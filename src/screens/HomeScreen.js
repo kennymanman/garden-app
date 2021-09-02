@@ -190,7 +190,7 @@ export default function HomeScreen({ navigation }) {
               Deals
             </Title>
             <Text style={{ marginLeft: 12, fontSize: 13, marginTop: 8 }}>
-              Enjoy deals, offers and discounts at affordable prices.
+              Enjoy deal, offers and discounts at affordable prices.
             </Text>
 
             <TouchableOpacity
