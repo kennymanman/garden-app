@@ -8,7 +8,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   FlatList,
-  ImageBackground
+  ImageBackground,
 } from "react-native";
 import { Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome5";
@@ -47,7 +47,7 @@ export default function HomeScreen({ navigation }) {
         marginRight: 7,
         marginLeft: 4,
         top: 2,
-        left: 2
+        left: 2,
       }}
     >
       <Text
@@ -59,7 +59,7 @@ export default function HomeScreen({ navigation }) {
           left: 0,
           marginBottom: 55,
           marginLeft: 10,
-          fontSize: 20
+          fontSize: 20,
         }}
       >
         {name}
@@ -73,7 +73,7 @@ export default function HomeScreen({ navigation }) {
           fontSize: 15,
           marginBottom: 35,
           marginLeft: 10,
-          color: "white"
+          color: "white",
         }}
       >
         ${price} {""}
@@ -87,7 +87,7 @@ export default function HomeScreen({ navigation }) {
           marginLeft: 10,
           color: "white",
           fontSize: 12,
-          marginBottom: 5
+          marginBottom: 5,
         }}
       >
         {description}
@@ -101,7 +101,7 @@ export default function HomeScreen({ navigation }) {
             //right:0,
             top: 0,
             marginTop: 3,
-            paddingLeft: 8
+            paddingLeft: 8,
           }}
           icon={<Feather name="heart" size={15} color="white" />}
           onPress={() => updateSaved({ name, price, description, image })}
@@ -127,7 +127,7 @@ export default function HomeScreen({ navigation }) {
         navigation.navigate("ProductPage", {
           name: item.name,
           price: item.price,
-          image: item.image
+          image: item.image,
         });
       }}
     >
@@ -142,15 +142,16 @@ export default function HomeScreen({ navigation }) {
   );
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
+      <SafeAreaView />
       <ScrollView showsHorizontalScrollIndicator={false}>
         <View style={styles.container}>
-          <Button
+          {/* <Button
             style={styles.ditch}
             type="clear"
             icon={<Icon name="bars" size={20} color="black" />}
             onPress={() => navigation.openDrawer()}
-          />
+          /> */}
 
           <Image
             style={{
@@ -158,7 +159,7 @@ export default function HomeScreen({ navigation }) {
               height: 100,
               alignItems: "center",
               borderRadius: 19,
-              marginTop: 18
+              marginTop: 18,
             }}
             source={ban}
           />
@@ -169,7 +170,7 @@ export default function HomeScreen({ navigation }) {
               height: 350,
               alignItems: "center",
               borderRadius: 20,
-              marginTop: 15
+              marginTop: 15,
             }}
             source={hus}
           />
@@ -180,7 +181,7 @@ export default function HomeScreen({ navigation }) {
               height: 290,
               alignItems: "center",
               borderRadius: 20,
-              marginTop: 15
+              marginTop: 15,
             }}
             source={fresh}
           />
@@ -201,7 +202,7 @@ export default function HomeScreen({ navigation }) {
                   marginLeft: 12,
                   fontSize: 13,
                   color: "blue",
-                  marginTop: 5
+                  marginTop: 5,
                 }}
               >
                 See all deals
@@ -215,7 +216,7 @@ export default function HomeScreen({ navigation }) {
               renderItem={({ item }) =>
                 renderItem({ navigation, item, useCart, useSaved })
               }
-              keyExtractor={item => item.id}
+              keyExtractor={(item) => item.id}
             />
           </View>
         </View>
@@ -228,21 +229,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 12,
-    backgroundColor: "#ffffff"
+    paddingTop: 30,
+    backgroundColor: "#ffffff",
+    alignItems: "center",
   },
 
   rest: {
     textAlign: "center",
-    marginTop: 100
+    marginTop: 100,
   },
 
   best: {
     justifyContent: "flex-start",
-    marginTop: 20
+    marginTop: 20,
   },
 
   ditch: {
     alignItems: "flex-end",
-    marginTop: 20
-  }
+    marginTop: 20,
+  },
 });
