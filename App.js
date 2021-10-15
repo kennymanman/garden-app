@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import MainTabNavigation from './src/Navigation/AppNavigator';
 import {CartProvider} from "./src/screens/CartContext"
 import { MenuProvider } from 'react-native-popup-menu'
-
+import { AuthenticatedUserProvider } from "./src/Providers/AuthenticatedUserProvider"
 
 
 export default function App() {
@@ -15,7 +15,7 @@ export default function App() {
 
 
 
-
+    <AuthenticatedUserProvider>
 <MenuProvider>
 <CartProvider>
     <PaperProvider>
@@ -29,7 +29,7 @@ export default function App() {
     </PaperProvider>
     </CartProvider>
  </MenuProvider>   
-    
+   </AuthenticatedUserProvider> 
     
   );
 }

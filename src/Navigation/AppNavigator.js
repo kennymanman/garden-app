@@ -35,17 +35,23 @@ import Health from "../screens/Health";
 import Kids from "../screens/Kids";
 import { createStackNavigator } from "@react-navigation/stack";
 import ProductPage from "../screens/ProductPage";
-import SignUp from "../screens/SignUp";
-import LogIn from "../screens/LogIn";
+
 import DeliveryScreen from "../screens/DeliveryScreen";
 import HelpScreen from "../screens/HelpScreen";
 import OrderScreen from "../screens/OrderScreen";
 import EditScreen from "../screens/EditScreen";
 import DealsScreen from "../screens/DealsScreen";
+import ProfileScreen from "../screens/ProfileScreen";
+import ProfileStack from "../Navigation/ProfileStack";
+import SavedStack from "../Navigation/SavedStack";
 
 import { Avatar, Title } from "react-native-paper";
 import { Text } from "react-native-elements";
 import { useContext, useState } from "react";
+
+
+
+
 
 function CustomDrawerContent(props) {
   //Icons and Images for Drawer Navigation
@@ -120,6 +126,8 @@ function CustomDrawerContent(props) {
   );
 }
 
+
+
 const Stack = createStackNavigator(); //Stack Navigation is required to connect all Screens together
 
 function SearchScreenStack() {
@@ -140,8 +148,7 @@ function SearchScreenStack() {
       <Stack.Screen name="House" component={House} />
       <Stack.Screen name="Health" component={Health} />
       <Stack.Screen name="Kids" component={Kids} />
-      <Stack.Screen name="SignUp" component={SignUp} />
-      <Stack.Screen name="LogIn" component={LogIn} />
+     
       <Stack.Screen name="ProductPage" component={ProductPage} />
       <Stack.Screen name="DeliveryScreen" component={DeliveryScreen} />
       <Stack.Screen name="DealsScreen" component={DealsScreen} />
@@ -182,7 +189,7 @@ function MainTabNavigator() {
 
       <Tab.Screen //Tab Bar Third Icon
         name="SavedScreen"
-        component={SavedScreen}
+        component={SavedStack}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
@@ -194,6 +201,9 @@ function MainTabNavigator() {
         }}
       />
 
+
+
+
       <Tab.Screen //Tab Bar Fourth Icon
         name="CartScreen"
         component={CartScreen}
@@ -204,6 +214,26 @@ function MainTabNavigator() {
           tabBarBadge: 0, //The Quantity Icon on the Tab Bar
         }}
       />
+
+
+
+
+<Tab.Screen //Tab Bar Fifth Icon
+        name="ProfileScreen"
+        component={ProfileStack}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <FontAwesome5
+              name="user"
+              size={23}
+              color={color}
+            />
+          ),
+        }}
+      />
+
+
+
     </Tab.Navigator> //Tab Bar End
   );
 }
