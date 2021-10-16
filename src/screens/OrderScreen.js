@@ -1,14 +1,19 @@
 import React from 'react'
 import { View, Text, ImageBackground, ScrollView } from 'react-native'
-import {Title} from "native-base"
 import { Button } from "react-native-elements"
 import { Ionicons } from '@expo/vector-icons'
+import {Header, Left, Right, Title, Body, Subtitle} from "native-base"
+import { Feather } from '@expo/vector-icons';
+
+
+
+
 
 export default function HelpScreen({navigation}) {
   return (
-    <View>
 
 
+<View>
 <ImageBackground
              
              source={require('../rmg/bred.jpg')}

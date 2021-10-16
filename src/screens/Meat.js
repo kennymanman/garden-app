@@ -24,7 +24,7 @@ import data from "./data"
 const Form = ({name, description, price}) => (
   
   
-  <ImageBackground
+<ImageBackground
 source={require("../img/sig.png")} 
 imageStyle={{borderRadius:12}}
 
