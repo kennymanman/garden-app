@@ -15,6 +15,8 @@ import InputField from "../Components/InputField";
 import Firebase from "../config/firebase";
 import { signIn } from "../../API/firebaseMethods";
 
+
+
 const auth = Firebase.auth();
 
 export default function LoginScreen({ navigation }) {
