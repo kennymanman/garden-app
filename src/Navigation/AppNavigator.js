@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 //import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from "../screens/HomeScreen";
@@ -48,10 +48,10 @@ import SavedStack from "../Navigation/SavedStack";
 import { Avatar, Title } from "react-native-paper";
 import { Text } from "react-native-elements";
 import { useContext, useState } from "react";
+import Firebase from "../config/firebase";
+import { AuthenticatedUserContext } from "../Providers/AuthenticatedUserProvider";
 
-
-
-
+const auth = Firebase.auth();
 
 function CustomDrawerContent(props) {
   //Icons and Images for Drawer Navigation
@@ -126,8 +126,6 @@ function CustomDrawerContent(props) {
   );
 }
 
-
-
 const Stack = createStackNavigator(); //Stack Navigation is required to connect all Screens together
 
 function SearchScreenStack() {
@@ -148,7 +146,7 @@ function SearchScreenStack() {
       <Stack.Screen name="House" component={House} />
       <Stack.Screen name="Health" component={Health} />
       <Stack.Screen name="Kids" component={Kids} />
-     
+
       <Stack.Screen name="ProductPage" component={ProductPage} />
       <Stack.Screen name="DeliveryScreen" component={DeliveryScreen} />
       <Stack.Screen name="DealsScreen" component={DealsScreen} />
@@ -201,9 +199,6 @@ function MainTabNavigator() {
         }}
       />
 
-
-
-
       <Tab.Screen //Tab Bar Fourth Icon
         name="CartScreen"
         component={CartScreen}
@@ -215,25 +210,15 @@ function MainTabNavigator() {
         }}
       />
 
-
-
-
-<Tab.Screen //Tab Bar Fifth Icon
+      <Tab.Screen //Tab Bar Fifth Icon
         name="ProfileScreen"
         component={ProfileStack}
         options={{
           tabBarIcon: ({ color }) => (
-            <FontAwesome5
-              name="user"
-              size={23}
-              color={color}
-            />
+            <FontAwesome5 name="user" size={23} color={color} />
           ),
         }}
       />
-
-
-
     </Tab.Navigator> //Tab Bar End
   );
 }
@@ -243,6 +228,20 @@ function MainTabNavigator() {
 const Drawer = createDrawerNavigator();
 
 export default function AppNavigator() {
+  const { user, setUser } = useContext(AuthenticatedUserContext);
+  useEffect(() => {
+    // onAuthStateChanged returns an unsubscriber
+    const unsubscribeAuth = auth.onAuthStateChanged(
+      async (authenticatedUser) => {
+        if (authenticatedUser) {
+          setUser(authenticatedUser);
+        } else {
+          setUser(null);
+        }
+      }
+    );
+  });
+
   return (
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen
