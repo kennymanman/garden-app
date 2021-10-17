@@ -52,6 +52,32 @@ export async function loggingOut() {
   }
 }
 
+// Get User Info
+export async function getUser(uid) {
+  let info = null;
+  try {
+    const db = firebase.firestore();
+    await db
+      .collection("users")
+      .doc(uid)
+      .get()
+      .then((snapshot) => {
+        info = snapshot.data();
+        console.log("Doc----", info);
+        return info;
+        // console.log(JSON.parse(doc._document.data.toString()));
+      })
+      .catch((e) => {
+        Alert.alert("There is something wrong!", e.message);
+        return info;
+      });
+  } catch (err) {
+    console.log("Error in get products---", err);
+    Alert.alert("There is something wrong!", err.message);
+    return info;
+  }
+}
+
 export async function getProducts() {
   try {
     // await firebase.auth().signOut();
