@@ -9,112 +9,51 @@ import { Feather } from '@expo/vector-icons';
 
 
 
-export default function HelpScreen({navigation}) {
-  return (
+export default function OrderScreen({navigation}) {
+
+return (
+
 
 
 <View>
-<ImageBackground
-             
-             source={require('../rmg/bred.jpg')}
-             imageStyle={{borderRadius:0}}
-          style={{
-            height: 670,
-            width: 375,
-            position: 'relative', // because it's parent
+<Header style={{marginTop: 3}}>
+<Left>
+    
+<Button  type="clear" style={{paddingLeft:9}}
+icon ={<Feather name="arrow-left"
+size={20}
+color="black"     />}
+onPress={() => navigation.navigate("My Profile")} />  
+    
+</Left>
             
-            top: 0,  
-          }}
-        >
-
-
-
-
-<Button  type="clear" style={{paddingLeft:15, alignSelf:"flex-start", paddingTop:35}}
-     icon ={<Ionicons name="ios-arrow-round-back"
-     size={30}
-     color="white"     />}
-            onPress={() => navigation.navigate("HomeScreen")} />  
-
-
-      <Title style={{textAlign:"left", fontSize:30, color:"white", paddingLeft:19, paddingTop:12}} >My Orders</Title>
-
-
-
+    <Body>
+    <Title   style={{width:300, textAlign:"center"}}>My Order History</Title>
+    </Body>
+    
+    
+    <Right>
+    </Right>
+  </Header>
+    
 
 
 <ScrollView>
 
 
-      <ImageBackground
-source={require("../rmg/pale.jpg")} 
-imageStyle={{borderRadius:12}}
+<Text style={{marginTop:40, fontWeight: "bold", left:9}}>Order Date: 25th August 1992</Text>
 
-  style={{
-    height: 500,
-    width: 325,
-    position: "relative", // because it's parent
-    marginBottom:15,
-    marginTop:19,
-    marginRight:11,
-    marginLeft:20,
-    top: 2,
-    left: 2
-  }}
->
+<Text style={{marginTop:10, fontWeight: "bold", left:9}}>Delivery Address: Mark Road Street</Text>
 
-<Title    
-  style={{
-      fontWeight: "bold",
-      color: "green",
-      position: "absolute", // child
-      top: 12, // position where you want
-      left: 0,
-      marginBottom:55,
-      marginLeft:10,
-      fontSize: 30
-    }}
-  >
-    successful
-  </Title>
+<Text style={{marginTop:20, color: "#60d394", left:9, fontSize:20, fontWeight: "bold"}} >Successful</Text>
 
-<Text
- style={{
-   fontSize:12,
-fontWeight: "bold",
- color: "black",
- position: "absolute",
- left:0,
-top:55,
-marginLeft:10
-}}
-
-> Estimated Delivery: 25th December 2020</Text>
-
-
-
-<Text
- style={{
-   fontSize:12,
-fontWeight: "bold",
- color: "black",
- position: "absolute",
- left:0,
-top:79,
-marginLeft:12
-}}
-
->Delivery Address: 21 road, Irvington avenue.</Text>
-
-
-<ScrollView>
 
 <View style={{  flexDirection:"row"}}>
 
 <ImageBackground 
               
-              source={require("../img/sig.png")}
-              imageStyle={{borderRadius:12}} //For reshaping the image.
+source={require("../img/sig.png")}  //This is where the image of product bought goes to.
+imageStyle={{borderRadius:12}} //For reshaping the image.
                 
               style={{
                height: 140,
@@ -129,11 +68,11 @@ marginLeft:12
                   }}
                 >
                 
-              </ImageBackground> 
+</ImageBackground> 
 
 
-              <View style={{flexDirection:"column", paddingRight:90, paddingTop:120}}>
-            <Title 
+<View style={{flexDirection:"column", paddingRight:90, paddingTop:120}}>
+<Title 
             style={{
               marginBottom:2,   //For passing down the Name.
               marginRight:88,
@@ -142,23 +81,23 @@ marginLeft:12
               
               color:"black"}}>
                  {""} Fruit
-            </Title>
+</Title>
             
 
             
 
-            <Title style={{ 
+<Title style={{ 
               marginRight:90,  //For passing down the Price.
               marginBottom:3,
               marginTop:5,
               fontSize:17,
               color:"black"
-              }}>$500
-              </Title>
+}}>$500
+</Title>
             
 
 
-            <Title  style={{ marginRight:112,  //For passing down the quantity needed.
+            <Title  style={{ marginRight:112,  //For passing down the quantity bought.
              marginBottom:10,
              marginTop:6,
              marginLeft:20,
@@ -170,26 +109,17 @@ marginLeft:12
 
              
             
+</View>
+
+<Title style={{position:"absolute", top:280, left:0, marginLeft:5}}
+>Total Price: $600</Title>
+
             </View>
 
-            <Title style={{position:"absolute", top:280, left:0, marginLeft:5}}
-            >Total Price: $600</Title>
-
-            </View>
-
-</ScrollView>
+</ScrollView>  
 
 
-
-
-
-
-
-</ImageBackground>
-
-
-
-</ScrollView>
+</View>
 
 
 
@@ -198,10 +128,5 @@ marginLeft:12
 
 
 
-
-
-      </ImageBackground>
-
-     </View>
-  );
+  )
 }
