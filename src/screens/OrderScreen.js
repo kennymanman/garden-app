@@ -38,7 +38,7 @@ onPress={() => navigation.navigate("My Profile")} />
     
 
 
-<ScrollView>
+<ScrollView   snapToEnd={false}>
 
 
 <Text style={{marginTop:40, fontWeight: "bold", left:9}}>Order Date: 25th August 1992</Text>

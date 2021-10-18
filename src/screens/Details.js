@@ -20,6 +20,8 @@ export default function Details({ navigation }) {
   const [loading, setLoading] = useState(false);
   const { user, setUser } = useContext(AuthenticatedUserContext);
 
+
+
   useEffect(() => {
     getUserDetails();
   }, []);
@@ -53,11 +55,14 @@ export default function Details({ navigation }) {
     }
   };
 
+
+
+  
+
   const updateUserDetails = async () => {
     if (!firstName) {
       Alert.alert("First name is required");
-    } else if (!email) {
-      Alert.alert("Email field is required.");
+  
     } else if (!phone || phone.length < 10) {
       Alert.alert("Enter valid phone number.");
     } else if (!address) {
@@ -96,7 +101,7 @@ export default function Details({ navigation }) {
           <Button
             type="clear"
             style={{ paddingLeft: 9 }}
-            icon={<Feather name="arrow-left" size={20} color="white" />}
+            icon={<Feather name="arrow-left" size={20} color="black" />}
             onPress={() => navigation.navigate("My Profile")}
           />
         </Left>
