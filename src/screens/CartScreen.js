@@ -273,7 +273,12 @@ paddingBottom:10}}>Deliver to: 92 lanre awolokun Gbagada </Title>
   paddingTop:1,
   paddingBottom:10}}>Total: $100 </Title>
 
-<Button                                          //Checkout Button
+<Button  //Checkout Button
+
+buttonStyle={{
+  backgroundColor: "black"
+}}
+
 title="Proceed to Checkout"
 style={{marginBottom:20,
 width:300,

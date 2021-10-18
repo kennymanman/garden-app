@@ -37,7 +37,10 @@ onPress={() => navigation.navigate("My Profile")} />
 
 
 
-<ScrollView>
+<ScrollView
+
+
+>
 
 <Shine style={{position:"absolute"}}/>
 <Text style={{textAlign:"center", fontSize:33, marginTop:30}}>Need Help ?</Text>

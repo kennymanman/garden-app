@@ -117,6 +117,10 @@ export default function Details({ navigation }) {
         contentContainerStyle={{ paddingHorizontal: 20 }}
         snapToEnd={false}
       >
+
+<Subtitle style={{marginTop:12}}>Information provided here will be used for delivery </Subtitle>
+<Subtitle>and phone number displayed here will be used as contact info.</Subtitle>
+
         <InputField
           inputStyle={{
             fontSize: 14,
@@ -214,6 +218,10 @@ export default function Details({ navigation }) {
         />
 
         <Button
+
+buttonStyle={{
+  backgroundColor: "black"
+}}
           loading={updating}
           onPress={updateUserDetails}
           style={{
