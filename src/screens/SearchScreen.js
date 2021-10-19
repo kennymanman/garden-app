@@ -24,8 +24,9 @@ import Deals from "../rmg/Deals.png"
 
 import {Title} from "native-base"
 import { TextInput } from "react-native-paper";
-
-
+import InputField from "../Components/InputField";
+import Bullseye from "../Svg/Bullseye.svg"
+import Outlinecloud from "../Svg/Outlinecloud.svg"
 
 
 
@@ -86,38 +87,33 @@ export default function SearchScreen ({navigation}) {
 
   
 
-
+{/*
 <ImageBackground 
  source={require('../rmg/sag.jpg')}
  style={{ height: 250, backgroundSize:"cover"}}
  imageStyle={{borderBottomRightRadius:70}}
 
+>*/}
+
+<Outlinecloud style={{position:"absolute", paddingTop:180}} />
+
+<Bullseye style={{position:"absolute", marginLeft:220, paddingTop:1100}} />
+
+
+<Title style={{textAlign:"left", fontSize:39, paddingTop:80, paddingLeft:13, paddingBottom:10, color:"black"}}>Categories</Title>
+
+
+
+
+
+<InputField placeholder="Search Groceries" leftIcon="magnify"
+
+containerStyle={{backgroundColor:"#e9ecef", borderBottomRightRadius:30, borderTopRightRadius:30}}
+style={{marginTop:20, padding:12, borderBottomRightRadius:30, borderTopRightRadius:30, width:350, height:10, backgroundColor:"gray", alignSelf:"center", borderTopLeftRadius:30, borderBottomLeftRadius:30}}
 >
-
-<Button style={styles.sitch} 
-            type="clear"
-            icon={
-               <Icon
-                name= "bars"
-                size= {21}
-                color= "white"
-                />
-            }
-            
-            onPress={() => navigation.openDrawer()} />  
+</InputField>
 
 
-
-
-<Title style={{textAlign:"left", fontSize:39, paddingTop:0, paddingLeft:13, paddingBottom:10, color:"white"}}>Categories</Title>
-
-
-<TextInput placeholder="     Search Groceries" 
-style={{marginTop:0, padding:12, borderBottomRightRadius:30, borderTopRightRadius:30, width:345, height:30, backgroundColor:"white"}}
->
-</TextInput>
-
-<Feather name="search" size={19} color="gray" style={{position:"absolute", left:5, top:159}} />
 
 
 
@@ -126,7 +122,7 @@ style={{marginTop:0, padding:12, borderBottomRightRadius:30, borderTopRightRadiu
 
 
       
-</ImageBackground>
+{/*</ImageBackground> */}
 
 
 

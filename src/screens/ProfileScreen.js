@@ -48,7 +48,7 @@ export default function ProfileScreen({ navigation }) {
           Welcome {user?.email || ""}
         </Text>
 
-<Flower  style={{position:"absolute", left:170, top:50}}/>
+<Flower  style={{position:"absolute", left:195, top:50}}/>
 
 
         <TouchableOpacity onPress={() => navigation.navigate("Details")}>

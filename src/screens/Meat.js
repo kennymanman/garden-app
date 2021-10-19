@@ -149,9 +149,7 @@ export default function Meat ({navigation }) {
 <Left>
 
 <Button  type="clear" style={{paddingLeft:9}}
-   icon ={<Ionicons name="ios-arrow-round-back"
-   size={30}
-   color="black"     />}
+icon={<Feather name="arrow-left" size={20} color="black" />}
             
   onPress={() => navigation.navigate("SearchScreen")} />  
 
@@ -165,17 +163,7 @@ export default function Meat ({navigation }) {
 
 <Right>
 
-            <Button  style={styles.titch}
-            type="clear"
-            icon={
-               <Icon
-                name= "bars"
-                size= {20}
-                color= "black"
-                />
-            }
-            
-            onPress={() => navigation.openDrawer()} />    
+         
 </Right>
 
 </Header>

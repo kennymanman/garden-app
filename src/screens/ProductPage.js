@@ -15,6 +15,8 @@ import { AddCartContext, AddSavedContext } from "../screens/CartContext";
 import { RNCarousel } from "react-native-carousel-cards";
 import DropdownMenu from "react-native-dropdownmenus";
 
+
+
 export default function ProductPage({ route, navigation }) {
   // routes
 
