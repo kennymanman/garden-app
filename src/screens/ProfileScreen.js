@@ -74,7 +74,7 @@ export default function ProfileScreen({ navigation }) {
           </View>
         </TouchableOpacity>
 
-<Arrowdown  style={{position:"absolute", marginTop:200, left:210}}/>
+<Arrowdown  style={{position:"absolute", marginTop:150, left:260}}/>
 
 
 
@@ -83,7 +83,7 @@ export default function ProfileScreen({ navigation }) {
         >
           <View style={{ flexDirection: "row", marginTop: 40 }}>
             <MaterialCommunityIcons
-              name="format-list-bulleted"
+              name="format-list-checks"
               size={26}
               color="black"
             />
