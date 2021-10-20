@@ -11,7 +11,7 @@ import { Feather } from "@expo/vector-icons";
 import { Tile } from "react-native-elements";
 import { Title, Subtitle, Text, Icon } from "native-base";
 import { Button } from "react-native-elements";
-import { AddCartContext, AddSavedContext } from "../screens/CartContext";
+import { AddCartContext, AddSavedContext, AddListedContext } from "../screens/CartContext";
 import { RNCarousel } from "react-native-carousel-cards";
 import DropdownMenu from "react-native-dropdownmenus";
 
@@ -22,9 +22,11 @@ export default function ProductPage({ route, navigation }) {
 
   const { updateCart } = useContext(AddCartContext);
   const { updateSaved } = useContext(AddSavedContext);
+  const { updateListed } = useContext(AddListedContext);
 
   const useCart = updateCart;
   const useSaved = updateSaved;
+  const useListed = updateListed;
 
   let conditionData = [
     [
@@ -56,9 +58,9 @@ export default function ProductPage({ route, navigation }) {
             paddingTop: 3,
             top: 18
           }}
-          icon={
-            <Ionicons name="ios-arrow-round-back" size={30} color="black" />
-          }
+          
+            icon={<Feather name="arrow-left" size={20} color="black" />}
+        
           onPress={() => navigation.goBack()}
         />
 
@@ -168,12 +170,33 @@ export default function ProductPage({ route, navigation }) {
             <Title style={{ textAlign: "left", marginTop: 8 }}>Quantity</Title>
           </View>
 
+
+          <Button //Checkout Button
+            title="Add to Grocery List"
+            style={{
+              marginBottom: 90,
+              width: 300,
+              marginTop: 76,
+              alignSelf: "center",
+              paddingRight: 20,
+              height: 100,
+              position: "relative",
+              paddingLeft: 13
+            }}
+            onPress={() => updateListed({ name, price, image })}
+          />
+
+
+
+
+
+
           <Button //Checkout Button
             title="Add to Cart"
             style={{
               marginBottom: 900,
               width: 300,
-              marginTop: 76,
+              marginTop: 6,
               alignSelf: "center",
               paddingRight: 20,
               height: 100,

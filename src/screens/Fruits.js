@@ -8,12 +8,9 @@ import { View,
   Alert}
    from "react-native"
 import { Button } from "react-native-elements";
-import Icon from "react-native-vector-icons/FontAwesome5"
-import { Ionicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 
 import {Header, Left, Right, Title, Body, Subtitle} from "native-base"
-import { Avatar,  Card,  Paragraph } from 'react-native-paper';
 import data from "./data"
 import {AddCartContext, AddSavedContext} from "../screens/CartContext"
 

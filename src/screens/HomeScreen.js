@@ -21,7 +21,7 @@ import { Feather } from "@expo/vector-icons";
 import { Headline } from "react-native-paper";
 //import Fruits from "../screens/Fruits"
 import { NavigationContainer } from "@react-navigation/native";
-import { Title } from "native-base";
+import { Title, Subtitle } from "native-base";
 import { Avatar } from "react-native-paper";
 import Animated from "react-native-reanimated";
 import BottomSheet from "reanimated-bottom-sheet";
@@ -187,8 +187,8 @@ export default function HomeScreen({ navigation }) {
           />
 
           <View style={{ marginTop: 45 }}>
-            <Title style={{ textAlign: "left", fontSize: 35, marginLeft: 8 }}>
-              Deals
+            <Title style={{ textAlign: "left", fontSize: 30, marginLeft: 8 }}>
+              Grocery Boxes
             </Title>
             <Text style={{ marginLeft: 12, fontSize: 13, marginTop: 8 }}>
               Enjoy deals, offers and discounts at affordable prices.
@@ -201,7 +201,7 @@ export default function HomeScreen({ navigation }) {
                 style={{
                   marginLeft: 12,
                   fontSize: 13,
-                  color: "blue",
+                  color: "grey",
                   marginTop: 5,
                 }}
               >

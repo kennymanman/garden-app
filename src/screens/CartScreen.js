@@ -34,6 +34,8 @@ const{removeFromCart}= useContext(AddCartContext)
 
 
 
+
+
 const Kandlepress = () =>
 Alert.alert(
   "Removed",

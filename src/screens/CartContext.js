@@ -2,12 +2,12 @@ import React, {useContext, useState} from "react"
 
 export const AddCartContext = React.createContext()
 export const AddSavedContext = React.createContext()
-export const AddPagedContext = React.createContext()
+export const AddListedContext = React.createContext()
 
 export function CartProvider({children}) {
  const [cart, setCart] = useState([])
  const [saved, setSaved] = useState([])
- const [paged, setPaged] = useState([])
+ const [listed, setListed] = useState([])
 
 
 
@@ -56,16 +56,21 @@ const cartContext = {
 
 
 
-  const PageContext = {
-    paged,
-    updatePaged: ({ name, price, image, description }) => {
+  const ListedContext = {
+    listed,
+    updateListed: ({ name, price, image, description }) => {
       
       
-      const updatedPaged = [...paged]
-      updatedPaged.push({name, price, image, description})
-      setPaged(updatedPaged)
-    }
-    
+      const updatedListed = [...listed]
+      updatedListed.push({name, price, image, description})
+      setListed(updatedListed)
+    },
+
+    removeFromListed: ({name })=>{
+
+      const updatedListed = listed.filter(item => item.name !== name)
+      setListed(updatedListed);  
+      }
   };
 
 
@@ -73,13 +78,13 @@ const cartContext = {
 
 
 return (
-  <AddPagedContext.Provider value={PageContext}>
+  <AddListedContext.Provider value={ListedContext}>
 <AddCartContext.Provider value={cartContext}>
     <AddSavedContext.Provider value={savedContext}>
         {children}
     </AddSavedContext.Provider>
 </AddCartContext.Provider>
-</AddPagedContext.Provider>
+</AddListedContext.Provider>
 
 )
 

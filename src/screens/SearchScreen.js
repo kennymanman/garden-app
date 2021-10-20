@@ -165,7 +165,7 @@ style={{marginTop:20, padding:12, borderBottomRightRadius:30, borderTopRightRadi
 <View style={{paddingRight:10, paddingLeft:19, paddingTop:10}}>
 
 
-<Title style={{color:"black"}}>Deals & Offers</Title>
+<Title style={{color:"black"}}>Grocery Boxes & Deals</Title>
 <View>
     <TouchableOpacity
      onPress={() => navigation.navigate ( "DealsScreen") }>
@@ -335,7 +335,7 @@ style={{marginTop:20, padding:12, borderBottomRightRadius:30, borderTopRightRadi
 
 
 <View style={{paddingRight:15, paddingTop:10 }}>
-<Title  style={{color:"black"}}>Pantry,Canned & Dried items</Title>
+<Title  style={{color:"black"}}>Pantry, Dried & Canned Items</Title>
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ('Pantry')}>
 
