@@ -75,7 +75,7 @@ export default function LoginScreen({ navigation }) {
     color: "black",
     alignSelf: "center",
     paddingBottom: 2,
-    fontFamily:"recoleta-bold",
+    fontFamily:"recoleta-black",
     paddingTop:120
     
     }}>Garden<Text style={{color:"orange", fontSize:55}}>.</Text></Text>
@@ -142,7 +142,7 @@ export default function LoginScreen({ navigation }) {
 <Subtitle style={{fontSize:12}}>Don't have an account?</Subtitle>
 
 <TouchableOpacity  onPress={() => navigation.navigate("Signup")}>
-<Title style={{marginTop:10}}>SignUp</Title>
+<Title style={{marginTop:7}}>SignUp</Title>
 </TouchableOpacity>
 
       {/*<RNButton 

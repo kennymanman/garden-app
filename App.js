@@ -16,6 +16,7 @@ export default function App() {
   useEffect(() => {
     font.loadAsync({
     'recoleta-bold': require('./assets/fonts/Recoleta-Bold.ttf'),
+    'recoleta-black': require('./assets/fonts/Recoleta-Black.ttf'),
 
     })
     },[])

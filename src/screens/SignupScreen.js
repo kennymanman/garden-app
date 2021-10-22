@@ -18,7 +18,13 @@ import InputField from "../Components/InputField";
 import Firebase from "../config/firebase";
 import { registration } from "../../API/firebaseMethods";
 
+
+
+
+
 const auth = Firebase.auth();
+
+
 
 export default function SignupScreen({ navigation }) {
   const [firstName, setFirstName] = useState("");
@@ -203,7 +209,7 @@ export default function SignupScreen({ navigation }) {
             }}
           />
           <RNButton
-            onPress={() => navigation.navigate("LoginScreen")}
+            onPress={() => navigation.navigate("Login")}
             title="Go to Login"
             color="#fff"
           />
