@@ -44,12 +44,14 @@ import DealsScreen from "../screens/DealsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import ProfileStack from "../Navigation/ProfileStack";
 import SavedStack from "../Navigation/SavedStack";
+import CartStack from "../Navigation/CartStack";
 
 import { Avatar, Title } from "react-native-paper";
 import { Text } from "react-native-elements";
 import { useContext, useState } from "react";
 import Firebase from "../config/firebase";
 import { AuthenticatedUserContext } from "../Providers/AuthenticatedUserProvider";
+
 
 const auth = Firebase.auth();
 
@@ -201,7 +203,7 @@ function MainTabNavigator() {
 
       <Tab.Screen //Tab Bar Fourth Icon
         name="CartScreen"
-        component={CartScreen}
+        component={CartStack}
         options={{
           tabBarIcon: ({ color }) => (
             <Feather name="shopping-bag" size={22} color={color} />

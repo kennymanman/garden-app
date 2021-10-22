@@ -346,7 +346,21 @@ imageStyle={{borderRadius:12}}
 </ImageBackground>
 
 
+<ImageBackground
+             
+             source={require('../img/die.jpg')}
+             imageStyle={{borderRadius:0}}
+          style={{
+            height: 821,
+            backgroundSize:"cover",
+            position: 'relative', // because it's parent
+            
+            top: 0,
+            
+          }}
+        >
 
+          </ImageBackground>
 
 
 
@@ -355,3 +369,6 @@ imageStyle={{borderRadius:12}}
 
 
       </ImageBackground>
+
+
+

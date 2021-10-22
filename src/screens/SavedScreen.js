@@ -1,5 +1,5 @@
 import React, {useContext} from "react"
-import { View, Text, StyleSheet,ImageBackground, Image, ScrollView, Alert, TouchableOpacity} from "react-native"
+import { View, Text, StyleSheet,ImageBackground, Image, ScrollView, Alert, TouchableOpacity, SafeAreaView} from "react-native"
 import { Button } from 'react-native-elements';
 import Icon from "react-native-vector-icons/FontAwesome5"
 import {Title, Left} from "native-base"
@@ -35,54 +35,24 @@ const {updateCart} = useContext(AddCartContext)
     return (
 
 
- <View style={styles.container} >
+<View style={styles.container} >
  
-
+<SafeAreaView>
                  
-             <ImageBackground
-             
-             source={require('../img/die.jpg')}
-             imageStyle={{borderRadius:0}}
-          style={{
-            height: 821,
-            backgroundSize:"cover",
-            position: 'relative', // because it's parent
             
-            top: 0,
-            
-          }}
-        >
-             
-            <Button style={styles.sitch} 
-            type="clear"
-            icon={
-               <Icon
-                name= "bars"
-                size= {20}
-                color= "black"
-                />
-            }
-            
-            onPress={() => navigation.openDrawer()} />    
-
-
 <Title
-style={{fontSize:35, color:"white", paddingLeft: 15, textAlign:"left"}}>Saved Items</Title>
-<Title style={{textAlign:"left", paddingLeft: 15, color:"white", fontSize:16}}>Keep track of groceries you love. </Title>
+style={{fontSize:35, color:"black", paddingLeft: 15, textAlign:"left"}}>Saved Items</Title>
+<Title style={{textAlign:"left", paddingLeft: 15, color:"black", fontSize:16, fontFamily:"recoleta-black"}}>Keep track of groceries you love. </Title>
 
 
 
-<ScrollView >
-<View  >
+<ScrollView showsVerticalScrollIndicator={false}>
+
 
 {saved.map(({ name, image, price, description, vendor, images}  )=> (
 
 
-
-
-
-
-<TouchableOpacity    onPress={()=> navigation.navigate("ProductPage" , { name: name , price: price, images:images, description:description, vendor: vendor})}>
+<TouchableOpacity key={name}    onPress={()=> navigation.navigate("ProductPage" , { name: name , price: price, images:images, description:description, vendor: vendor})}>
   <ImageBackground
 
   source={image ? image: require("../img/sig.png")} 
@@ -151,13 +121,13 @@ onPress={()=> {updateCart({name, price, image}); Handlepress();   }}
 ))}
 
 
-</View>
+
 
 </ScrollView>
 
 
 
-  </ImageBackground>
+</SafeAreaView>
 
   
         </View>
@@ -183,7 +153,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 0,
-        backgroundColor: "#eaeaea"
+        marginTop:70
       },
 
       rest: {

@@ -8,12 +8,13 @@ import {
     FlatList,
     TouchableOpacity,
     ScrollView,
-     Alert     
+     Alert,
+     SafeAreaView   
   }
     from "react-native"
 import { Button } from "react-native-elements"
 import Icon from "react-native-vector-icons/FontAwesome5"
-import {Title, Left} from "native-base"
+import { Header, Left, Right, Title, Body, Subtitle } from "native-base";
 import { Feather } from "@expo/vector-icons"
 import { FontAwesome } from "@expo/vector-icons"
 import { Ionicons } from "@expo/vector-icons"
@@ -21,6 +22,7 @@ import { Entypo } from "@expo/vector-icons"
 import { FAB } from "react-native-paper"
 import {AddCartContext} from "./CartContext"
 import DropdownMenu from 'react-native-dropdownmenus';
+import { alignSelf } from 'styled-system';
 
 
 
@@ -52,60 +54,33 @@ return (
 
 
 
-<View style={{flex: 1, padding: 0, backgroundColor: "#eaeaea"}} >
+<View style={{flex: 1, marginTop:70, paddingHorizontal: 12}} >
 
-<ImageBackground
-source={require('../img/jie.jpg')}
-imageStyle={{borderRadius:0}}
-style={{
-height: 821,
-backgroundSize:"cover",
-position: 'relative', // because it's parent
-top: 0,
-     }}
->
+<SafeAreaView>
              
-             
-             
-             
-<Button style={{ alignItems: "flex-end",
-          paddingTop:45,
-          paddingRight:12}} 
-type="clear"
-icon={
-<Icon
-name= "bars"
-size= {20}
-color= "black"
-/>
-}
-onPress={() => navigation.openDrawer()} />  
-
 
 <Title              //For the Main screen title
 style={{fontSize:35,
-color:"white",
-paddingLeft: 32,
+color:"black",
 textAlign:"left"}} >Cart</Title>
 
 
 <Title style={{fontSize:13, //For the delivery address
-  color:"white",
-  paddingLeft: 32,
+  color:"black",
   textAlign:"left",
   paddingTop:12,
-paddingBottom:10}}>Deliver to: 92 lanre awolokun Gbagada </Title>
+paddingBottom:10,
+fontFamily:"recoleta-black"
+}}>Deliver to: 92 lanre awolokun Gbagada   </Title>
 
 
 
-<TouchableOpacity onPress={() => navigation.navigate ( "DeliveryScreen") }>
+<TouchableOpacity onPress={() => navigation.navigate ( "Details") }>
 
-<Text style={{
- paddingLeft:32,
- color:"blue",
- fontSize:12
-
-}}>Change Address</Text>
+<Subtitle style={{
+ fontSize:13,
+ alignSelf:"flex-start"
+}}>Change Delivery info</Subtitle>
 </TouchableOpacity>
 
 
@@ -113,7 +88,8 @@ paddingBottom:10}}>Deliver to: 92 lanre awolokun Gbagada </Title>
 
 
 
-<ScrollView style={{marginBottom:2, marginTop:18}}> 
+<ScrollView  showsVerticalScrollIndicator={false}
+style={{marginBottom:2, marginTop:18}}> 
 
 
 
@@ -187,7 +163,7 @@ paddingBottom:10}}>Deliver to: 92 lanre awolokun Gbagada </Title>
               marginRight:70,
               marginTop:19,
               fontSize:20,
-              color:"white"}}>
+              color:"black"}}>
                  {""} {name}
             </Title>
             
@@ -199,7 +175,7 @@ paddingBottom:10}}>Deliver to: 92 lanre awolokun Gbagada </Title>
               marginBottom:3,
               marginTop:5,
               fontSize:17,
-              color:"white"
+              color:"black"
               }}>${price} {""}
               </Title>
             
@@ -211,7 +187,7 @@ paddingBottom:10}}>Deliver to: 92 lanre awolokun Gbagada </Title>
              marginLeft:20,
              marginRight:85,
              fontSize:12,
-             color:"white"}}>Quantity:{count}</Title>
+             color:"black"}}>Quantity:{count}</Title>
             
             
             </View>
@@ -262,18 +238,18 @@ paddingBottom:10}}>Deliver to: 92 lanre awolokun Gbagada </Title>
 
 
 <Title style={{fontSize:20,                     //Delivery Fee
-  color:"white",
-  paddingLeft: 32,
+  color:"black",
   textAlign:"left",
   paddingTop:20,
-  paddingBottom:10}}>Delivery Fee: $32 </Title>
+  paddingBottom:10}}>Delivery Fee: $950 </Title>
 
 <Title style={{fontSize:20,                       //Total Price
-   color:"white",
-  paddingLeft: 32,
+   color:"black",
   textAlign:"left",
   paddingTop:1,
-  paddingBottom:10}}>Total: $100 </Title>
+  paddingBottom:10}}>Total: $0 </Title>
+
+
 
 <Button  //Checkout Button
 
@@ -286,31 +262,17 @@ style={{marginBottom:20,
 width:300,
 marginTop:9,
 alignSelf: "center",
-paddingRight:20,
-height:100, position:"relative", paddingLeft:13}}
+height:100}}
 />
 
 
 
 </ScrollView>
-</ImageBackground>
+
+</SafeAreaView>
+
+
 </View>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     )
 }

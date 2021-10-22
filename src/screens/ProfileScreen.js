@@ -44,11 +44,11 @@ export default function ProfileScreen({ navigation }) {
 
 <Star />
       <View style={{ margin: 30 }}>
-        <Text style={{ fontSize: 15, textAlign: "center", marginTop: 10, position:"relative" }}>
+        <Text style={{ fontSize: 16, textAlign: "center", marginTop: 3, fontFamily:"recoleta-black" }}>
           Welcome {user?.email || ""}
         </Text>
 
-<Flower  style={{position:"absolute", left:195, top:50}}/>
+<Flower  style={{position:"absolute", left:195, top:70}}/>
 
 
         <TouchableOpacity onPress={() => navigation.navigate("Details")}>
@@ -109,7 +109,7 @@ export default function ProfileScreen({ navigation }) {
         </View>
        </TouchableOpacity>
 
-<Bingcross style={{position:"absolute", left:270}} />
+{/*<Bingcross style={{position:"absolute", left:270}} /> */}
 
 
         <TouchableOpacity onPress={() => navigation.navigate("Help & Support")}>

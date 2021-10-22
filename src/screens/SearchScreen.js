@@ -1,5 +1,5 @@
 import React from "react"
-import { View, StyleSheet, Image, ScrollView, TouchableOpacity, ImageBackground } from "react-native"
+import { View, StyleSheet, Image, ScrollView, TouchableOpacity, ImageBackground, SafeAreaView } from "react-native"
 import { Button } from 'react-native-elements';
 import Icon from "react-native-vector-icons/FontAwesome5"
 import { Container, Header, Item, Input,  Text } from 'native-base';
@@ -47,7 +47,7 @@ export default function SearchScreen ({navigation}) {
         
 
 
-        <View >
+        <View style={{ flex: 1}} >
 
         {/*<Header  style={{marginTop:12  }} searchBar rounded   >
 
@@ -82,8 +82,9 @@ export default function SearchScreen ({navigation}) {
 
         <ScrollView >
 
-        <View style={{marginTop: 0,  
-        backgroundColor: "white"}} >
+        
+
+        <View style={{marginTop:23}} >
 
   
 
@@ -108,8 +109,8 @@ export default function SearchScreen ({navigation}) {
 
 <InputField placeholder="Search Groceries" leftIcon="magnify"
 
-containerStyle={{backgroundColor:"#e9ecef", borderBottomRightRadius:30, borderTopRightRadius:30, height:38}}
-style={{marginTop:20, padding:12, borderBottomRightRadius:30, borderTopRightRadius:30, width:350, height:10, backgroundColor:"gray", alignSelf:"center", borderTopLeftRadius:30, borderBottomLeftRadius:30}}
+containerStyle={{backgroundColor:"#ced4da", borderBottomRightRadius:30, borderTopRightRadius:30, height:38}}
+style={{marginTop:20, padding:12, borderBottomRightRadius:30, borderTopRightRadius:30, width:350, height:10, backgroundColor:"#ced4da", alignSelf:"center", borderTopLeftRadius:30, borderBottomLeftRadius:30}}
 >
 </InputField>
 
@@ -413,10 +414,9 @@ style={{marginTop:20, padding:12, borderBottomRightRadius:30, borderTopRightRadi
 
   </View>    
 
-
+  
 
 </ScrollView>
-
 
         
 
@@ -444,7 +444,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 24,
-        backgroundColor: "#eaeaea"
+        
       },
 
       rest: {
