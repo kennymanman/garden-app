@@ -101,7 +101,7 @@ export default function SignupScreen({ navigation }) {
         <StatusBar style="dark-content" />
 
         <ScrollView
-          style={{ flex: 1 }}
+          style={{ flex: 1, paddingTop:55 }}
           contentContainerStyle={{ flexGrow: 1 }}
           showsVerticalScrollIndicator={false}
         >
@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#faedcd",
-    paddingTop: 60,
+    paddingTop: 0,
     paddingHorizontal: 12,
   },
   title: {
