@@ -10,6 +10,8 @@ import {
   Platform,
   ScrollView,
   Alert,
+  TouchableOpacity,
+  SafeAreaView
 } from "react-native";
 
 import ErrorMessage from "../Components/ErrorMessage";
@@ -17,9 +19,12 @@ import Button from "../Components/Button";
 import InputField from "../Components/InputField";
 import Firebase from "../config/firebase";
 import { registration } from "../../API/firebaseMethods";
+import {Title, Body, Subtitle} from "native-base"
 
-
-
+import Bing from "../Svg/Bing.svg"
+import Cactus from "../Svg/Cactus.svg"
+import Yellow from "../Svg/Yellow.svg"
+import Orange from "../Svg/Orange.svg"
 
 
 const auth = Firebase.auth();
@@ -88,6 +93,7 @@ export default function SignupScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -99,8 +105,17 @@ export default function SignupScreen({ navigation }) {
           contentContainerStyle={{ flexGrow: 1 }}
           showsVerticalScrollIndicator={false}
         >
-          <Text style={styles.title}>Create new account</Text>
+          <Text style={{fontSize: 24,
+    fontWeight: "600",
+    color: "black",
+    alignSelf: "center",
+    paddingBottom: 24,
+    fontFamily:"recoleta-black",
+    paddingTop:20
+    }}>Create a new account</Text>
 
+
+<Bing style={{position:"absolute"}} />
           <InputField
             inputStyle={{
               fontSize: 14,
@@ -109,7 +124,7 @@ export default function SignupScreen({ navigation }) {
               backgroundColor: "#fff",
               marginBottom: 20,
             }}
-            leftIcon="account-tie"
+            leftIcon="nature-people"
             placeholder="First Name"
             autoCapitalize="none"
             autoFocus={true}
@@ -125,7 +140,7 @@ export default function SignupScreen({ navigation }) {
               backgroundColor: "#fff",
               marginBottom: 20,
             }}
-            leftIcon="account-tie"
+            leftIcon="human-handsdown"
             placeholder="Last Name"
             autoCapitalize="none"
             autoFocus={true}
@@ -141,7 +156,7 @@ export default function SignupScreen({ navigation }) {
               backgroundColor: "#fff",
               marginBottom: 20,
             }}
-            leftIcon="email"
+            leftIcon="email-multiple-outline"
             placeholder="Enter email"
             autoCapitalize="none"
             keyboardType="email-address"
@@ -151,10 +166,12 @@ export default function SignupScreen({ navigation }) {
             onChangeText={(text) => setEmail(text)}
           />
 
+<Orange style={{position:"absolute", marginTop:255, marginLeft:210}} />
+
           <InputField
             inputStyle={{ fontSize: 14 }}
             containerStyle={{ backgroundColor: "#fff", marginBottom: 20 }}
-            leftIcon="cellphone-basic"
+            leftIcon="phone-ring-outline"
             placeholder="Phone Number"
             autoCapitalize="none"
             keyboardType="number-pad"
@@ -167,13 +184,17 @@ export default function SignupScreen({ navigation }) {
           <InputField
             inputStyle={{ fontSize: 14 }}
             containerStyle={{ backgroundColor: "#fff", marginBottom: 20 }}
-            leftIcon="earth"
+            leftIcon="map-marker-circle"
             placeholder="Address"
             autoCapitalize="none"
             autoFocus={true}
             value={address}
             onChangeText={(text) => setAddress(text)}
           />
+
+
+<Yellow style={{position:"absolute", marginTop:379}} />
+<Cactus style={{position:"absolute", marginTop:359}} />
 
           <InputField
             inputStyle={{
@@ -200,19 +221,30 @@ export default function SignupScreen({ navigation }) {
           ) : null}
           <Button
             onPress={onHandleSignup}
-            backgroundColor="#f57c00"
+            backgroundColor="black"
             title="Signup"
             tileColor="#fff"
             titleSize={20}
             containerStyle={{
-              marginBottom: 24,
+              marginBottom: 12,
             }}
           />
+
+
+<Subtitle style={{fontSize:12}}>Already have an account?</Subtitle>
+
+<TouchableOpacity  onPress={() => navigation.navigate("Login")}>
+<Title style={{marginTop:0}}>Log In</Title>
+</TouchableOpacity>
+
+{/*
           <RNButton
             onPress={() => navigation.navigate("Login")}
             title="Go to Login"
             color="#fff"
           />
+*/}
+
         </ScrollView>
       </KeyboardAvoidingView>
     </View>
@@ -222,7 +254,7 @@ export default function SignupScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#707070",
+    backgroundColor: "#faedcd",
     paddingTop: 50,
     paddingHorizontal: 12,
   },

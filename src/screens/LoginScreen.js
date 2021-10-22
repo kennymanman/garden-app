@@ -91,7 +91,7 @@ export default function LoginScreen({ navigation }) {
           backgroundColor: "#fff",
           marginBottom: 20,
         }}
-        leftIcon="email"
+        leftIcon="email-multiple-outline"
         placeholder="Enter email"
         autoCapitalize="none"
         keyboardType="email-address"
