@@ -226,7 +226,7 @@ export default function SignupScreen({ navigation }) {
             tileColor="#fff"
             titleSize={20}
             containerStyle={{
-              marginBottom: 12,
+              marginBottom: 9,
             }}
           />
 
