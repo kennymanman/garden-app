@@ -1,11 +1,12 @@
 import React from 'react';
 import { StyleSheet, Pressable, Text } from 'react-native';
+import { fontSize } from 'styled-system';
 
 const Button = ({
   title,
   backgroundColor = '#000',
   titleColor = '#fff',
-  titleSize = 14,
+  titleSize = 5,
   onPress,
   width = '100%',
   containerStyle
@@ -46,7 +47,8 @@ const Button = ({
 
 const styles = StyleSheet.create({
   text: {
-    fontWeight: '600'
+    fontWeight: '600',
+    
   },
   base: {
     alignItems: 'center',

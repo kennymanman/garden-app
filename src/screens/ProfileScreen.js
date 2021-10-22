@@ -94,6 +94,9 @@ export default function ProfileScreen({ navigation }) {
           </View>
         </TouchableOpacity>
 
+
+
+        <TouchableOpacity onPress={() => navigation.navigate("Change my Password")}>
         <View style={{ flexDirection: "row", marginTop: 40 }}>
           <MaterialCommunityIcons
             name="account-key-outline"
@@ -104,6 +107,8 @@ export default function ProfileScreen({ navigation }) {
             Change Password
           </Title>
         </View>
+       </TouchableOpacity>
+
 <Bingcross style={{position:"absolute", left:270}} />
 
 

@@ -108,7 +108,7 @@ export default function SearchScreen ({navigation}) {
 
 <InputField placeholder="Search Groceries" leftIcon="magnify"
 
-containerStyle={{backgroundColor:"#e9ecef", borderBottomRightRadius:30, borderTopRightRadius:30}}
+containerStyle={{backgroundColor:"#e9ecef", borderBottomRightRadius:30, borderTopRightRadius:30, height:38}}
 style={{marginTop:20, padding:12, borderBottomRightRadius:30, borderTopRightRadius:30, width:350, height:10, backgroundColor:"gray", alignSelf:"center", borderTopLeftRadius:30, borderBottomLeftRadius:30}}
 >
 </InputField>

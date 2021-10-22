@@ -12,7 +12,7 @@ export default function AuthStack() {
   return (
 
 
-    <Stack.Navigator >
+    <Stack.Navigator headerMode={"none"} >
       <Stack.Screen name='Login' component={LoginScreen} />
       <Stack.Screen name='Signup' component={SignupScreen} />
     </Stack.Navigator>

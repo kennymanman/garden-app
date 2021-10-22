@@ -7,14 +7,19 @@ import {
   View,
   Button as RNButton,
   Alert,
+  SafeAreaView,
+  TouchableOpacity
 } from "react-native";
+
+import {Title, Body, Subtitle} from "native-base"
 
 import ErrorMessage from "../Components/ErrorMessage";
 import Button from "../Components/Button";
 import InputField from "../Components/InputField";
 import Firebase from "../config/firebase";
 import { signIn } from "../../API/firebaseMethods";
-
+import Green from "../Svg/Green.svg"
+import Cheetos from "../Svg/Cheetos.svg"
 
 
 const auth = Firebase.auth();
@@ -59,12 +64,28 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <SafeAreaView>
       <StatusBar style="dark-content" />
-      <Text style={styles.title}>Login</Text>
+
+<Green style={{position:"absolute"}}/>
+
+
+      <Text style={{ fontSize: 52,
+    fontWeight: "600",
+    color: "black",
+    alignSelf: "center",
+    paddingBottom: 2,
+    fontFamily:"recoleta-bold",
+    paddingTop:120
+    
+    }}>Garden<Text style={{color:"orange", fontSize:55}}>.</Text></Text>
+
+    <Subtitle style={{paddingBottom: 12}}>Groceries at your doorstep</Subtitle>
 
       <InputField
         inputStyle={{
           fontSize: 14,
+          
         }}
         containerStyle={{
           backgroundColor: "#fff",
@@ -79,6 +100,10 @@ export default function LoginScreen({ navigation }) {
         value={email}
         onChangeText={(text) => setEmail(text)}
       />
+
+<Cheetos style={{position:"absolute", marginTop:240}} />
+
+
 
       <InputField
         inputStyle={{
@@ -104,7 +129,7 @@ export default function LoginScreen({ navigation }) {
 
       <Button
         onPress={onLogin}
-        backgroundColor="green"
+        backgroundColor="black"
         title="Login"
         tileColor="#fff"
         titleSize={20}
@@ -113,11 +138,20 @@ export default function LoginScreen({ navigation }) {
         }}
       />
 
-      <RNButton
+
+<Subtitle style={{fontSize:12}}>Don't have an account?</Subtitle>
+
+<TouchableOpacity  onPress={() => navigation.navigate("Signup")}>
+<Title style={{marginTop:10}}>SignUp</Title>
+</TouchableOpacity>
+
+      {/*<RNButton 
         onPress={() => navigation.navigate("Signup")}
-        title="Go to Signup"
+        title="Signup"
         color="black"
-      />
+      />*/}
+
+</SafeAreaView>
     </View>
   );
 }
@@ -125,15 +159,10 @@ export default function LoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0000",
+    backgroundColor: "#faedcd",
     paddingTop: 50,
     paddingHorizontal: 12,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "600",
-    color: "black",
-    alignSelf: "center",
-    paddingBottom: 24,
-  },
+  }
+ 
 });
+
