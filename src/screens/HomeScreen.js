@@ -22,6 +22,7 @@ import { Headline } from "react-native-paper";
 //import Fruits from "../screens/Fruits"
 import { NavigationContainer } from "@react-navigation/native";
 import { Title, Subtitle } from "native-base";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Avatar } from "react-native-paper";
 import Animated from "react-native-reanimated";
 import BottomSheet from "reanimated-bottom-sheet";
@@ -79,7 +80,7 @@ export default function HomeScreen({ navigation }) {
         ${price} {""}
       </Text>
 
-      <Text
+      {/*<Text
         style={{
           bottom: 0,
           left: 0,
@@ -92,7 +93,8 @@ export default function HomeScreen({ navigation }) {
       >
         {description}
         {""}{" "}
-      </Text>
+      </Text> */}
+
 
       <View style={{ flexDirection: "row" }}>
         <Button
@@ -141,23 +143,18 @@ export default function HomeScreen({ navigation }) {
     </TouchableOpacity>
   );
 
-  return (
-    <View style={{ flex: 1 }}>
-      <SafeAreaView />
-      <ScrollView showsHorizontalScrollIndicator={false}>
-        <View style={styles.container}>
-          {/* <Button
-            style={styles.ditch}
-            type="clear"
-            icon={<Icon name="bars" size={20} color="black" />}
-            onPress={() => navigation.openDrawer()}
-          /> */}
+return (
+<View >
+      
+  <ScrollView showsVerticalScrollIndicator={false} >
+   <View style={styles.container}>
+          
 
           <Image
             style={{
               width: 349,
               height: 100,
-              alignItems: "center",
+              alignSelf: "center",
               borderRadius: 19,
               marginTop: 18,
             }}
@@ -168,7 +165,7 @@ export default function HomeScreen({ navigation }) {
             style={{
               width: 349,
               height: 350,
-              alignItems: "center",
+              alignSelf: "center",
               borderRadius: 20,
               marginTop: 15,
             }}
@@ -179,34 +176,35 @@ export default function HomeScreen({ navigation }) {
             style={{
               width: 349,
               height: 290,
-              alignItems: "center",
+              alignSelf: "center",
               borderRadius: 20,
               marginTop: 15,
             }}
             source={fresh}
           />
 
-          <View style={{ marginTop: 45 }}>
-            <Title style={{ textAlign: "left", fontSize: 30, marginLeft: 8 }}>
-              Grocery Boxes
-            </Title>
-            <Text style={{ marginLeft: 12, fontSize: 13, marginTop: 8 }}>
+  
+  <Title style={{ alignSelf: "flex-start", fontSize: 30, marginLeft: 8, marginTop: 60 }}>
+    Grocery Boxes
+   </Title>
+            <Text style={{ marginLeft: 12, fontSize: 13, marginTop: 8, alignSelf: "flex-start" }}>
               Enjoy deals, offers and discounts at affordable prices.
             </Text>
 
             <TouchableOpacity
               onPress={() => navigation.navigate("DealsScreen")}
             >
-              <Text
+              <Subtitle
                 style={{
-                  marginLeft: 12,
+                  marginLeft: 9,
                   fontSize: 13,
                   color: "grey",
                   marginTop: 5,
+                  alignSelf:"flex-start"
                 }}
               >
                 See all deals
-              </Text>
+              </Subtitle>
             </TouchableOpacity>
 
             <FlatList
@@ -218,20 +216,31 @@ export default function HomeScreen({ navigation }) {
               }
               keyExtractor={(item) => item.id}
             />
-          </View>
-        </View>
-      </ScrollView>
+        
+</View>
+
+<View style={{backgroundColor:"#058c42", height:700, borderTopLeftRadius:24, borderTopRightRadius:24, marginTop:110}}>
+
+
+<Text style={{marginTop:70, marginLeft:0,  fontSize:30, alignSelf:"center", color:"white", fontFamily:"recoleta-black"}}>My Grocery List<Text style={{color:"orange"}}> .</Text></Text>
+<Title style={{fontSize:11}}>Create your own personalized grocery list and have </Title>
+<Title style={{fontSize:11}}>it delivered on your selected date.</Title>
+</View>
+
+
+    </ScrollView>
+
+   
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 12,
-    paddingTop: 30,
-    backgroundColor: "#ffffff",
-    alignItems: "center",
+    
+    
+    marginTop: 35,
+    
   },
 
   rest: {
