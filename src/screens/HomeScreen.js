@@ -15,6 +15,7 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import ban from "../img/ban.png";
 import fresh from "../img/fresh.png";
 import hus from "../img/hus.png";
+
 import Deals from "./Deals";
 import { AddCartContext, AddSavedContext } from "../screens/CartContext";
 import { Feather } from "@expo/vector-icons";
@@ -26,6 +27,14 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Avatar } from "react-native-paper";
 import Animated from "react-native-reanimated";
 import BottomSheet from "reanimated-bottom-sheet";
+import Vortex from "../Svg/Vortex.svg"
+import Orangelong from "../Svg/Orangelong.svg"
+
+
+import carrot from "../rmg/carrot.png";
+
+
+
 
 export default function HomeScreen({ navigation }) {
   const { updateCart } = useContext(AddCartContext);
@@ -148,7 +157,9 @@ return (
       
   <ScrollView showsVerticalScrollIndicator={false} >
    <View style={styles.container}>
-          
+
+     
+
 
           <Image
             style={{
@@ -180,14 +191,14 @@ return (
               borderRadius: 20,
               marginTop: 15,
             }}
-            source={fresh}
+            source={carrot}
           />
 
   
   <Title style={{ alignSelf: "flex-start", fontSize: 30, marginLeft: 8, marginTop: 60 }}>
     Grocery Boxes
    </Title>
-            <Text style={{ marginLeft: 12, fontSize: 13, marginTop: 8, alignSelf: "flex-start" }}>
+            <Text style={{ marginLeft: 12, fontSize: 13, marginTop: 8, alignSelf: "flex-start", fontFamily:"recoleta-black" }}>
               Enjoy deals, offers and discounts at affordable prices.
             </Text>
 
@@ -221,10 +232,18 @@ return (
 
 <View style={{backgroundColor:"#058c42", height:700, borderTopLeftRadius:24, borderTopRightRadius:24, marginTop:110}}>
 
-
+<Vortex style={{position:"absolute", marginTop:250}}/>
 <Text style={{marginTop:70, marginLeft:0,  fontSize:30, alignSelf:"center", color:"white", fontFamily:"recoleta-black"}}>My Grocery List<Text style={{color:"orange"}}> .</Text></Text>
-<Title style={{fontSize:11}}>Create your own personalized grocery list and have </Title>
-<Title style={{fontSize:11}}>it delivered on your selected date.</Title>
+<Title style={{fontSize:13, fontFamily:"recoleta-black"}}>Create your own personalized grocery list and have </Title>
+<Title style={{fontSize:13, fontFamily:"recoleta-black"}}>it delivered on your selected date.</Title>
+
+
+<Orangelong style={{position:"absolute", marginTop:480, marginLeft:230}} />
+
+<Text style={{color:"white", fontSize:13, fontFamily:"recoleta-bold", marginTop:50, marginLeft:10}}>Selected date of delivery:  25th October 2021 </Text>
+<Subtitle style={{marginTop:10, alignSelf:"flex-start", marginLeft:10, color:"yellow", fontFamily:"recoleta-black"}}>Edit Grocery List </Subtitle>
+
+
 </View>
 
 
