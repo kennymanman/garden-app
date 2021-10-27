@@ -45,6 +45,7 @@ import ProfileScreen from "../screens/ProfileScreen";
 import ProfileStack from "../Navigation/ProfileStack";
 import SavedStack from "../Navigation/SavedStack";
 import CartStack from "../Navigation/CartStack";
+import HomeStack from "../Navigation/HomeStack";
 
 import { Avatar, Title } from "react-native-paper";
 import { Text } from "react-native-elements";
@@ -152,6 +153,7 @@ function SearchScreenStack() {
       <Stack.Screen name="ProductPage" component={ProductPage} />
       <Stack.Screen name="DeliveryScreen" component={DeliveryScreen} />
       <Stack.Screen name="DealsScreen" component={DealsScreen} />
+      
     </Stack.Navigator>
   );
 }
@@ -161,15 +163,15 @@ const Tab = createMaterialBottomTabNavigator(); //Bottom Tab bar Navigation
 function MainTabNavigator() {
   return (
     <Tab.Navigator //Tab bar Navigation Start
-      initialRouteName="HomeScreen"
+      initialRouteName="HomeStack"
       shifting={true}
       sceneAnimationEnabled={false}
       barStyle={{ backgroundColor: "#ffffff" }}
       labeled={false}
     >
       <Tab.Screen //Tab Bar First Icon
-        name="HomeScreen"
-        component={HomeScreen}
+        name="HomeStack"
+        component={HomeStack}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="tree" color={color} size={28} />

@@ -38,7 +38,7 @@ return (
    size={20}
    color="black"     />}
             
-  onPress={() => navigation.navigate("My Profile")} />  
+  onPress={() => navigation.goBack()} />  
 
 </Left>
         

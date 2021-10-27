@@ -29,9 +29,9 @@ import Animated from "react-native-reanimated";
 import BottomSheet from "reanimated-bottom-sheet";
 import Vortex from "../Svg/Vortex.svg"
 import Orangelong from "../Svg/Orangelong.svg"
+import Petal from "../Svg/Petal.svg"
 
-
-import carrot from "../rmg/carrot.png";
+import page from "../rmg/page.png";
 
 
 
@@ -158,7 +158,9 @@ return (
   <ScrollView showsVerticalScrollIndicator={false} >
    <View style={styles.container}>
 
-     
+
+
+   
 
 
           <Image
@@ -170,7 +172,7 @@ return (
               marginTop: 18,
             }}
             source={ban}
-          />
+          /> 
 
           <Image
             style={{
@@ -186,16 +188,16 @@ return (
           <Image
             style={{
               width: 349,
-              height: 290,
+              height: 460,
               alignSelf: "center",
               borderRadius: 20,
               marginTop: 15,
             }}
-            source={carrot}
+            source={page}
           />
 
   
-  <Title style={{ alignSelf: "flex-start", fontSize: 30, marginLeft: 8, marginTop: 60 }}>
+  <Title style={{ alignSelf: "flex-start", fontSize: 30, marginLeft: 8, marginTop: 70 }}>
     Grocery Boxes
    </Title>
             <Text style={{ marginLeft: 12, fontSize: 13, marginTop: 8, alignSelf: "flex-start", fontFamily:"recoleta-black" }}>
@@ -232,7 +234,7 @@ return (
 
 <View style={{backgroundColor:"#058c42", height:700, borderTopLeftRadius:24, borderTopRightRadius:24, marginTop:110}}>
 
-<Vortex style={{position:"absolute", marginTop:250}}/>
+<Vortex style={{position:"absolute", marginTop:220}}/>
 <Text style={{marginTop:70, marginLeft:0,  fontSize:30, alignSelf:"center", color:"white", fontFamily:"recoleta-black"}}>My Grocery List<Text style={{color:"orange"}}> .</Text></Text>
 <Title style={{fontSize:13, fontFamily:"recoleta-black"}}>Create your own personalized grocery list and have </Title>
 <Title style={{fontSize:13, fontFamily:"recoleta-black"}}>it delivered on your selected date.</Title>
@@ -240,9 +242,24 @@ return (
 
 <Orangelong style={{position:"absolute", marginTop:480, marginLeft:230}} />
 
-<Text style={{color:"white", fontSize:13, fontFamily:"recoleta-bold", marginTop:50, marginLeft:10}}>Selected date of delivery:  25th October 2021 </Text>
-<Subtitle style={{marginTop:10, alignSelf:"flex-start", marginLeft:10, color:"yellow", fontFamily:"recoleta-black"}}>Edit Grocery List </Subtitle>
+<Title style={{color:"white", fontSize:13, fontFamily:"recoleta-bold", marginTop:50}}>Selected date of delivery:  25th October 2021 </Title>
 
+
+
+<Button  //Checkout Button
+
+buttonStyle={{
+  backgroundColor: "black"
+}}
+
+title="Edit Grocery List"
+style={{marginBottom:20,
+width:300,
+marginTop:20,
+alignSelf: "center",
+height:100}}
+onPress={() => navigation.navigate("Grocerylist")}
+/>
 
 </View>
 

@@ -197,7 +197,7 @@ return (
 <Button  type="clear" style={{paddingLeft:9}}
 icon={<Feather name="arrow-left" size={20} color="black" />}
             
-  onPress={() => navigation.navigate("SearchScreen")} />  
+  onPress={() => navigation.goBack()} />  
 </Left>
 <Body>
 <Title style={{width:300}} >Grocery Boxes & Deals</Title>
