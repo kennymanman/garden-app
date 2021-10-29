@@ -7,7 +7,8 @@ let data = [
     id: "344455dg",
     name: "Orange",
     price: 250,
-    description: "fresh from the farms",
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+    ,
     quantity: 3,
     vendor: "pa salieu",
     image: require("../rmg/orange.jpg"),
@@ -37,7 +38,8 @@ let data = [
     name: "Banana",
     price: 500,
     quantity: 2,
-    description: "fresh from the oguns",
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+    ,
     vendor: "pa salieu",
     images: [
       {
@@ -65,8 +67,8 @@ let data = [
     name: "Pineapple",
     price: 300,
     quantity: 7,
-    description: "fresh from the seas",
-
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+    ,
     vendor: "pa salieu",
     images: [
       {
@@ -94,8 +96,8 @@ let data = [
     name: "Guava",
     price: 450,
     quantity: 4,
-    description: "fresh from the seas",
-
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+    ,
     vendor: "pa salieu",
     images: [
       {
@@ -123,7 +125,8 @@ let data = [
     name: "Mango",
     price: 190,
     quantity: 6,
-    description: "fresh from the seas",
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+    ,
     vendor: "pa salieu",
     images: [
       {
@@ -151,8 +154,8 @@ let data = [
     name: "Paw-Paw",
     price: 250,
     quantity: 3,
-    description: "fresh from the seas",
-
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+    ,
     vendor: "pa salieu",
     images: [
       {
@@ -180,7 +183,8 @@ let data = [
     image: require("../rmg/grape.jpg"),
     price: 300,
     quantity: 5,
-    description: "blacker the berry",
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+    ,
     images: [
       {
         url:

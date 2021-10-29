@@ -33,6 +33,7 @@ import Petal from "../Svg/Petal.svg"
 
 import page from "../rmg/page.png";
 
+import data from "./data"
 
 
 
@@ -139,6 +140,7 @@ export default function HomeScreen({ navigation }) {
           name: item.name,
           price: item.price,
           image: item.image,
+          description: item.description
         });
       }}
     >
@@ -222,7 +224,7 @@ return (
 
             <FlatList
               horizontal={true}
-              data={Deals}
+              data={data}
               // renderItem={renderItem}
               renderItem={({ item }) =>
                 renderItem({ navigation, item, useCart, useSaved })
