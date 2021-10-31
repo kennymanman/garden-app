@@ -12,6 +12,7 @@ let data = [
     quantity: 3,
     vendor: "pa salieu",
     image: require("../rmg/orange.jpg"),
+    size: "20kg in weight & 10 Pieces of the item",
     images: [
       {
         url:
@@ -40,6 +41,7 @@ let data = [
     quantity: 2,
     description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
     ,
+    size: "20kg in weight & 10 Pieces of the item ",
     vendor: "pa salieu",
     images: [
       {
@@ -69,6 +71,7 @@ let data = [
     quantity: 7,
     description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
     ,
+    size: "20kg in weight & 10 Pieces of the item ",
     vendor: "pa salieu",
     images: [
       {
@@ -98,6 +101,7 @@ let data = [
     quantity: 4,
     description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
     ,
+    size: "20kg in weight & 10 Pieces of the item ",
     vendor: "pa salieu",
     images: [
       {
@@ -127,6 +131,7 @@ let data = [
     quantity: 6,
     description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
     ,
+    size: "20kg in weight & 10 Pieces of the item ",
     vendor: "pa salieu",
     images: [
       {
@@ -156,6 +161,7 @@ let data = [
     quantity: 3,
     description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
     ,
+    size: "20kg in weight & 10 Pieces of the item ",
     vendor: "pa salieu",
     images: [
       {
@@ -185,6 +191,7 @@ let data = [
     quantity: 5,
     description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
     ,
+    size: "20kg in weight & 10 Pieces of the item ",
     images: [
       {
         url:

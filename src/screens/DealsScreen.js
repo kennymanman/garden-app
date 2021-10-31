@@ -58,7 +58,7 @@ const Bandlepress = () =>
 
 
 //Structure of the product list.
- const Form = ({name, description, price,  id, image, images, vendor}) => (
+ const Form = ({name, description, price,  id, image, images, vendor, size}) => (
   
   <ImageBackground
 source={image ? image: require("../img/sig.png")}  //Background Image
@@ -129,7 +129,7 @@ imageStyle={{borderRadius:12}}
          paddingLeft: 8,
          }}
 icon ={  <Feather name="heart"  size={15} color="white"     />}
-onPress={()=> {updateSaved ({name, price, description, image, images, vendor}); Bandlepress();  }}
+onPress={()=> {updateSaved ({name, price, description, image, images, vendor, size}); Bandlepress();  }}
 
 />
 
@@ -147,7 +147,7 @@ onPress={()=> {updateSaved ({name, price, description, image, images, vendor}); 
          paddingLeft: 94,
          }}
 icon ={  <Feather name="shopping-bag"  size={15} color="white"     />}
-onPress={()=> {updateCart({name, price, image, images, description, vendor}); Handlepress();    }} 
+onPress={()=> {updateCart({name, price, image, images, description, vendor, size}); Handlepress();    }} 
 
 />
 
@@ -170,7 +170,7 @@ onPress={()=> {updateCart({name, price, image, images, description, vendor}); Ha
 
 //Render Items.
   const renderItem= ({ item, id, useCart, useSaved  })=> (  //had to remove navigation here so i could also render navigation.
-  <TouchableOpacity    onPress={()=> navigation.navigate("ProductPage" , { name: item.name , price: item.price, images: item.images, description: item.description, vendor: item.vendor})}>
+  <TouchableOpacity    onPress={()=> navigation.navigate("ProductPage" , { name: item.name , price: item.price, images: item.images, description: item.description, vendor: item.vendor, size: item.size})}>
       <Form
        id={item.id}
        name={item.name} 
@@ -179,6 +179,7 @@ onPress={()=> {updateCart({name, price, image, images, description, vendor}); Ha
        price={item.price}
       images={item.images}
       vendor={item.vendor}
+      size={item.size}
       
        />
       </TouchableOpacity>

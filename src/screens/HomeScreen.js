@@ -45,7 +45,7 @@ export default function HomeScreen({ navigation }) {
   const useSaved = updateSaved;
 
   //Structure of the product list.
-  const Form = ({ name, description, price, id, image }) => (
+  const Form = ({ name, description, price, id, image, size }) => (
     <ImageBackground
       source={image ? image : require("../img/sig.png")} //Background Image
       imageStyle={{ borderRadius: 12 }}
@@ -116,14 +116,14 @@ export default function HomeScreen({ navigation }) {
             paddingLeft: 8,
           }}
           icon={<Feather name="heart" size={15} color="white" />}
-          onPress={() => updateSaved({ name, price, description, image })}
+          onPress={() => updateSaved({ name, price, description, image, size })}
         />
 
         <Button
           type="clear"
           style={{ right: 0, top: 0, marginTop: 3, paddingLeft: 119 }}
           icon={<Feather name="shopping-bag" size={15} color="white" />}
-          onPress={() => updateCart({ name, price, image })}
+          onPress={() => updateCart({ name, price, image,size})}
         />
       </View>
     </ImageBackground>
@@ -140,7 +140,8 @@ export default function HomeScreen({ navigation }) {
           name: item.name,
           price: item.price,
           image: item.image,
-          description: item.description
+          description: item.description,
+          size: item.size
         });
       }}
     >
@@ -150,6 +151,7 @@ export default function HomeScreen({ navigation }) {
         description={item.description}
         image={item.image}
         price={item.price}
+        size={item.size}
       />
     </TouchableOpacity>
   );

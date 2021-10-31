@@ -55,6 +55,7 @@ export default function ProductPage({ route, navigation }) {
 <Ionicons style={{alignSelf:"center"}} name="remove-outline" size={35} color="gray" />
 
 
+
 <Button
             type="clear"
             style={{
@@ -65,11 +66,22 @@ export default function ProductPage({ route, navigation }) {
 />
 
 
+
 <Title style={{alignSelf:"flex-start", fontSize:26}}>{route.params.name} </Title>
 
 <Title style={{alignSelf:"flex-start", fontSize:20}}> ${route.params.price}</Title>
 
 <Subtitle style={{paddingTop:12}}>Scrolldown to view more info</Subtitle>
+
+
+<View
+  style={{
+    borderBottomColor: 'gray',
+    borderBottomWidth: 1,
+    marginTop:10
+  }}
+/>
+
 <Button  //Add to cart button
 
 buttonStyle={{
@@ -79,16 +91,24 @@ buttonStyle={{
 title="Add to Cart"
 style={{
 width:300,
-marginTop:29,
+marginTop:24,
 alignSelf: "center",
 height:100}}
 />  
 
 
-<Title style={{alignSelf:"flex-start"}}>Product description</Title>
+<Title style={{alignSelf:"flex-start", marginLeft:2}}>Product description</Title>
 <Text number={7} style={{alignSelf:"flex-start", marginTop:15, padding:11, fontSize:14}}>{route.params.description}</Text>
 
-<Title style={{alignSelf:"flex-start", marginTop:30}}>Quantity</Title>
+<View
+  style={{
+    borderBottomColor: 'gray',
+    borderBottomWidth: 1,
+    marginTop:19
+  }}
+/>
+
+<Title style={{alignSelf:"flex-start", marginTop:30, marginLeft:2}}>Quantity</Title>
 
 
 
@@ -111,6 +131,22 @@ placeholder={placeholder}
             ]}
         />
 </View>
+
+
+<Title style={{alignSelf:"flex-start", marginTop:75, marginLeft:2}}>Size & Measurement</Title>
+
+<Text style={{alignSelf:"flex-start", marginTop:20, padding:5, fontSize:14, fontWeight:"500"}}>{route.params.size}</Text>
+
+
+
+<View
+  style={{
+    borderBottomColor: 'gray',
+    borderBottomWidth: 1,
+    marginTop:30
+  }}
+/>
+
 
 <Button  //Add to Grocery List
 
@@ -171,10 +207,9 @@ icon={<Feather name="arrow-left" size={22} color="black" />}
 
  <BottomSheet
         ref={sheetRef}
-        snapPoints={[8, 6, 510]}
+        snapPoints={[8, 6, 720]}
         borderRadius={15}
-        
-        renderContent={renderContent}
+       renderContent={renderContent}
         enabledInnerScrolling={false}
  />
 
@@ -189,6 +224,6 @@ const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: { flex: 1, backgroundColor: 'white' },
-    child: { width, justifyContent: 'center', height:370 },
+    child: { width, justifyContent: 'center', height:380 },
     text: { fontSize: width * 0.5, textAlign: 'center' },
   });
