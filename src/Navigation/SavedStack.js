@@ -7,7 +7,7 @@ import Firebase from '../config/firebase';
 import { createStackNavigator } from "@react-navigation/stack";
 import { ActivityIndicator } from 'react-native';
 import AuthStack from "../Navigation/AuthStack"
-
+import ProductPage from '../screens/ProductPage';
 
 
 
@@ -70,7 +70,7 @@ return (
   <SavedStack.Navigator headerMode="none"  >
     
 <SavedStack.Screen name="SavedScreen" component={SavedScreen} />
-
+<SavedStack.Screen name="ProductPage" component={ProductPage} />
      
 </SavedStack.Navigator> 
 )

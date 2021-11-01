@@ -109,7 +109,7 @@ style={{marginBottom:2, marginTop:18}}>
               
             
 
-            {cart.map(({ name, count, image, price, images, description, vendor})=> (
+            {cart.map(({ name, count, image, price, images, description, vendor, size})=> (
 
             <View style={{  flexDirection:"row"}}  key={name}>   
 
@@ -117,7 +117,7 @@ style={{marginBottom:2, marginTop:18}}>
 
 
 
-<TouchableOpacity    onPress={()=> navigation.navigate("ProductPage" , { name: name , price: price, images:images, description:description, vendor: vendor})}>
+<TouchableOpacity    onPress={()=> navigation.navigate("ProductPage" , { name: name , price: price, images:images, description:description, vendor: vendor, size: size})}>
 <ImageBackground 
               
               source={image ? image: require("../img/sig.png")}
@@ -237,16 +237,24 @@ style={{marginBottom:2, marginTop:18}}>
 
 
 
-<Title style={{fontSize:20,                     //Delivery Fee
+
+  <Title style={{fontSize:20,                     //Subtotal
   color:"black",
   textAlign:"left",
   paddingTop:20,
+  paddingBottom:10}}>Subtotal: $0 </Title>
+
+
+<Title style={{fontSize:20,                     //Delivery Fee
+  color:"black",
+  textAlign:"left",
+  paddingTop:1,
   paddingBottom:10}}>Delivery Fee: $950 </Title>
 
 <Title style={{fontSize:20,                       //Total Price
    color:"black",
   textAlign:"left",
-  paddingTop:1,
+  paddingTop:20,
   paddingBottom:10}}>Total: $0 </Title>
 
 

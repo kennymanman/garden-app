@@ -84,7 +84,7 @@ export default function SavedScreen({ navigation }) {
 
         <ScrollView showsVerticalScrollIndicator={false}>
           {saved.map(
-            ({ name, image, price, description, vendor, images, id }) => (
+            ({ name, image, price, description, vendor, images, id, size }) => (
               <TouchableOpacity
                 key={name}
                 onPress={() =>
@@ -94,6 +94,7 @@ export default function SavedScreen({ navigation }) {
                     images: images,
                     description: description,
                     vendor: vendor,
+                    size: size
                   })
                 }
               >
@@ -167,7 +168,7 @@ export default function SavedScreen({ navigation }) {
                       <Feather name="shopping-bag" size={17} color="white" />
                     }
                     onPress={() => {
-                      updateCart({ name, price, image });
+                      updateCart({ name, price, image, size });
                       Handlepress();
                     }}
                   />

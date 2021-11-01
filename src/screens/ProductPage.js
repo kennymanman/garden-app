@@ -151,7 +151,8 @@ placeholder={placeholder}
 <Button  //Add to Grocery List
 
 buttonStyle={{
-  backgroundColor: "green"
+  backgroundColor: "#058e3f"
+ 
 }}
 
 title="Add to Grocery List"

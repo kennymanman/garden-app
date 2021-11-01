@@ -15,9 +15,9 @@ export function CartProvider({children}) {
 const cartContext = {
 
    cart,                                              //To Add Item to Cart
-   updateCart: ({name, price, image, description, images, vendor}) => {
+   updateCart: ({name, price, image, description, images, vendor, size}) => {
    const updatedCart = [...cart]
-   updatedCart.push({ name, count:1, price, image, description, images, vendor })
+   updatedCart.push({ name, count:1, price, image, description, images, vendor, size })
    setCart(updatedCart)
 
     },
@@ -35,11 +35,11 @@ const cartContext = {
 
   const savedContext = {
     saved,
-    updateSaved: ({ name, price, image, description, images,vendor }) => {
+    updateSaved: ({ name, price, image, description, images,vendor, size }) => {
       
       
       const updatedSaved = [...saved]
-      updatedSaved.push({name, price, image, description, images, vendor})
+      updatedSaved.push({name, price, image, description, images, vendor, size})
       setSaved(updatedSaved)
     },
 
@@ -58,11 +58,11 @@ const cartContext = {
 
   const ListedContext = {
     listed,
-    updateListed: ({ name, price, image, description }) => {
+    updateListed: ({ name, price, image, description, size}) => {
       
       
       const updatedListed = [...listed]
-      updatedListed.push({name, price, image, description})
+      updatedListed.push({name, price, image, description, size})
       setListed(updatedListed)
     },
 
