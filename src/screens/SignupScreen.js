@@ -24,7 +24,7 @@ import {Title, Body, Subtitle} from "native-base"
 import Bing from "../Svg/Bing.svg"
 import Cactus from "../Svg/Cactus.svg"
 import Yellow from "../Svg/Yellow.svg"
-import Orange from "../Svg/Orange.svg"
+// import Orange from "../Svg/Orange.svg"
 
 
 const auth = Firebase.auth();
@@ -166,7 +166,7 @@ export default function SignupScreen({ navigation }) {
             onChangeText={(text) => setEmail(text)}
           />
 
-<Orange style={{position:"absolute", marginTop:255, marginLeft:210}} />
+{/* <Orange style={{position:"absolute", marginTop:255, marginL¯eft:210}} /> */}
 
           <InputField
             inputStyle={{ fontSize: 14 }}

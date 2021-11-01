@@ -27,15 +27,12 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Avatar } from "react-native-paper";
 import Animated from "react-native-reanimated";
 import BottomSheet from "reanimated-bottom-sheet";
-import Vortex from "../Svg/Vortex.svg"
-import Orangelong from "../Svg/Orangelong.svg"
-import Petal from "../Svg/Petal.svg"
+import Vortex from "../Svg/Vortex.svg";
+// import Petal from "../Svg/Petal.svg"
 
 import page from "../rmg/page.png";
 
-import data from "./data"
-
-
+import data from "./data";
 
 export default function HomeScreen({ navigation }) {
   const { updateCart } = useContext(AddCartContext);
@@ -105,7 +102,6 @@ export default function HomeScreen({ navigation }) {
         {""}{" "}
       </Text> */}
 
-
       <View style={{ flexDirection: "row" }}>
         <Button
           type="clear"
@@ -123,7 +119,7 @@ export default function HomeScreen({ navigation }) {
           type="clear"
           style={{ right: 0, top: 0, marginTop: 3, paddingLeft: 119 }}
           icon={<Feather name="shopping-bag" size={15} color="white" />}
-          onPress={() => updateCart({ name, price, image,size})}
+          onPress={() => updateCart({ name, price, image, size })}
         />
       </View>
     </ImageBackground>
@@ -141,7 +137,7 @@ export default function HomeScreen({ navigation }) {
           price: item.price,
           image: item.image,
           description: item.description,
-          size: item.size
+          size: item.size,
         });
       }}
     >
@@ -156,17 +152,10 @@ export default function HomeScreen({ navigation }) {
     </TouchableOpacity>
   );
 
-return (
-<View >
-      
-  <ScrollView showsVerticalScrollIndicator={false} >
-   <View style={styles.container}>
-
-
-
-   
-
-
+  return (
+    <View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.container}>
           <Image
             style={{
               width: 349,
@@ -176,7 +165,7 @@ return (
               marginTop: 18,
             }}
             source={ban}
-          /> 
+          />
 
           <Image
             style={{
@@ -200,87 +189,118 @@ return (
             source={page}
           />
 
-  
-  <Title style={{ alignSelf: "flex-start", fontSize: 30, marginLeft: 8, marginTop: 70 }}>
-    Grocery Boxes
-   </Title>
-            <Text style={{ marginLeft: 12, fontSize: 13, marginTop: 8, alignSelf: "flex-start", fontFamily:"recoleta-black" }}>
-              Enjoy deals, offers and discounts at affordable prices.
-            </Text>
+          <Title
+            style={{
+              alignSelf: "flex-start",
+              fontSize: 30,
+              marginLeft: 8,
+              marginTop: 70,
+            }}
+          >
+            Grocery Boxes
+          </Title>
+          <Text
+            style={{
+              marginLeft: 12,
+              fontSize: 13,
+              marginTop: 8,
+              alignSelf: "flex-start",
+              fontFamily: "recoleta-black",
+            }}
+          >
+            Enjoy deals, offers and discounts at affordable prices.
+          </Text>
 
-            <TouchableOpacity
-              onPress={() => navigation.navigate("DealsScreen")}
+          <TouchableOpacity onPress={() => navigation.navigate("DealsScreen")}>
+            <Subtitle
+              style={{
+                marginLeft: 9,
+                fontSize: 13,
+                color: "grey",
+                marginTop: 5,
+                alignSelf: "flex-start",
+              }}
             >
-              <Subtitle
-                style={{
-                  marginLeft: 9,
-                  fontSize: 13,
-                  color: "grey",
-                  marginTop: 5,
-                  alignSelf:"flex-start"
-                }}
-              >
-                See all deals
-              </Subtitle>
-            </TouchableOpacity>
+              See all deals
+            </Subtitle>
+          </TouchableOpacity>
 
-            <FlatList
-              horizontal={true}
-              data={data}
-              // renderItem={renderItem}
-              renderItem={({ item }) =>
-                renderItem({ navigation, item, useCart, useSaved })
-              }
-              keyExtractor={(item) => item.id}
-            />
-        
-</View>
+          <FlatList
+            horizontal={true}
+            data={data}
+            // renderItem={renderItem}
+            renderItem={({ item }) =>
+              renderItem({ navigation, item, useCart, useSaved })
+            }
+            keyExtractor={(item) => item.id}
+          />
+        </View>
 
-<View style={{backgroundColor:"#058c42", height:700, borderTopLeftRadius:24, borderTopRightRadius:24, marginTop:110}}>
+        <View
+          style={{
+            backgroundColor: "#058c42",
+            height: 700,
+            borderTopLeftRadius: 24,
+            borderTopRightRadius: 24,
+            marginTop: 110,
+          }}
+        >
+          <Vortex style={{ position: "absolute", marginTop: 220 }} />
+          <Text
+            style={{
+              marginTop: 70,
+              marginLeft: 0,
+              fontSize: 30,
+              alignSelf: "center",
+              color: "white",
+              fontFamily: "recoleta-black",
+            }}
+          >
+            My Grocery List<Text style={{ color: "orange" }}> .</Text>
+          </Text>
+          <Title style={{ fontSize: 13, fontFamily: "recoleta-black" }}>
+            Create your own personalized grocery list and have{" "}
+          </Title>
+          <Title style={{ fontSize: 13, fontFamily: "recoleta-black" }}>
+            it delivered on your selected date.
+          </Title>
 
-<Vortex style={{position:"absolute", marginTop:220}}/>
-<Text style={{marginTop:70, marginLeft:0,  fontSize:30, alignSelf:"center", color:"white", fontFamily:"recoleta-black"}}>My Grocery List<Text style={{color:"orange"}}> .</Text></Text>
-<Title style={{fontSize:13, fontFamily:"recoleta-black"}}>Create your own personalized grocery list and have </Title>
-<Title style={{fontSize:13, fontFamily:"recoleta-black"}}>it delivered on your selected date.</Title>
+          {/* <Orangelong style={{position:"absolute", marginTop:480, marginLeft:230}} /> */}
 
+          <Title
+            style={{
+              color: "white",
+              fontSize: 13,
+              fontFamily: "recoleta-bold",
+              marginTop: 50,
+            }}
+          >
+            Selected date of delivery: 25th October 2021{" "}
+          </Title>
 
-<Orangelong style={{position:"absolute", marginTop:480, marginLeft:230}} />
-
-<Title style={{color:"white", fontSize:13, fontFamily:"recoleta-bold", marginTop:50}}>Selected date of delivery:  25th October 2021 </Title>
-
-
-
-<Button  //Checkout Button
-
-buttonStyle={{
-  backgroundColor: "black"
-}}
-
-title="Edit Grocery List"
-style={{marginBottom:20,
-width:300,
-marginTop:20,
-alignSelf: "center",
-height:100}}
-onPress={() => navigation.navigate("Grocerylist")}
-/>
-
-</View>
-
-
-    </ScrollView>
-
-   
+          <Button //Checkout Button
+            buttonStyle={{
+              backgroundColor: "black",
+            }}
+            title="Edit Grocery List"
+            style={{
+              marginBottom: 20,
+              width: 300,
+              marginTop: 20,
+              alignSelf: "center",
+              height: 100,
+            }}
+            onPress={() => navigation.navigate("Grocerylist")}
+          />
+        </View>
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    
-    
     marginTop: 35,
-    
   },
 
   rest: {
