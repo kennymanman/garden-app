@@ -28,11 +28,18 @@ import { Avatar } from "react-native-paper";
 import Animated from "react-native-reanimated";
 import BottomSheet from "reanimated-bottom-sheet";
 import Vortex from "../Svg/Vortex.svg";
-// import Petal from "../Svg/Petal.svg"
 
 import page from "../rmg/page.png";
 
 import data from "./data";
+
+import { saveItems } from "../../API/firebaseMethods";
+import * as firebase from "firebase";
+
+
+
+
+
 
 export default function HomeScreen({ navigation }) {
   const { updateCart } = useContext(AddCartContext);
@@ -41,8 +48,13 @@ export default function HomeScreen({ navigation }) {
   const useCart = updateCart;
   const useSaved = updateSaved;
 
+
+  const user = firebase.auth().currentUser;
+
+
+
   //Structure of the product list.
-  const Form = ({ name, description, price, id, image, size }) => (
+  const Form = ({ name, description, price, id, image, images, size, vendor }) => (
     <ImageBackground
       source={image ? image : require("../img/sig.png")} //Background Image
       imageStyle={{ borderRadius: 12 }}
@@ -112,8 +124,26 @@ export default function HomeScreen({ navigation }) {
             paddingLeft: 8,
           }}
           icon={<Feather name="heart" size={15} color="white" />}
-          onPress={() => updateSaved({ name, price, description, image, size })}
+          onPress={() => {
+            console.log("User--------", user);
+            if (user?.uid) {
+              saveItems({
+                name,
+                price,
+                description,
+                image,
+                images,
+                vendor,
+                size,
+              });
+            } else {
+              navigation.navigate("ProfileScreen");
+            }
+          }}
         />
+
+
+
 
         <Button
           type="clear"
