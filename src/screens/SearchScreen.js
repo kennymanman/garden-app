@@ -96,7 +96,7 @@ export default function SearchScreen ({navigation}) {
 
 >*/}
 
-<Outlinecloud style={{position:"absolute", paddingTop:180}} />
+{/*<Outlinecloud style={{position:"absolute", paddingTop:180}} />*/}
 
 <Bullseye style={{position:"absolute", marginLeft:220, paddingTop:1100}} />
 

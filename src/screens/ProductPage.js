@@ -168,7 +168,7 @@ placeholder={placeholder}
   }}
 />
 
-<Orang style={{position:"absolute", marginTop:880, marginLeft:250}} />
+{/*<Orang style={{position:"absolute", marginTop:880, marginLeft:250}} />*/}
 
 <Button  //Add to Grocery List
 
@@ -186,7 +186,7 @@ alignSelf: "center",
 height:100}}
 /> 
 
-<Bingcross style={{position:"absolute", marginTop:990}} />
+{/*<Bingcross style={{position:"absolute", marginTop:990}} />*/}
 
 <Subtitle>Add this product to your personal grocery list.</Subtitle>
 

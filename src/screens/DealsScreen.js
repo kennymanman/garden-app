@@ -18,6 +18,7 @@ import { saveItems } from "../../API/firebaseMethods";
 import * as firebase from "firebase";
 
 export default function DealsScreen({ navigation, ...props }) {
+
   const { updateCart } = useContext(AddCartContext);
   const { updateSaved } = useContext(AddSavedContext);
 
@@ -27,6 +28,8 @@ export default function DealsScreen({ navigation, ...props }) {
   const Handlepress = () => Alert.alert("Added to Cart");
 
   const Bandlepress = () => Alert.alert("Saved");
+
+  
 
   const user = firebase.auth().currentUser;
 
