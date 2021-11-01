@@ -10,10 +10,11 @@ import { Feather } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons'; 
 import { Title, Subtitle,  Icon } from "native-base";
 import { AddCartContext, AddSavedContext, AddListedContext } from "../screens/CartContext";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import RNPickerSelect from 'react-native-picker-select';
-
-
+import Bingcross from "../Svg/Bingcross.svg"
+import Orang from "../Svg/Orang.svg"
 
 
 
@@ -48,7 +49,7 @@ export default function ProductPage({ route, navigation }) {
           style={{
             backgroundColor: 'white',
             padding: 7,
-            height: 950,
+            height: 1350,
           }}
         >
 
@@ -135,9 +136,29 @@ placeholder={placeholder}
 
 <Title style={{alignSelf:"flex-start", marginTop:75, marginLeft:2}}>Size & Measurement</Title>
 
-<Text style={{alignSelf:"flex-start", marginTop:20, padding:5, fontSize:14, fontWeight:"500"}}>{route.params.size}</Text>
+<Text style={{alignSelf:"flex-start", marginTop:20, padding:5, fontSize:14}}>{route.params.size}</Text>
 
 
+
+<View style={{flexDirection:"row", alignSelf:"center", marginTop:60}}>
+
+<View style={{margin:10}}>
+<MaterialCommunityIcons style={{alignSelf:"center"}} name="egg-outline" size={25} />
+<Subtitle style={{fontSize:12}}>Fresh Grocery</Subtitle>
+</View>
+
+<View style={{margin:10}}>
+<MaterialCommunityIcons style={{alignSelf:"center"}} name="package-variant-closed" size={25} />
+<Subtitle style={{fontSize:12}}>Well Preserved</Subtitle>
+</View>
+
+<View style={{margin:10}}>
+<MaterialCommunityIcons style={{alignSelf:"center"}} name="flower-outline" size={25} />
+<Subtitle style={{fontSize:12}}>Quality Product</Subtitle>
+</View>
+
+
+</View>
 
 <View
   style={{
@@ -147,13 +168,15 @@ placeholder={placeholder}
   }}
 />
 
+<Orang style={{position:"absolute", marginTop:880, marginLeft:250}} />
 
 <Button  //Add to Grocery List
 
 buttonStyle={{
-  backgroundColor: "#058e3f"
+  backgroundColor: "#024126",
  
 }}
+
 
 title="Add to Grocery List"
 style={{
@@ -163,6 +186,7 @@ alignSelf: "center",
 height:100}}
 /> 
 
+<Bingcross style={{position:"absolute", marginTop:990}} />
 
 <Subtitle>Add this product to your personal grocery list.</Subtitle>
 
@@ -208,7 +232,7 @@ icon={<Feather name="arrow-left" size={22} color="black" />}
 
  <BottomSheet
         ref={sheetRef}
-        snapPoints={[8, 6, 720]}
+        snapPoints={[8, 6, 830]}
         borderRadius={15}
        renderContent={renderContent}
         enabledInnerScrolling={false}
