@@ -201,7 +201,7 @@ icon={<Feather name="arrow-left" size={20} color="black" />}
   onPress={() => navigation.navigate("SearchScreen")} />  
 </Left>
 <Body>
-<Title style={{width:300}} >Household Essentials</Title>
+<Title style={{width:300}} >Grains & Tubers</Title>
 </Body>
 <Right>
    

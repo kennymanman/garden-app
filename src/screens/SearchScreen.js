@@ -260,7 +260,7 @@ style={{marginTop:20, padding:12, borderBottomRightRadius:30, borderTopRightRadi
 </View>
 
 
-
+{/*
 <View style={{paddingRight:15, paddingTop:10 }}>
 <Title  style={{color:"black"}}>Cereals</Title>
 <View>
@@ -272,6 +272,7 @@ style={{marginTop:20, padding:12, borderBottomRightRadius:30, borderTopRightRadi
 
 </View>
 </View>
+*/}
 
 
 
@@ -289,7 +290,7 @@ style={{marginTop:20, padding:12, borderBottomRightRadius:30, borderTopRightRadi
 
 
 
-
+{/*
 <View style={{paddingRight:15, paddingTop:10 }}>
 <Title  style={{color:"black"}}>Alcohol</Title>
 <View>
@@ -301,10 +302,11 @@ style={{marginTop:20, padding:12, borderBottomRightRadius:30, borderTopRightRadi
 
 </View>
 </View>
+*/}
 
 
 
-
+{/*
 <View style={{paddingRight:15, paddingTop:10 }}>
 <Title  style={{color:"black"}}>Snacks</Title>
 <View>
@@ -316,12 +318,12 @@ style={{marginTop:20, padding:12, borderBottomRightRadius:30, borderTopRightRadi
 
 </View>
 </View>
-
+*/}
 
 
 
 <View style={{paddingRight:15, paddingTop:10 }}>
-<Title  style={{color:"black"}}>Spices,Sauces & Condiments</Title>
+<Title  style={{color:"black"}}>Spices,Sauces & Oil</Title>
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ('Spices')}>
 
@@ -350,8 +352,10 @@ style={{marginTop:20, padding:12, borderBottomRightRadius:30, borderTopRightRadi
 
 
 
+
+
 <View style={{paddingRight:15, paddingTop:10 }}>
-<Title  style={{color:"black"}}>Household essentials</Title>
+<Title  style={{color:"black"}}>Grains & Tubers</Title>
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ('House')}>
 
@@ -365,7 +369,7 @@ style={{marginTop:20, padding:12, borderBottomRightRadius:30, borderTopRightRadi
 
 
 
-
+{/*
 <View style={{paddingRight:15, paddingTop:10 }}>
 <Title  style={{color:"black"}}>Health & Nutrition</Title>
 <View>
@@ -377,10 +381,10 @@ style={{marginTop:20, padding:12, borderBottomRightRadius:30, borderTopRightRadi
 
 </View>
 </View>
+*/}
 
 
-
-
+{/*
 <View style={{paddingRight:15, paddingTop:10 }}>
 <Title  style={{color:"black"}}>Kids & Babies</Title>
 <View>
@@ -392,7 +396,7 @@ style={{marginTop:20, padding:12, borderBottomRightRadius:30, borderTopRightRadi
 
 </View>
 </View>
-
+*/}
 
 
 
