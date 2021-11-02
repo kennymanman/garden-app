@@ -323,7 +323,7 @@ style={{marginTop:20, padding:12, borderBottomRightRadius:30, borderTopRightRadi
 
 
 <View style={{paddingRight:15, paddingTop:10 }}>
-<Title  style={{color:"black"}}>Spices,Sauces & Oil</Title>
+<Title  style={{color:"black"}}>Spices, Sauces & Oil</Title>
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ('Spices')}>
 
