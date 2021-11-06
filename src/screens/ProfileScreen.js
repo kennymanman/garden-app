@@ -43,12 +43,12 @@ export default function ProfileScreen({ navigation }) {
       </Header>
 
 <Star />
-      <View style={{ margin: 30 }}>
-        <Text style={{ fontSize: 16, textAlign: "center", marginTop: 3, fontFamily:"recoleta-black" }}>
+      <View style={{ margin: 25 }}>
+        <Text style={{ fontSize: 16, textAlign: "center", marginTop: 1, fontFamily:"recoleta-black" }}>
           Welcome {user?.email || ""}
         </Text>
 
-<Flower  style={{position:"absolute", left:195, top:70}}/>
+{/*<Flower  style={{position:"absolute", left:195, top:70}}/> */}
 
 
         <TouchableOpacity onPress={() => navigation.navigate("Details")}>
@@ -122,7 +122,7 @@ export default function ProfileScreen({ navigation }) {
           </View>
         </TouchableOpacity>
 
-<Cactus style={{position:"absolute", marginTop:290, left:200}} />
+{/*<Cactus style={{position:"absolute", marginTop:290, left:200}} />*/}
 
         <TouchableOpacity onPress={loggingOut}>
           <View style={{ flexDirection: "row", marginTop: 50 }}>

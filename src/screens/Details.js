@@ -9,6 +9,7 @@ import { getUser } from "../../API/firebaseMethods";
 import * as firebase from "firebase";
 import "firebase/firestore";
 import CustomLoader from "../Components/CustomLoader";
+import { marginTop } from "styled-system";
 
 export default function Details({ navigation }) {
   const [firstName, setFirstName] = useState("");
@@ -114,12 +115,12 @@ export default function Details({ navigation }) {
       </Header>
 
       <ScrollView
-        contentContainerStyle={{ paddingHorizontal: 20 }}
+        contentContainerStyle={{ paddingHorizontal: 15}}
         snapToEnd={false}
       >
 
-<Subtitle style={{marginTop:12}}>Information provided here will be used for delivery </Subtitle>
-<Subtitle>and phone number displayed here will be used as contact info.</Subtitle>
+<Subtitle style={{marginTop:20, alignSelf:"flex-start"}}>Information provided here will be used for delivery and phone </Subtitle>
+<Subtitle style={{alignSelf:"flex-start"}}>number displayed here will be used as contact information.</Subtitle>
 
         <InputField
           inputStyle={{
@@ -204,7 +205,7 @@ export default function Details({ navigation }) {
           }}
           containerStyle={{
             backgroundColor: "#fff",
-            marginBottom: 20,
+            marginBottom: 10,
             marginTop: 20,
           }}
           leftIcon="map-marker-circle"
@@ -217,10 +218,14 @@ export default function Details({ navigation }) {
           onChangeText={(text) => setAddress(text)}
         />
 
-        <Button
+<Subtitle style={{alignSelf:"flex-start"}}>Please ensure that address or location provided is within Lagos</Subtitle>
+<Subtitle style={{marginBottom:25, alignSelf:"flex-start"}}>state as Garden only operates in Lagos state for now. </Subtitle>
+
+  <Button
 
 buttonStyle={{
   backgroundColor: "black"
+  
 }}
           loading={updating}
           onPress={updateUserDetails}
@@ -229,6 +234,7 @@ buttonStyle={{
             width: 300,
             backgroundColor: "black",
             alignSelf: "center",
+            marginBottom:35
           }}
           title="Save Changes"
           type="solid"

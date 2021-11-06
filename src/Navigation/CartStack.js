@@ -4,6 +4,7 @@ import CartScreen from '../screens/CartScreen'
 import Details from "../screens/Details"
 import { createStackNavigator } from "@react-navigation/stack";
 import ProfileScreen from '../screens/ProfileScreen';
+import Checkout from '../screens/Checkout';
 
 
 
@@ -17,6 +18,7 @@ export default function CartStack() {
         <Stack.Screen name='CartScreen' component={CartScreen} />
         <Stack.Screen name='Details' component={Details} />
         <Stack.Screen name='My Profile' component={ProfileScreen} />
+        <Stack.Screen name='Checkout' component={Checkout} />
       </Stack.Navigator>
     )
 }

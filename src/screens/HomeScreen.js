@@ -36,8 +36,8 @@ import data from "./data";
 import { saveItems } from "../../API/firebaseMethods";
 import * as firebase from "firebase";
 
-
-
+import bag from "../img/bag.png"
+import xag from "../rmg/xag.png"
 
 
 
@@ -59,8 +59,8 @@ export default function HomeScreen({ navigation }) {
       source={image ? image : require("../img/sig.png")} //Background Image
       imageStyle={{ borderRadius: 12 }}
       style={{
-        height: 200,
-        width: 200,
+        height: 195,
+        width: 180,
         position: "relative", // because it's parent
         marginBottom: 15,
         marginTop: 19,
@@ -147,9 +147,9 @@ export default function HomeScreen({ navigation }) {
 
         <Button
           type="clear"
-          style={{ right: 0, top: 0, marginTop: 3, paddingLeft: 119 }}
+          style={{ right: 0, top: 0, marginTop: 3, paddingLeft: 102}}
           icon={<Feather name="shopping-bag" size={15} color="white" />}
-          onPress={() => updateCart({ name, price, image, size })}
+          onPress={() => updateCart({ name, price, image, size, description })}
         />
       </View>
     </ImageBackground>
@@ -191,7 +191,7 @@ export default function HomeScreen({ navigation }) {
               width: 349,
               height: 100,
               alignSelf: "center",
-              borderRadius: 19,
+              borderRadius: 10,
               marginTop: 18,
             }}
             source={ban}
@@ -200,12 +200,12 @@ export default function HomeScreen({ navigation }) {
           <Image
             style={{
               width: 349,
-              height: 350,
+              height: 450,
               alignSelf: "center",
-              borderRadius: 20,
+              borderRadius: 10,
               marginTop: 15,
             }}
-            source={hus}
+            source={xag}
           />
 
           <Image
@@ -213,10 +213,10 @@ export default function HomeScreen({ navigation }) {
               width: 349,
               height: 460,
               alignSelf: "center",
-              borderRadius: 20,
+              borderRadius: 10,
               marginTop: 15,
             }}
-            source={page}
+            source={bag}
           />
 
           <Title
@@ -276,7 +276,7 @@ export default function HomeScreen({ navigation }) {
           }}
         >
           <Vortex style={{ position: "absolute", marginTop: 220 }} />
-          <Text
+          <Title
             style={{
               marginTop: 70,
               marginLeft: 0,
@@ -287,7 +287,7 @@ export default function HomeScreen({ navigation }) {
             }}
           >
             My Grocery List<Text style={{ color: "orange" }}> .</Text>
-          </Text>
+          </Title>
           <Title style={{ fontSize: 13, fontFamily: "recoleta-black" }}>
             Create your own personalized grocery list and have{" "}
           </Title>

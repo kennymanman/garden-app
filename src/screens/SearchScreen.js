@@ -101,7 +101,7 @@ export default function SearchScreen ({navigation}) {
 <Bullseye style={{position:"absolute", marginLeft:220, paddingTop:1100}} />
 
 
-<Title style={{textAlign:"left", fontSize:39, paddingTop:80, paddingLeft:13, paddingBottom:10, color:"black"}}>Categories</Title>
+<Title style={{textAlign:"left", fontSize:39, paddingTop:40, paddingLeft:13, paddingBottom:10, color:"black"}}>Categories</Title>
 
 
 
@@ -109,8 +109,8 @@ export default function SearchScreen ({navigation}) {
 
 <InputField placeholder="Search Groceries" leftIcon="magnify"
 
-containerStyle={{backgroundColor:"#ced4da", borderBottomRightRadius:30, borderTopRightRadius:30, height:38}}
-style={{marginTop:20, padding:12, borderBottomRightRadius:30, borderTopRightRadius:30, width:350, height:10, backgroundColor:"#ced4da", alignSelf:"center", borderTopLeftRadius:30, borderBottomLeftRadius:30}}
+containerStyle={{backgroundColor:"#ced4da", borderBottomRightRadius:17, borderTopRightRadius:17, height:45, borderTopLeftRadius:17, borderBottomLeftRadius:17, margin:10}}
+style={{marginTop:20, padding:12, width:350, height:10}}
 >
 </InputField>
 

@@ -77,6 +77,7 @@ export default function SavedScreen({ navigation }) {
             color: "black",
             fontSize: 16,
             fontFamily: "recoleta-black",
+            
           }}
         >
           Keep track of groceries you love.{" "}
@@ -103,8 +104,8 @@ export default function SavedScreen({ navigation }) {
                   imageStyle={{ borderRadius: 12 }}
                   key={name}
                   style={{
-                    height: 187,
-                    width: 186,
+                    height: 170,
+                    width: 176,
                     position: "relative", // because it's parent
                     marginBottom: 8,
                     marginTop: 19,
@@ -119,11 +120,12 @@ export default function SavedScreen({ navigation }) {
                       fontWeight: "bold",
                       color: "white",
                       position: "absolute", // child
-                      bottom: 0, // position where you want
+                      //bottom: 0, // position where you want
                       left: 0,
                       marginBottom: 55,
                       marginLeft: 10,
                       fontSize: 20,
+                      top:110
                     }}
                   >
                     {name}
@@ -131,16 +133,17 @@ export default function SavedScreen({ navigation }) {
 
                   <Text
                     style={{
-                      bottom: 0,
+                      
                       left: 0,
                       position: "absolute",
                       fontSize: 15,
                       marginBottom: 35,
                       marginLeft: 10,
                       color: "white",
+                      top:135
                     }}
                   >
-                    ${price}
+                    ₦{price}
                   </Text>
 
                   {/*} <Text style={{bottom:0, left:0,position: "absolute", marginLeft:10, color:"white", fontSize:12, marginBottom:5}}>
@@ -149,7 +152,7 @@ export default function SavedScreen({ navigation }) {
 
                   <Button
                     type="clear"
-                    style={{ top: 0, paddingLeft: 152, right: 0, marginTop: 2 }}
+                    style={{ top: 0, alignSelf:"flex-end", right: 0, marginTop: 2 }}
                     icon={<FontAwesome name="remove" size={17} color="white" />}
                     onPress={async () => {
                       try {
@@ -163,12 +166,12 @@ export default function SavedScreen({ navigation }) {
 
                   <Button
                     type="clear"
-                    style={{ top: 0, paddingLeft: 150, right: 0, marginTop: 5 }}
+                    style={{ top: 0, alignSelf:"flex-end", right: 0, marginTop: 10 }}
                     icon={
                       <Feather name="shopping-bag" size={17} color="white" />
                     }
                     onPress={() => {
-                      updateCart({ name, price, image, size });
+                      updateCart({ name, price, image, size, description });
                       Handlepress();
                     }}
                   />

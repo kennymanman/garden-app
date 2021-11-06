@@ -160,9 +160,10 @@ style={{marginBottom:2, marginTop:18}}>
             <Title 
             style={{
               marginBottom:2,   //For passing down the Name.
-              marginRight:70,
+              alignSelf:"flex-start",
               marginTop:19,
               fontSize:20,
+              left:11.5,
               color:"black"}}>
                  {""} {name}
             </Title>
@@ -171,12 +172,13 @@ style={{marginBottom:2, marginTop:18}}>
             
 
             <Title style={{ 
-              marginRight:90,  //For passing down the Price.
+              alignSelf:"flex-start",  //For passing down the Price.
               marginBottom:3,
+              left:13,
               marginTop:5,
               fontSize:17,
               color:"black"
-              }}>${price} {""}
+              }}>₦{price} {""}
               </Title>
             
 
@@ -184,9 +186,10 @@ style={{marginBottom:2, marginTop:18}}>
             <Title  style={{ marginRight:112,  //For passing down the quantity needed.
              marginBottom:10,
              marginTop:6,
-             marginLeft:20,
-             marginRight:85,
+            
+             left:16,
              fontSize:12,
+             alignSelf:"flex-start",
              color:"black"}}>Quantity:{count}</Title>
             
             
@@ -242,20 +245,24 @@ style={{marginBottom:2, marginTop:18}}>
   color:"black",
   textAlign:"left",
   paddingTop:20,
-  paddingBottom:10}}>Subtotal: $0 </Title>
+  paddingBottom:10}}>Subtotal: ₦0 </Title>
 
 
 <Title style={{fontSize:20,                     //Delivery Fee
   color:"black",
   textAlign:"left",
   paddingTop:1,
-  paddingBottom:10}}>Delivery Fee: $950 </Title>
+  paddingBottom:10}}>Delivery Fee: ₦950 </Title>
+
+  <Subtitle style={{alignSelf:"flex-start"}}>
+  Delivery fee is ₦950 for all deliveries across Lagos.Enjoy.
+   </Subtitle>
 
 <Title style={{fontSize:20,                       //Total Price
    color:"black",
   textAlign:"left",
-  paddingTop:20,
-  paddingBottom:10}}>Total: $0 </Title>
+  paddingTop:30,
+  paddingBottom:10}}>Total: ₦0 </Title>
 
 
 
@@ -266,11 +273,13 @@ buttonStyle={{
 }}
 
 title="Proceed to Checkout"
-style={{marginBottom:20,
+style={{marginBottom:50,
 width:300,
 marginTop:9,
 alignSelf: "center",
 height:100}}
+
+onPress={() => navigation.navigate ( "Checkout")}
 />
 
 
