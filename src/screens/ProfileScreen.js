@@ -44,8 +44,8 @@ export default function ProfileScreen({ navigation }) {
 
 <Star />
 
-<Bingcross style={{position:"absolute", marginTop:140, alignSelf:"flex-end"}}/>
-      <View style={{ margin: 25 }}>
+<Bingcross style={{position:"absolute", marginTop:119, alignSelf:"flex-end"}}/>
+      <View style={{ margin: 20 }}>
         <Text style={{ fontSize: 16, textAlign: "center", fontFamily:"recoleta-black" }}>
           Welcome {user?.email || ""}
         </Text>

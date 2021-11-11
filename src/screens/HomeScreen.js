@@ -39,6 +39,7 @@ import * as firebase from "firebase";
 import bag from "../img/bag.png"
 import xag from "../rmg/xag.png"
 import artfruits from "../img/artfruits.png"
+import lagos from "../homescreenimages/lagos.png"
 
 
 export default function HomeScreen({ navigation }) {
@@ -219,6 +220,20 @@ export default function HomeScreen({ navigation }) {
             source={bag}
           />
 
+
+<Image
+            style={{
+              width: 349,
+              height: 100,
+              alignSelf: "center",
+              borderRadius: 10,
+              marginTop: 18,
+            }}
+            source={lagos}
+          />
+
+
+
           <Title
             style={{
               alignSelf: "flex-start",
@@ -238,7 +253,7 @@ export default function HomeScreen({ navigation }) {
               fontFamily: "recoleta-black",
             }}
           >
-            Enjoy deals, offers and discounts at affordable prices.
+            Get whole grocery boxes at affordable prices.
           </Text>
 
           <TouchableOpacity onPress={() => navigation.navigate("DealsScreen")}>
@@ -251,7 +266,7 @@ export default function HomeScreen({ navigation }) {
                 alignSelf: "flex-start",
               }}
             >
-              See all deals
+              See all boxes
             </Subtitle>
           </TouchableOpacity>
 
@@ -279,21 +294,23 @@ export default function HomeScreen({ navigation }) {
           <Title
             style={{
               marginTop: 70,
-              marginLeft: 0,
-              fontSize: 30,
-              alignSelf: "center",
+              marginLeft: 20,
+              fontSize: 45,
+              alignSelf: "flex-start",
               color: "black",
-              fontFamily: "recoleta-black",
+              
             }}
           >
-            My Grocery List<Text style={{ color: "orange" }}> .</Text>
+            My 
           </Title>
-          <Title style={{ fontSize: 13, fontFamily: "recoleta-black" }}>
-            Create your own personalized grocery list and have{" "}
-          </Title>
-          <Title style={{ fontSize: 13, fontFamily: "recoleta-black" }}>
-            it delivered on your selected date.
-          </Title>
+          <Title style={{marginLeft:20, alignSelf:"flex-start", fontSize:45}}>Grocery</Title>
+          <Title style={{marginLeft:20, alignSelf:"flex-start", fontSize:45}}>List.</Title>
+
+          <Subtitle style={{marginLeft:20, alignSelf:"flex-start", marginTop:20, color:"black"}}> Create your own personalized grocery list and have{" "}</Subtitle>
+
+          <Subtitle style={{marginLeft:20, alignSelf:"flex-start", color:"black"}}> it delivered on your selected date.</Subtitle>
+
+         
 
           {/* <Orangelong style={{position:"absolute", marginTop:480, marginLeft:230}} /> */}
 
@@ -301,7 +318,7 @@ export default function HomeScreen({ navigation }) {
             style={{
               color: "white",
               fontSize: 13,
-              fontFamily: "recoleta-bold",
+              
               marginTop: 50,
             }}
           >

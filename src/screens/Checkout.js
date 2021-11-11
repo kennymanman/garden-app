@@ -30,8 +30,9 @@ onPress={() => navigation.goBack()}
 <Right></Right>
 </Header>
 
-<Outlinecloud style={{position:"absolute", marginTop:170}} />
-<Flower style={{position:"absolute", marginTop:90, alignSelf:"flex-end"}}/>
+{/*<Outlinecloud style={{position:"absolute", marginTop:170}} />*/}
+
+{/*<Flower style={{position:"absolute", marginTop:90, alignSelf:"flex-end"}}/> */}
 
 <Button  //Checkout Button
 buttonStyle={{
@@ -39,18 +40,20 @@ backgroundColor: "black"
 }}
 
 title="Pay on Delivery"
-style={{marginBottom:30,
+style={{
 width:300,
-marginTop:130,
+marginTop:90,
 alignSelf: "center",
 height:100}}
 />
 
+<Subtitle>Please ensure actual amount when paying on delivery</Subtitle>
+<Subtitle>as our dispatch riders do not carry change.</Subtitle>
 
 
-<Title >Or</Title>
+<Title style={{marginTop:30}} >Or</Title>
 
-<Green style={{position:"absolute", marginTop:400}} />
+{/*<Green style={{position:"absolute", marginTop:400}} /> */}
 
 <Button  //Checkout Button
 buttonStyle={{

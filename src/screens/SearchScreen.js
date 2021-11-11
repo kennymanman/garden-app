@@ -29,13 +29,17 @@ import Bullseye from "../Svg/Bullseye.svg"
 import Outlinecloud from "../Svg/Outlinecloud.svg"
 
 
-
-
-
-
-
-
-
+import orangesimage from "../categoryimages/orangesimage.jpg"
+import kaleimage from "../categoryimages/kaleimage.jpg"
+import meatimage from "../categoryimages/meatimage.jpg"
+import breadimage from "../categoryimages/breadimage.jpg"
+import eggimage from "../categoryimages/eggimage.jpg"
+import drinkimage from "../categoryimages/drinkimage.jpg"
+import spiceimage from "../categoryimages/spiceimage.jpg"
+import pastaimage from "../categoryimages/pastaimage.jpg"
+import tuberimage from "../categoryimages/tuberimage.jpg"
+import juiceima from "../categoryimages/juiceima.jpg"
+import beefimage from "../categoryimages/beefimage.jpg"
 
 
 
@@ -116,6 +120,7 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 </InputField>
 
 
+<View style={{ height: 2,  borderBottomWidth: 1, borderBottomColor: '#CED0CE', marginTop:10}} />
 
 
 
@@ -187,7 +192,7 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ("Fruits" ) } >
 
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom:100}} source={pat}  />
+<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom:100}} source={orangesimage}  />
 
 </TouchableOpacity>
 
@@ -211,7 +216,7 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ("Vegetables" ) } >
 
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom:100}} source={veg}  />
+<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom:100}} source={kaleimage}  />
 
 </TouchableOpacity>
 
@@ -225,7 +230,7 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ( 'Meat')}>
 
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={mea}  />
+<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={beefimage}  />
 
 </TouchableOpacity>
 
@@ -239,7 +244,7 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ('Bread')}>
 
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10 , marginBottom: 100}} source={brea}  />
+<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10 , marginBottom: 100}} source={breadimage}  />
 
 </TouchableOpacity>
 
@@ -253,7 +258,7 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ('Eggs')}>
 
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={egg}  />
+<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={eggimage}  />
 
 </TouchableOpacity>
 
@@ -282,7 +287,7 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ('Drinks')}>
 
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={dri}  />
+<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={juiceima}  />
 
 </TouchableOpacity>
 
@@ -328,7 +333,7 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ('Spices')}>
 
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={spi}  />
+<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={spiceimage}  />
 
 </TouchableOpacity>
 
@@ -344,7 +349,7 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ('House')}>
 
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={hou}  />
+<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={pastaimage}  />
 
 </TouchableOpacity>
 
@@ -359,7 +364,7 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ('Pantry')}>
 
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 20, marginTop: 10, marginBottom: 100}} source={pan}  />
+<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={tuberimage}  />
 
 </TouchableOpacity>
 
@@ -416,7 +421,7 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 
 
 
-<Subtitle>Recommend grocery items you would like to see?</Subtitle>
+<Subtitle>Recommend grocery items you would love to see?</Subtitle>
 <Subtitle>Email Us</Subtitle>
 
 <Button  //Checkout Button
