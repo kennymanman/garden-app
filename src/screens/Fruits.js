@@ -13,8 +13,8 @@ import { Feather } from '@expo/vector-icons';
 import {Header, Left, Right, Title, Body, Subtitle} from "native-base"
 import data from "./data"
 import {AddCartContext, AddSavedContext} from "../screens/CartContext"
-
-
+import { Chevron } from 'react-native-shapes'
+import RNPickerSelect from 'react-native-picker-select';
 
 
 
@@ -211,9 +211,48 @@ icon={<Feather name="arrow-left" size={20} color="black" />}
 
 
 
+<View style={{ alignSelf:"center", paddingBottom:15, marginTop:20}}>
+
+
+<RNPickerSelect
+            placeholder={{
+           }}
+         
+ onValueChange={(value) => console.log(value)}
+            items={[
+                { label: 'Recommended', value: '1', key:"Recommended"},
+                { label: 'Lowest to Highest', value: '2', key:"Lowest to Highest" },
+                { label: 'Highest to Lowest', value: '3', key:"Highest to Lowsest" },
+                ]}
+        
+
+            style={{
+              inputAndroid: {
+                backgroundColor: 'transparent',
+              },
+              iconContainer: {
+                top: 6,
+                left: 118,
+                },
+             
+            }}
+
+
+            useNativeAndroidPickerStyle={false}
+
+            Icon={() => {
+              return < Chevron  size={1.3}  color="black"  />;
+      }}
+
+    />
+
+</View>
+<View style={{ height: 0.3,  borderBottomWidth: 1, borderBottomColor: '#E6E8E6'}} />
+
+
 <View style={{ marginBottom:100, paddingBottom:80}}>
   
-    <FlatList    numColumns={2}   
+<FlatList    numColumns={2}   
 data={data}
  renderItem={renderItem}
  renderItem={({ item }) => renderItem({ navigation, item, useCart, useSaved })}

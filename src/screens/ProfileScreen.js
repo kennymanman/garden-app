@@ -43,16 +43,19 @@ export default function ProfileScreen({ navigation }) {
       </Header>
 
 <Star />
+
+<Bingcross style={{position:"absolute", marginTop:140, alignSelf:"flex-end"}}/>
       <View style={{ margin: 25 }}>
-        <Text style={{ fontSize: 16, textAlign: "center", marginTop: 1, fontFamily:"recoleta-black" }}>
+        <Text style={{ fontSize: 16, textAlign: "center", fontFamily:"recoleta-black" }}>
           Welcome {user?.email || ""}
         </Text>
 
 {/*<Flower  style={{position:"absolute", left:195, top:70}}/> */}
 
+<View style={{ height: 2,  borderBottomWidth: 1, borderBottomColor: '#CED0CE', marginTop:20}} />
 
         <TouchableOpacity onPress={() => navigation.navigate("Details")}>
-          <View style={{ flexDirection: "row", marginTop: 40 }}>
+          <View style={{ flexDirection: "row", marginTop: 32}}>
             <MaterialCommunityIcons
               name="card-account-details-star-outline"
               size={26}
@@ -65,8 +68,10 @@ export default function ProfileScreen({ navigation }) {
           </View>
         </TouchableOpacity>
 
+        <View style={{ height: 1.5,  borderBottomWidth: 1, borderBottomColor: '#CED0CE', marginTop:15}} />
+
         <TouchableOpacity onPress={() => navigation.navigate("My Orders")}>
-          <View style={{ flexDirection: "row", marginTop: 40 }}>
+          <View style={{ flexDirection: "row", marginTop: 32 }}>
             <Feather name="shopping-bag" size={24} color="black" />
             <Title style={{ marginLeft: 30, paddingTop: 6, fontSize: 15 }}>
               Order History
@@ -74,14 +79,16 @@ export default function ProfileScreen({ navigation }) {
           </View>
         </TouchableOpacity>
 
-<Arrowdown  style={{position:"absolute", marginTop:150, left:260}}/>
+    <View style={{ height: 1.5,  borderBottomWidth: 1, borderBottomColor: '#CED0CE', marginTop:15}} />
+
+{/*<Arrowdown  style={{position:"absolute", marginTop:150, left:260}}/>*/}
 
 
 
         <TouchableOpacity
           onPress={() => navigation.navigate("My Grocery List")}
         >
-          <View style={{ flexDirection: "row", marginTop: 40 }}>
+          <View style={{ flexDirection: "row", marginTop: 32 }}>
             <MaterialCommunityIcons
               name="format-list-checks"
               size={26}
@@ -93,11 +100,11 @@ export default function ProfileScreen({ navigation }) {
             </Title>
           </View>
         </TouchableOpacity>
-
+        <View style={{ height: 1.5,  borderBottomWidth: 1, borderBottomColor: '#CED0CE', marginTop:15}} />
 
 
         <TouchableOpacity onPress={() => navigation.navigate("Change my Password")}>
-        <View style={{ flexDirection: "row", marginTop: 40 }}>
+        <View style={{ flexDirection: "row", marginTop: 32 }}>
           <MaterialCommunityIcons
             name="account-key-outline"
             size={26}
@@ -108,12 +115,13 @@ export default function ProfileScreen({ navigation }) {
           </Title>
         </View>
        </TouchableOpacity>
+       <View style={{ height: 1.5,  borderBottomWidth: 1, borderBottomColor: '#CED0CE', marginTop:15}} />
 
 {/*<Bingcross style={{position:"absolute", left:270}} /> */}
 
 
         <TouchableOpacity onPress={() => navigation.navigate("Help & Support")}>
-          <View style={{ flexDirection: "row", marginTop: 40 }}>
+          <View style={{ flexDirection: "row", marginTop: 32 }}>
             <MaterialCommunityIcons name="help-box" size={26} color="black" />
 
             <Title style={{ marginLeft: 30, paddingTop: 6, fontSize: 15 }}>
@@ -121,6 +129,8 @@ export default function ProfileScreen({ navigation }) {
             </Title>
           </View>
         </TouchableOpacity>
+
+        <View style={{ height: 1.5,  borderBottomWidth: 1, borderBottomColor: '#CED0CE', marginTop:15}} />
 
 {/*<Cactus style={{position:"absolute", marginTop:290, left:200}} />*/}
 

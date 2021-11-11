@@ -23,7 +23,7 @@ return (
 icon ={<Feather name="arrow-left"
 size={20}
 color="black"     />}
-onPress={() => navigation.navigate("My Profile")} />  
+onPress={() => navigation.goBack()} />  
     
 </Left>
             

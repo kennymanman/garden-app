@@ -38,7 +38,7 @@ import * as firebase from "firebase";
 
 import bag from "../img/bag.png"
 import xag from "../rmg/xag.png"
-
+import artfruits from "../img/artfruits.png"
 
 
 export default function HomeScreen({ navigation }) {
@@ -205,7 +205,7 @@ export default function HomeScreen({ navigation }) {
               borderRadius: 10,
               marginTop: 15,
             }}
-            source={xag}
+            source={artfruits}
           />
 
           <Image
@@ -268,21 +268,21 @@ export default function HomeScreen({ navigation }) {
 
         <View
           style={{
-            backgroundColor: "#058c42",
+            backgroundColor: "#ff8a5b",
             height: 700,
             borderTopLeftRadius: 24,
             borderTopRightRadius: 24,
-            marginTop: 110,
+            marginTop: 130,
           }}
         >
-          <Vortex style={{ position: "absolute", marginTop: 220 }} />
+          {/*<Vortex style={{ position: "absolute", marginTop: 220 }} />*/}
           <Title
             style={{
               marginTop: 70,
               marginLeft: 0,
               fontSize: 30,
               alignSelf: "center",
-              color: "white",
+              color: "black",
               fontFamily: "recoleta-black",
             }}
           >

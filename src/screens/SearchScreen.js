@@ -22,11 +22,12 @@ import vit from "../img/vit.png"
 import ki from "../img/ki.png"
 import Deals from "../rmg/Deals.png"
 
-import {Title} from "native-base"
+import {Title, Subtitle} from "native-base"
 import { TextInput } from "react-native-paper";
 import InputField from "../Components/InputField";
 import Bullseye from "../Svg/Bullseye.svg"
 import Outlinecloud from "../Svg/Outlinecloud.svg"
+
 
 
 
@@ -98,10 +99,10 @@ export default function SearchScreen ({navigation}) {
 
 {/*<Outlinecloud style={{position:"absolute", paddingTop:180}} />*/}
 
-<Bullseye style={{position:"absolute", marginLeft:220, paddingTop:1100}} />
+{/*<Bullseye style={{position:"absolute", marginLeft:220, paddingTop:1100}} />*/}
 
 
-<Title style={{textAlign:"left", fontSize:39, paddingTop:40, paddingLeft:13, paddingBottom:10, color:"black"}}>Categories</Title>
+<Title style={{textAlign:"left", fontSize:39, paddingTop:50, paddingLeft:13, paddingBottom:10, color:"black"}}>Categories</Title>
 
 
 
@@ -171,7 +172,7 @@ style={{marginTop:20, padding:12, width:350, height:10}}
     <TouchableOpacity
      onPress={() => navigation.navigate ( "DealsScreen") }>
 
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 20, marginTop: 10, marginBottom:100}} source={Deals}  />
+<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom:100}} source={Deals}  />
 
 </TouchableOpacity>
 
@@ -186,7 +187,7 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ("Fruits" ) } >
 
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 20, marginTop: 10, marginBottom:100}} source={pat}  />
+<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom:100}} source={pat}  />
 
 </TouchableOpacity>
 
@@ -210,7 +211,7 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ("Vegetables" ) } >
 
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 20, marginTop: 10, marginBottom:100}} source={veg}  />
+<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom:100}} source={veg}  />
 
 </TouchableOpacity>
 
@@ -224,7 +225,7 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ( 'Meat')}>
 
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 20, marginTop: 10, marginBottom: 100}} source={mea}  />
+<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={mea}  />
 
 </TouchableOpacity>
 
@@ -238,7 +239,7 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ('Bread')}>
 
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 20, marginTop: 10 , marginBottom: 100}} source={brea}  />
+<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10 , marginBottom: 100}} source={brea}  />
 
 </TouchableOpacity>
 
@@ -252,7 +253,7 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ('Eggs')}>
 
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 20, marginTop: 10, marginBottom: 100}} source={egg}  />
+<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={egg}  />
 
 </TouchableOpacity>
 
@@ -281,7 +282,7 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ('Drinks')}>
 
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 20, marginTop: 10, marginBottom: 100}} source={dri}  />
+<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={dri}  />
 
 </TouchableOpacity>
 
@@ -327,7 +328,23 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ('Spices')}>
 
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 20, marginTop: 10, marginBottom: 100}} source={spi}  />
+<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={spi}  />
+
+</TouchableOpacity>
+
+</View>
+</View>
+
+
+
+
+
+<View style={{paddingRight:15, paddingTop:10 }}>
+<Title  style={{color:"black"}}>Pasta, Noodles & Grains</Title>
+<View>
+    <TouchableOpacity onPress={() =>navigation.navigate ('House')}>
+
+<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={hou}  />
 
 </TouchableOpacity>
 
@@ -338,7 +355,7 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 
 
 <View style={{paddingRight:15, paddingTop:10 }}>
-<Title  style={{color:"black"}}>Pantry, Dried & Canned Items</Title>
+<Title  style={{color:"black"}}> Dried, Pantry & Tubers</Title>
 <View>
     <TouchableOpacity onPress={() =>navigation.navigate ('Pantry')}>
 
@@ -354,17 +371,7 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 
 
 
-<View style={{paddingRight:15, paddingTop:10 }}>
-<Title  style={{color:"black"}}>Grains & Tubers</Title>
-<View>
-    <TouchableOpacity onPress={() =>navigation.navigate ('House')}>
 
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 20, marginTop: 10, marginBottom: 100}} source={hou}  />
-
-</TouchableOpacity>
-
-</View>
-</View>
 
 
 
@@ -409,7 +416,24 @@ style={{marginTop:20, padding:12, width:350, height:10}}
 
 
 
+<Subtitle>Recommend grocery items you would like to see?</Subtitle>
+<Subtitle>Email Us</Subtitle>
 
+<Button  //Checkout Button
+
+buttonStyle={{
+  backgroundColor: "black"
+}}
+
+title="Recommend"
+style={{marginBottom:30,
+width:200,
+marginTop:9,
+alignSelf: "center",
+height:100}}
+
+onPress={() => navigation.navigate ( "HelpScreen")}
+/>
 
 
 

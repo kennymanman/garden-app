@@ -21,9 +21,11 @@ import { Ionicons } from "@expo/vector-icons"
 import { Entypo } from "@expo/vector-icons"
 import { FAB } from "react-native-paper"
 import {AddCartContext} from "./CartContext"
-import DropdownMenu from 'react-native-dropdownmenus';
 import { alignSelf } from 'styled-system';
+import RNPickerSelect from 'react-native-picker-select';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+import { Chevron } from 'react-native-shapes'
 
 
 
@@ -46,6 +48,14 @@ Alert.alert(
 
 
 
+const placeholder = {
+  label: '1',
+  fontSize:12,
+  top:12,
+  value:1,
+  
+  
+};
 
 
 
@@ -181,17 +191,60 @@ style={{marginBottom:2, marginTop:18}}>
               }}>₦{price} {""}
               </Title>
             
+<View style={{flexDirection:"row", marginTop:8}}>
 
-
-            <Title  style={{ marginRight:112,  //For passing down the quantity needed.
+            <Title  style={{ marginRight:30,  //For passing down the quantity needed.
              marginBottom:10,
-             marginTop:6,
-            
-             left:16,
+             
+             left:15,
              fontSize:12,
              alignSelf:"flex-start",
-             color:"black"}}>Quantity:{count}</Title>
-            
+             color:"black"}}>Quantity:</Title>
+
+             
+
+<RNPickerSelect
+            placeholder={{}}
+         
+ onValueChange={(value) => console.log(value)}
+            items={[
+                { label: '1', value: '1' },
+                { label: '2', value: '2' },
+                { label: '3', value: '3' },
+                { label: '4', value: '4' },
+                { label: '5', value: '5' },
+                { label: '6', value: '6' },
+                { label: '7', value: '7' },
+                { label: '8', value: '8' },
+                { label: '9', value: '9' },
+                { label: '10', value: '10' },
+                { label: '11', value: '11' },
+            ]}
+        
+
+            style={{
+              inputAndroid: {
+                backgroundColor: 'transparent',
+              },
+              iconContainer: {
+                top: 8,
+                left: 15,
+                
+              },
+            }}
+
+
+            useNativeAndroidPickerStyle={false}
+
+            Icon={() => {
+              return < Chevron  size={1}  color="black"  />;
+            }}
+
+    />
+
+  
+
+  </View>          
             
             </View>
 

@@ -153,6 +153,7 @@ function SearchScreenStack() {
       <Stack.Screen name="ProductPage" component={ProductPage} />
       <Stack.Screen name="DeliveryScreen" component={DeliveryScreen} />
       <Stack.Screen name="DealsScreen" component={DealsScreen} />
+      <Stack.Screen name="HelpScreen" component={HelpScreen} />
       
     </Stack.Navigator>
   );

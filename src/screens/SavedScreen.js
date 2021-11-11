@@ -57,6 +57,8 @@ export default function SavedScreen({ navigation }) {
     }
   };
 
+
+
   return (
     <View style={styles.container}>
       <SafeAreaView>
@@ -64,7 +66,7 @@ export default function SavedScreen({ navigation }) {
           style={{
             fontSize: 35,
             color: "black",
-            paddingLeft: 15,
+            marginTop:2,
             textAlign: "left",
           }}
         >
@@ -73,7 +75,7 @@ export default function SavedScreen({ navigation }) {
         <Title
           style={{
             textAlign: "left",
-            paddingLeft: 15,
+            
             color: "black",
             fontSize: 16,
             fontFamily: "recoleta-black",
@@ -112,7 +114,7 @@ export default function SavedScreen({ navigation }) {
                     marginRight: 7,
                     marginLeft: 4,
                     top: 2,
-                    left: 12,
+                    left: 1,
                   }}
                 >
                   <Text
@@ -188,7 +190,7 @@ export default function SavedScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 0,
+    paddingHorizontal:12,
     marginTop: 70,
   },
 
