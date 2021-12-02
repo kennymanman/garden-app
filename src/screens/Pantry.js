@@ -201,7 +201,7 @@ icon={<Feather name="arrow-left" size={20} color="black" />}
   onPress={() => navigation.navigate("SearchScreen")} />  
 </Left>
 <Body>
-<Title style={{width:300}} >Pantry, Dried & Canned Items</Title>
+<Title style={{width:300}} > Dried, Pantry & Tubers</Title>
 </Body>
 <Right>
    

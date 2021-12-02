@@ -52,7 +52,7 @@ export default function ProfileScreen({ navigation }) {
 
 {/*<Flower  style={{position:"absolute", left:195, top:70}}/> */}
 
-<View style={{ height: 2,  borderBottomWidth: 1, borderBottomColor: '#CED0CE', marginTop:20}} />
+<View style={{ height: 2,  borderBottomWidth: 1, borderBottomColor: '#CED0CE', marginTop:35}} />
 
         <TouchableOpacity onPress={() => navigation.navigate("Details")}>
           <View style={{ flexDirection: "row", marginTop: 32}}>
@@ -65,6 +65,14 @@ export default function ProfileScreen({ navigation }) {
             <Title style={{ marginLeft: 30, paddingTop: 6, fontSize: 15 }}>
               My Details
             </Title>
+
+            <MaterialCommunityIcons
+              name="chevron-right"
+              size={26}
+              color="gray"
+              style={{marginLeft:177, marginTop:1}}
+            />
+
           </View>
         </TouchableOpacity>
 
@@ -76,6 +84,13 @@ export default function ProfileScreen({ navigation }) {
             <Title style={{ marginLeft: 30, paddingTop: 6, fontSize: 15 }}>
               Order History
             </Title>
+
+            <MaterialCommunityIcons
+              name="chevron-right"
+              size={26}
+              color="gray"
+              style={{marginLeft:157, marginTop:1}}
+            />
           </View>
         </TouchableOpacity>
 
@@ -98,11 +113,19 @@ export default function ProfileScreen({ navigation }) {
             <Title style={{ marginLeft: 30, paddingTop: 6, fontSize: 15 }}>
               Grocery List
             </Title>
+
+            <MaterialCommunityIcons
+              name="chevron-right"
+              size={26}
+              color="gray"
+              style={{marginLeft:165, marginTop:1}}
+            />
+
           </View>
         </TouchableOpacity>
         <View style={{ height: 1.5,  borderBottomWidth: 1, borderBottomColor: '#CED0CE', marginTop:15}} />
 
-
+{/*
         <TouchableOpacity onPress={() => navigation.navigate("Change my Password")}>
         <View style={{ flexDirection: "row", marginTop: 32 }}>
           <MaterialCommunityIcons
@@ -116,7 +139,7 @@ export default function ProfileScreen({ navigation }) {
         </View>
        </TouchableOpacity>
        <View style={{ height: 1.5,  borderBottomWidth: 1, borderBottomColor: '#CED0CE', marginTop:15}} />
-
+*/}
 {/*<Bingcross style={{position:"absolute", left:270}} /> */}
 
 
@@ -127,6 +150,13 @@ export default function ProfileScreen({ navigation }) {
             <Title style={{ marginLeft: 30, paddingTop: 6, fontSize: 15 }}>
               Help & Support
             </Title>
+
+            <MaterialCommunityIcons
+              name="chevron-right"
+              size={26}
+              color="gray"
+              style={{marginLeft:142, marginTop:1}}
+            />
           </View>
         </TouchableOpacity>
 
@@ -135,7 +165,7 @@ export default function ProfileScreen({ navigation }) {
 {/*<Cactus style={{position:"absolute", marginTop:290, left:200}} />*/}
 
         <TouchableOpacity onPress={loggingOut}>
-          <View style={{ flexDirection: "row", marginTop: 50 }}>
+          <View style={{ flexDirection: "row", marginTop: 40 }}>
             <MaterialCommunityIcons
               name="exit-to-app"
               size={26}
@@ -144,8 +174,20 @@ export default function ProfileScreen({ navigation }) {
             <Title style={{ marginLeft: 30, paddingTop: 6, fontSize: 15 }}>
               Log Out
             </Title>
+
+            <MaterialCommunityIcons
+              name="chevron-right"
+              size={26}
+              color="gray"
+              style={{marginLeft:194, marginTop:1}}
+            />
           </View>
         </TouchableOpacity>
+
+        <View style={{ height: 1.5,  borderBottomWidth: 1, borderBottomColor: '#CED0CE', marginTop:35}} />
+
+
+     <Subtitle style={{marginTop:30}}>Groceries at your doorstep.</Subtitle>
       </View>
     </View>
   );

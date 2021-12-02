@@ -283,7 +283,7 @@ export default function HomeScreen({ navigation }) {
 
         <View
           style={{
-            backgroundColor: "#ff8a5b",
+            backgroundColor: "#e47644",
             height: 700,
             borderTopLeftRadius: 24,
             borderTopRightRadius: 24,
