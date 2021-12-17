@@ -46,7 +46,7 @@ onPress={() => navigation.goBack()} />
 <Text style={{textAlign:"center", fontSize:33, marginTop:30}}>Need Help ?</Text>
 
 
-<Center style={{position:"absolute", marginTop:50, marginLeft:40}} />
+<Center style={{position:"absolute", marginTop:51, marginLeft:40}} />
 
 
 
