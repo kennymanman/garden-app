@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, Text, ScrollView, Alert } from "react-native";
+import { View, Text, ScrollView, Alert, StyleSheet } from "react-native";
 import { Header, Left, Right, Title, Body, Subtitle } from "native-base";
 import { Button } from "react-native-elements";
 import { Feather } from "@expo/vector-icons";
@@ -9,7 +9,7 @@ import { getUser } from "../../API/firebaseMethods";
 import * as firebase from "firebase";
 import "firebase/firestore";
 import CustomLoader from "../Components/CustomLoader";
-import { marginTop } from "styled-system";
+
 
 export default function Details({ navigation }) {
   const [firstName, setFirstName] = useState("");
@@ -20,7 +20,6 @@ export default function Details({ navigation }) {
   const [updating, setUpdating] = useState(false);
   const [loading, setLoading] = useState(false);
   const { user, setUser } = useContext(AuthenticatedUserContext);
-
 
 
   useEffect(() => {
@@ -57,13 +56,10 @@ export default function Details({ navigation }) {
   };
 
 
-
-  
-
   const updateUserDetails = async () => {
     if (!firstName) {
       Alert.alert("First name is required");
-  
+
     } else if (!phone || phone.length < 10) {
       Alert.alert("Enter valid phone number.");
     } else if (!address) {
@@ -97,30 +93,29 @@ export default function Details({ navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
-      <Header style={{ marginTop: 3 }}>
+      <Header>
         <Left>
           <Button
             type="clear"
             style={{ paddingLeft: 9 }}
-            icon={<Feather name="arrow-left" size={20} color="black" />}
+            icon={<Feather name="arrow-left" size={25} color="white" />}
             onPress={() => navigation.goBack()}
           />
         </Left>
 
         <Body>
-          <Title style={{ width: 300, textAlign: "center" }}>My Details</Title>
+          <Title style={{ textAlign: "center" }}>My Details</Title>
         </Body>
 
         <Right></Right>
       </Header>
 
       <ScrollView
-        contentContainerStyle={{ paddingHorizontal: 15}}
-        snapToEnd={false}
-      >
+        contentContainerStyle={{ paddingHorizontal: 15 }}
+        snapToEnd={false}>
 
-<Subtitle style={{marginTop:20, alignSelf:"flex-start"}}>Information provided here will be used for delivery and phone </Subtitle>
-<Subtitle style={{alignSelf:"flex-start"}}>number displayed here will be used as contact information.</Subtitle>
+        <Subtitle style={styles.textStyle1}>Information provided here will be used for delivery and phone </Subtitle>
+        <Subtitle style={styles.textStyle2}>number displayed here will be used as contact information.</Subtitle>
 
         <InputField
           inputStyle={{
@@ -128,8 +123,7 @@ export default function Details({ navigation }) {
           }}
           containerStyle={{
             backgroundColor: "#fff",
-            marginBottom: 20,
-            marginTop: 40,
+            marginTop: 30,
           }}
           leftIcon="nature-people"
           placeholder="First Name"
@@ -147,7 +141,6 @@ export default function Details({ navigation }) {
           }}
           containerStyle={{
             backgroundColor: "#fff",
-            marginBottom: 20,
             marginTop: 20,
           }}
           leftIcon="human-handsdown"
@@ -167,7 +160,6 @@ export default function Details({ navigation }) {
           editable={false}
           containerStyle={{
             backgroundColor: "#fff",
-            marginBottom: 20,
             marginTop: 20,
           }}
           leftIcon="email-multiple-outline"
@@ -186,7 +178,6 @@ export default function Details({ navigation }) {
           }}
           containerStyle={{
             backgroundColor: "#fff",
-            marginBottom: 20,
             marginTop: 20,
           }}
           leftIcon="phone-ring-outline"
@@ -205,7 +196,7 @@ export default function Details({ navigation }) {
           }}
           containerStyle={{
             backgroundColor: "#fff",
-            marginBottom: 10,
+            marginBottom: 20,
             marginTop: 20,
           }}
           leftIcon="map-marker-circle"
@@ -218,23 +209,21 @@ export default function Details({ navigation }) {
           onChangeText={(text) => setAddress(text)}
         />
 
-<Subtitle style={{alignSelf:"flex-start"}}>Please ensure that address or location provided is within Lagos</Subtitle>
-<Subtitle style={{marginBottom:25, alignSelf:"flex-start"}}>state as Garden only operates in Lagos state for now. </Subtitle>
+        <Subtitle style={styles.textStyle}>Please ensure that address or location provided is within Lagos</Subtitle>
+        <Subtitle style={styles.textStyle}>state as Garden only operates in Lagos state for now. </Subtitle>
 
-  <Button
-
-buttonStyle={{
-  backgroundColor: "black"
-  
-}}
+        <Button
+          buttonStyle={{
+            backgroundColor: "black",
+            marginTop: 25,
+            marginBottom: 20
+          }}
           loading={updating}
           onPress={updateUserDetails}
           style={{
             borderRadius: 45,
-            width: 300,
             backgroundColor: "black",
             alignSelf: "center",
-            marginBottom:35
           }}
           title="Save Changes"
           type="solid"
@@ -244,3 +233,22 @@ buttonStyle={{
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  textStyle: {
+    alignSelf: "flex-start",
+    fontSize: 11,
+    color: 'grey'
+  },
+  textStyle1: {
+    marginTop: 15,
+    alignSelf: "center",
+    fontSize: 11,
+    color: 'grey'
+  },
+  textStyle2: {
+    alignSelf: "center",
+    fontSize: 11,
+    color: 'grey'
+  }
+})

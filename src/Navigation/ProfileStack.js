@@ -1,11 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import React, { useContext } from "react";
 import ProfileScreen from "../screens/ProfileScreen";
 import AuthStack from "../Navigation/AuthStack";
 import { NavigationContainer } from "@react-navigation/native";
 import { AuthenticatedUserContext } from "../Providers/AuthenticatedUserProvider";
-
-import { ActivityIndicator } from "react-native";
 import Firebase from "../config/firebase";
 import { createStackNavigator } from "@react-navigation/stack";
 import Details from "../screens/Details";
@@ -14,8 +11,8 @@ import Grocerylist from "../screens/Grocerylist";
 import Password from "../screens/Password";
 import HelpScreen from "../screens/HelpScreen";
 import HomeScreen from "../screens/HomeScreen";
+import OrderDetail from "../screens/OrderDetail";
 
-const auth = Firebase.auth();
 
 export default function ProfileStack() {
   const { user, setUser } = useContext(AuthenticatedUserContext);
@@ -31,13 +28,15 @@ export default function ProfileStack() {
 
         <ProfileStack.Screen name="My Orders" component={OrderScreen} />
 
+        <ProfileStack.Screen name="OrderDetail" component={OrderDetail} />
+
         <ProfileStack.Screen name="My Grocery List" component={Grocerylist} />
 
         <ProfileStack.Screen name="Change my Password" component={Password} />
 
         <ProfileStack.Screen name="Help & Support" component={HelpScreen} />
 
-        
+
         <ProfileStack.Screen name="HomeScreen" component={HomeScreen} />
 
 

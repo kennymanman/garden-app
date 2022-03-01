@@ -4,24 +4,31 @@ import {
   Text,
   StyleSheet,
   ImageBackground,
-  Image,
+  ActivityIndicator,
   ScrollView,
   Alert,
   TouchableOpacity,
-  SafeAreaView,
 } from "react-native";
+import { useFocusEffect } from '@react-navigation/native';
 import { Button } from "react-native-elements";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import { Title, Left } from "native-base";
-import data from "./data";
+import { Header, Left, Right, Title, Body } from "native-base";
+import * as firebase from "firebase";
 import { Feather } from "@expo/vector-icons";
+import { AuthenticatedUserContext } from "../Providers/AuthenticatedUserProvider";
 import { FontAwesome } from "@expo/vector-icons";
 import { AddSavedContext } from "./CartContext";
 import { AddCartContext } from "./CartContext";
+import fire, { firestore } from "../config/firebase";
 import { getsSavedItems, removeSavedItems } from "../../API/firebaseMethods";
-import { useFocusEffect } from "@react-navigation/core";
+import CatListData from "./CatListData";
+import { FlatList } from "react-native-gesture-handler";
+
+
 
 export default function SavedScreen({ navigation }) {
+  const { user, setUser } = useContext(AuthenticatedUserContext);
+  const [proList, setProList] = useState([]);
+  const [loader, setLoader] = useState("false");
   const { updateSaved } = useContext(AddSavedContext);
   // const { saved } = useContext(AddSavedContext);
   const [saved, setSaved] = useState([]);
@@ -29,160 +36,290 @@ export default function SavedScreen({ navigation }) {
   const { updateCart } = useContext(AddCartContext);
   const { cart } = useContext(AddCartContext);
 
-  const { removeFromSaved } = useContext(AddSavedContext);
+  const { removeFromSaved } = useContext(AddSavedContext)
+
+  const Kandlepress = () =>
+    Alert.alert(
+      "Removed",
+
+    );
 
   const Handlepress = () => Alert.alert("Added to Cart");
 
-  // useFocusEffect(() => {
-  //   fetchBasket();
-  // }, []);
-
   useFocusEffect(
     React.useCallback(() => {
-      fetchBasket();
-    }, [navigation])
+    fetchFav();
+  }, [])
   );
 
-  const fetchBasket = async () => {
-    try {
-      const response = await getsSavedItems();
-      if (response && response.length) {
-        setSaved([...response]);
-      } else {
-        setSaved([]);
-      }
-      console.log("Response----", response);
-    } catch (error) {
-      console.log("Error---", error);
-    }
-  };
 
+  const fetchFav = async () => {
+    setLoader(true)
+    const currentUser = user.uid;
+
+    const db = firebase.firestore();
+
+    const favItems = db.collection("savedItems")
+    //const productItems = db.collection("Category").doc("kLfqtXJx6xPcjAEwrU4B").get();
+    const allFavRes = await favItems.where('currentUserID', '==', currentUser).get();
+
+    if (!allFavRes.empty) {
+      var arrayList = []
+      allFavRes.forEach(doc => {
+        //console.log('fav items', doc.id, '=>', doc.data().product_ID);
+        //idList.push(doc.data().product_ID);
+
+        CatListData.forEach((item) => {
+          firestore
+            .collection("Category")
+            .doc("kLfqtXJx6xPcjAEwrU4B")
+            .collection(item.name)
+            .get()
+            .then(subCategory => {
+              //console.log('Total Product in sub category: ', subCategory.size);
+              subCategory.docChanges().forEach(function (anotherSnapshot) {
+                //console.log('databas1122', anotherSnapshot.doc.data())
+                if (anotherSnapshot.doc.data().productId == doc.data().product_ID) {
+                  //console.log('databa',anotherSnapshot.doc.data())
+                  arrayList.push(anotherSnapshot.doc.data())
+                  console.log('get log', proList)
+                  setProList(arrayList);
+                  setLoader(false)
+                }
+              })
+            })
+        })
+      })
+    }
+    else {
+      setLoader(false)
+    }
+  }
+
+
+  const removeFavItem = async (productId) => {
+    setLoader(true);
+    const currentUser = user.uid;
+
+    const db = firebase.firestore();
+
+    const favItems = db.collection("savedItems")
+
+    const removeFavRes = await favItems.where('currentUserID', '==', currentUser).where('product_ID', '==', productId).get();
+    removeFavRes.forEach(item => {
+      console.log(item.id,);
+      const id = item.id
+      db.collection("savedItems").doc(id).delete();
+    })
+    await fetchFav();
+    setLoader(false);
+    alert('Item removed');
+  }
+
+
+  const addToCartItem = async (id, name, price, image, size, description) => {
+    setLoader(true)
+    const currentUser = user.uid;
+
+    const db = firebase.firestore();
+
+    // Create a reference to the cities collection
+    const cartRef = db.collection('cartItems');
+
+    // Create a query against the collection
+    const allCartRes = await cartRef.where('currentUserID', '==', currentUser).where('product_ID', '==', id).get();
+
+
+    if (allCartRes.empty) {
+      console.log('No matching documents.');
+      db.collection("cartItems").doc().set({
+        product_ID: id,
+        productName: name,
+        productPrice: price,
+        productImage: image,
+        productSize: size,
+        productDescription: description,
+        productQty: 1,
+        currentUserID: currentUser
+      });
+      setLoader(false);
+      alert('Item added to cart');
+      return;
+    }
+    else {
+      allCartRes.forEach(doc => {
+        console.log(doc.id, '=>', doc.data().productQty);
+        const qty = doc.data().productQty
+        db.collection("cartItems")
+          .doc(doc.id)
+          .update({ productQty: qty + 1 });
+        setLoader(false);
+        alert('Item added to cart');
+      })
+    }
+  }
+
+
+  // const fetchBasket = async () => {
+  //   try {
+  //     const response = await getsSavedItems();
+  //     if (response && response.length) {
+
+  //     } else {
+  //       setSaved([]);
+  //     }
+  //     console.log("Response----", response);
+  //   } catch (error) {
+  //     console.log("Error---", error);
+  //   }
+  // };
+
+  const Form = ({ id, name, description, price, image, size }) => (
+    <View style={{ marginTop: 10 }}>
+      <ImageBackground
+        source={{ uri: image }}
+        imageStyle={{ borderRadius: 12 }}
+        style={{
+          height: 190,
+          width: 180,
+          position: "relative", // because it's parent
+          marginBottom: 5,
+          marginTop: 10,
+          marginLeft: 15
+        }}
+      >
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("ProductPage", {
+              id: id,
+              name: name,
+              price: price,
+              image: image,
+              description: description,
+              size: size,
+            })
+          }>
+          <Text
+            style={{
+              fontWeight: "bold",
+              color: "white",
+              position: "absolute", // child
+              //bottom: 0, // position where you want
+              left: 0,
+              marginLeft: 10,
+              fontSize: 20,
+              top: 110
+            }}
+          >
+            {name}
+          </Text>
+
+          <Text
+            style={{
+              left: 0,
+              position: "absolute",
+              fontSize: 15,
+              marginLeft: 10,
+              color: "white",
+              top: 135
+            }}
+          >
+            ₦ {price}
+          </Text>
+        </TouchableOpacity>
+        {/*} <Text style={{bottom:0, left:0,position: "absolute", marginLeft:10, color:"white", fontSize:12, marginBottom:5}}>
+
+{description}  </Text> */}
+        <View style={{ alignSelf: 'flex-end', right: 10, marginTop: 10 }}>
+
+          <Button
+            type="clear"
+            icon={<FontAwesome name="remove"
+              size={17}
+              color="white"
+              style={{ alignSelf: 'center', position: 'absolute' }}
+              onPress={() => removeFavItem(id)}
+            />}
+          />
+        </View>
+        <Button
+          type="clear"
+          icon={
+            <Feather name="shopping-bag" size={18} color="white" style={{ left: 70, marginTop: 20 }}
+
+              onPress={() => {
+                if (user?.uid) {
+                  addToCartItem(id, name, price, image, size, description)
+                }
+              }}
+            />
+          }
+        />
+      </ImageBackground>
+    </View>
+  );
+
+  const renderItem = ({ item, navigation }) => (
+    <Form
+      id={item.productId}
+      name={item.name}
+      description={item.description}
+      image={item.image}
+      price={item.price}
+      size={item.size}
+
+    />
+
+  )
 
 
   return (
-    <View style={styles.container}>
-      <SafeAreaView>
+    <View >
+      <ScrollView showsVerticalScrollIndicator={false}>
+
         <Title
           style={{
-            fontSize: 35,
-            color: "black",
-            marginTop:2,
             textAlign: "left",
-          }}
-        >
+            color: "black",
+            marginLeft: 15,
+            marginTop: 20,
+            fontSize: 26,
+            fontFamily: "recoleta-black",
+
+          }}>
           Saved Items
         </Title>
+
         <Title
           style={{
             textAlign: "left",
-            
             color: "black",
-            fontSize: 16,
+            marginLeft: 15,
+            bottom: 3,
+            fontSize: 15,
             fontFamily: "recoleta-black",
-            
-          }}
-        >
+
+          }}>
           Keep track of groceries you love.{" "}
         </Title>
 
-        <ScrollView showsVerticalScrollIndicator={false}>
-          {saved.map(
-            ({ name, image, price, description, vendor, images, id, size }) => (
-              <TouchableOpacity
-                key={name}
-                onPress={() =>
-                  navigation.navigate("ProductPage", {
-                    name: name,
-                    price: price,
-                    images: images,
-                    description: description,
-                    vendor: vendor,
-                    size: size
-                  })
-                }
-              >
-                <ImageBackground
-                  source={image ? image : require("../img/sig.png")}
-                  imageStyle={{ borderRadius: 12 }}
-                  key={name}
-                  style={{
-                    height: 170,
-                    width: 176,
-                    position: "relative", // because it's parent
-                    marginBottom: 8,
-                    marginTop: 19,
-                    marginRight: 7,
-                    marginLeft: 4,
-                    top: 2,
-                    left: 1,
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontWeight: "bold",
-                      color: "white",
-                      position: "absolute", // child
-                      //bottom: 0, // position where you want
-                      left: 0,
-                      marginBottom: 55,
-                      marginLeft: 10,
-                      fontSize: 20,
-                      top:110
-                    }}
-                  >
-                    {name}
-                  </Text>
+        {loader ?
+          <View style={{ marginTop: 150 }}>
+            <ActivityIndicator size="large" color="#4267B2" />
+          </View>
+          :
+          (proList.length != 0 ? <FlatList
+            data={proList}
+            renderItem={({ item }) =>
+              renderItem({ navigation, item })
+            }
 
-                  <Text
-                    style={{
-                      
-                      left: 0,
-                      position: "absolute",
-                      fontSize: 15,
-                      marginBottom: 35,
-                      marginLeft: 10,
-                      color: "white",
-                      top:135
-                    }}
-                  >
-                    ₦{price}
-                  </Text>
-
-                  {/*} <Text style={{bottom:0, left:0,position: "absolute", marginLeft:10, color:"white", fontSize:12, marginBottom:5}}>
-  
-  {description}  </Text> */}
-
-                  <Button
-                    type="clear"
-                    style={{ top: 0, alignSelf:"flex-end", right: 0, marginTop: 2 }}
-                    icon={<FontAwesome name="remove" size={17} color="white" />}
-                    onPress={async () => {
-                      try {
-                        await removeSavedItems(id);
-                        alert("Item removed");
-                        fetchBasket();
-                      } catch (error) {}
-                    }}
-                    // onPress={() => removeFromSaved({ name, price, image })}
-                  />
-
-                  <Button
-                    type="clear"
-                    style={{ top: 0, alignSelf:"flex-end", right: 0, marginTop: 10 }}
-                    icon={
-                      <Feather name="shopping-bag" size={17} color="white" />
-                    }
-                    onPress={() => {
-                      updateCart({ name, price, image, size, description });
-                      Handlepress();
-                    }}
-                  />
-                </ImageBackground>
-              </TouchableOpacity>
-            )
-          )}
-        </ScrollView>
-      </SafeAreaView>
+          />
+            : <View style={{ flex: 1, alignItems: 'center', marginTop: 200 }}>
+              <Text style={{ fontSize: 16, color: 'black' }}>No saved items</Text>
+            </View>)
+        }
+      </ScrollView>
     </View>
   );
 }
@@ -190,7 +327,7 @@ export default function SavedScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal:12,
+    paddingHorizontal: 12,
     marginTop: 70,
   },
 

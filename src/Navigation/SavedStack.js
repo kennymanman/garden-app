@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect} from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { View, Text } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { AuthenticatedUserContext } from '../Providers/AuthenticatedUserProvider';
@@ -10,87 +10,65 @@ import AuthStack from "../Navigation/AuthStack"
 import ProductPage from '../screens/ProductPage';
 
 
-
-
-
 const auth = Firebase.auth();
 
 
 export default function SavedStack() {
 
 
-    const { user, setUser } = useContext(AuthenticatedUserContext); 
+  const { user, setUser } = useContext(AuthenticatedUserContext);
 
 
-    const [isLoading, setIsLoading] = useState(true);
-  
-
-    useEffect(() => {
-      // onAuthStateChanged returns an unsubscriber
-      const unsubscribeAuth = auth.onAuthStateChanged(async authenticatedUser => {
-        try {
-          await (authenticatedUser ? setUser(authenticatedUser) : setUser(null));
-          setIsLoading(false);
-        } catch (error) {
-          console.log(error);
-        }
-      });
-  
+  const [isLoading, setIsLoading] = useState(true);
 
 
-
-      
-      // unsubscribe auth listener on unmount
-      return unsubscribeAuth;
-    }, []);
-  
-    if (isLoading) {
-      return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <ActivityIndicator size='large' />
-        </View>
-      );
-    }   
-  
+  useEffect(() => {
+    // onAuthStateChanged returns an unsubscriber
+    const unsubscribeAuth = auth.onAuthStateChanged(async authenticatedUser => {
+      try {
+        await (authenticatedUser ? setUser(authenticatedUser) : setUser(null));
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    });
 
 
+    // unsubscribe auth listener on unmount
+    return unsubscribeAuth;
+  }, []);
 
-
-
-  
-
-
-
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size='large' />
+      </View>
+    );
+  }
 
 
   const SavedStack = createStackNavigator();
 
-  function SavedStackScreen () {
-return (
-  <SavedStack.Navigator headerMode="none"  >
-    
-<SavedStack.Screen name="SavedScreen" component={SavedScreen} />
-<SavedStack.Screen name="ProductPage" component={ProductPage} />
-     
-</SavedStack.Navigator> 
-)
+  function SavedStackScreen() {
+    return (
+      <SavedStack.Navigator headerMode="none"  >
 
+        <SavedStack.Screen name="SavedScreen" component={SavedScreen} />
+        <SavedStack.Screen name="ProductPage" component={ProductPage} />
+
+      </SavedStack.Navigator>
+    )
+
+  }
+
+
+  return (
+
+    <NavigationContainer independent={true}>
+      {user ? <SavedStackScreen /> : <AuthStack />}
+    </NavigationContainer>
+  )
 }
-
-
-
-
-
-return (
-
-  <NavigationContainer independent={true}>
-  {user ? <SavedStackScreen /> : <AuthStack />}
-  </NavigationContainer>
-)
-
-  
-
-} 
 
 
 

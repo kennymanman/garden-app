@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import * as firebase from "firebase";
+import fire, { firestore } from "../config/firebase";
 //import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from "../screens/HomeScreen";
 import SearchScreen from "../screens/SearchScreen";
@@ -18,7 +20,7 @@ import {
 } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import { View, SafeAreaView, ScrollView, Image } from "react-native";
-
+import CatProducts from '../screens/CatProducts';
 import Fruits from "../screens/Fruits";
 import Vegetables from "../screens/Vegetables";
 import Meat from "../screens/Meat";
@@ -46,88 +48,86 @@ import ProfileStack from "../Navigation/ProfileStack";
 import SavedStack from "../Navigation/SavedStack";
 import CartStack from "../Navigation/CartStack";
 import HomeStack from "../Navigation/HomeStack";
-
-import { Avatar, Title } from "react-native-paper";
-import { Text } from "react-native-elements";
-import { useContext, useState } from "react";
 import Firebase from "../config/firebase";
 import { AuthenticatedUserContext } from "../Providers/AuthenticatedUserProvider";
 
 
 const auth = Firebase.auth();
 
-function CustomDrawerContent(props) {
-  //Icons and Images for Drawer Navigation
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ height: 50, width: 30, marginTop: 23 }}>
-        <Avatar.Image //Drawer Avatar
-          size={150}
-          source={require("../img/ral.jpg")}
-          style={{ marginLeft: 61, marginBottom: 10 }}
-        />
+const count = 0;
 
-        <Title style={{ width: 224, marginLeft: 57 }}>Rakeem Micheal </Title>
-      </View>
+// function CustomDrawerContent(props) {
+//   //Icons and Images for Drawer Navigation
+//   return (
+//     <SafeAreaView style={{ flex: 1 }}>
+//       <View style={{ height: 50, width: 30, marginTop: 23 }}>
+//         <Avatar.Image //Drawer Avatar
+//           size={150}
+//           source={require("../img/ral.jpg")}
+//           style={{ marginLeft: 61, marginBottom: 10 }}
+//         />
 
-      <DrawerContentScrollView {...props} style={{ marginTop: 130 }}>
-        <DrawerItemList {...props} />
+//         <Title style={{ width: 224, marginLeft: 57 }}>Rakeem Micheal </Title>
+//       </View>
 
-        <DrawerItem //First Drawer Item for Drawer Navigation
-          label="Home"
-          icon={({ color, size }) => (
-            <MaterialCommunityIcons name="tree" color={"black"} size={26} />
-          )}
-          component={MainTabNavigator}
-        />
+//       <DrawerContentScrollView {...props} style={{ marginTop: 130 }}>
+//         <DrawerItemList {...props} />
 
-        <DrawerItem //Second Drawer Item for Drawer Navigation
-          label="Delivery Info"
-          icon={({ color, size }) => (
-            <MaterialCommunityIcons
-              name="account-card-details-outline"
-              color={"black"}
-              size={size}
-            />
-          )}
-          onPress={() => navigation.navigate("DeliveryScreen")}
-        />
+//         <DrawerItem //First Drawer Item for Drawer Navigation
+//           label="Home"
+//           icon={({ color, size }) => (
+//             <MaterialCommunityIcons name="tree" color={"black"} size={26} />
+//           )}
+//           component={MainTabNavigator}
+//         />
 
-        <DrawerItem //Third Drawer Item for Drawer Navigation
-          label="My Orders"
-          icon={({ color, size }) => (
-            <MaterialCommunityIcons
-              name="package-variant"
-              color={"black"}
-              size={size}
-            />
-          )}
-        />
+//         <DrawerItem //Second Drawer Item for Drawer Navigation
+//           label="Delivery Info"
+//           icon={({ color, size }) => (
+//             <MaterialCommunityIcons
+//               name="account-card-details-outline"
+//               color={"black"}
+//               size={size}
+//             />
+//           )}
+//           onPress={() => navigation.navigate("DeliveryScreen")}
+//         />
 
-        <DrawerItem //Fourth Drawer Item for Drawer Navigation
-          label="Need Help?"
-          icon={({ color, size }) => (
-            <Feather name="help-circle" color={"black"} size={size} />
-          )}
-          onPress={() => Linking.openURL("https://mywebsite.com/help")}
-        />
+//         <DrawerItem //Third Drawer Item for Drawer Navigation
+//           label="My Orders"
+//           icon={({ color, size }) => (
+//             <MaterialCommunityIcons
+//               name="package-variant"
+//               color={"black"}
+//               size={size}
+//             />
+//           )}
+//         />
 
-        <DrawerItem
-          style={{ marginTop: 130 }} //Drawer Item Sign Out
-          label="Sign out"
-          icon={({ color, size }) => (
-            <MaterialCommunityIcons
-              name="exit-to-app"
-              color={"black"}
-              size={size}
-            />
-          )}
-          onPress={() => Linking.openURL("https://mywebsite.com/help")}
-        />
-      </DrawerContentScrollView>
-    </SafeAreaView>
-  );
-}
+//         <DrawerItem //Fourth Drawer Item for Drawer Navigation
+//           label="Need Help?"
+//           icon={({ color, size }) => (
+//             <Feather name="help-circle" color={"black"} size={size} />
+//           )}
+//           onPress={() => Linking.openURL("https://mywebsite.com/help")}
+//         />
+
+//         <DrawerItem
+//           style={{ marginTop: 130 }} //Drawer Item Sign Out
+//           label="Sign out"
+//           icon={({ color, size }) => (
+//             <MaterialCommunityIcons
+//               name="exit-to-app"
+//               color={"black"}
+//               size={size}
+//             />
+//           )}
+//           onPress={() => Linking.openURL("https://mywebsite.com/help")}
+//         />
+//       </DrawerContentScrollView>
+//     </SafeAreaView>
+//   );
+// }
 
 const Stack = createStackNavigator(); //Stack Navigation is required to connect all Screens together
 
@@ -135,6 +135,7 @@ function SearchScreenStack() {
   return (
     <Stack.Navigator headerMode={"none"}>
       <Stack.Screen name="SearchScreen" component={SearchScreen} />
+      <Stack.Screen name="CatProducts" component={CatProducts} />
       <Stack.Screen name="Fruits" component={Fruits} />
       <Stack.Screen name="Vegetables" component={Vegetables} />
       <Stack.Screen name="Meat" component={Meat} />
@@ -154,7 +155,7 @@ function SearchScreenStack() {
       <Stack.Screen name="DeliveryScreen" component={DeliveryScreen} />
       <Stack.Screen name="DealsScreen" component={DealsScreen} />
       <Stack.Screen name="HelpScreen" component={HelpScreen} />
-      
+
     </Stack.Navigator>
   );
 }
@@ -211,7 +212,7 @@ function MainTabNavigator() {
           tabBarIcon: ({ color }) => (
             <Feather name="shopping-bag" size={22} color={color} />
           ),
-          tabBarBadge: 0, //The Quantity Icon on the Tab Bar
+          tabBarBadge:0, //The Quantity Icon on the Tab Bar
         }}
       />
 
@@ -234,6 +235,7 @@ const Drawer = createDrawerNavigator();
 
 export default function AppNavigator() {
   const { user, setUser } = useContext(AuthenticatedUserContext);
+
   useEffect(() => {
     // onAuthStateChanged returns an unsubscriber
     const unsubscribeAuth = auth.onAuthStateChanged(
@@ -245,7 +247,19 @@ export default function AppNavigator() {
         }
       }
     );
+
+    if (auth.currentUser) {
+      const id = auth.currentUser.uid
+      fetch(id)
+    }
   });
+
+  const fetch = async (id) => {
+    const allCartRes = await firebase.firestore().collection("cartItems").where('currentUserID', '==', id).get();
+    console.log('get cartttttt', allCartRes.size)
+    count = allCartRes.size
+  }
+
 
   return (
     <Stack.Navigator initialRouteName="Home">

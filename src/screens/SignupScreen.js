@@ -19,7 +19,7 @@ import Button from "../Components/Button";
 import InputField from "../Components/InputField";
 import Firebase from "../config/firebase";
 import { registration } from "../../API/firebaseMethods";
-import {Title, Body, Subtitle} from "native-base"
+import { Title, Body, Subtitle } from "native-base"
 
 import Bing from "../Svg/Bing.svg"
 import Cactus from "../Svg/Cactus.svg"
@@ -36,7 +36,7 @@ export default function SignupScreen({ navigation }) {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState("Mohali");
   const [password, setPassword] = useState("");
   const [passwordVisibility, setPasswordVisibility] = useState(true);
   const [rightIcon, setRightIcon] = useState("eye");
@@ -93,7 +93,7 @@ export default function SignupScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      
+
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -101,21 +101,22 @@ export default function SignupScreen({ navigation }) {
         <StatusBar style="dark-content" />
 
         <ScrollView
-          style={{ flex: 1, paddingTop:55 }}
+          style={{ flex: 1, paddingTop: 55 }}
           contentContainerStyle={{ flexGrow: 1 }}
           showsVerticalScrollIndicator={false}
         >
-          <Text style={{fontSize: 24,
-    fontWeight: "600",
-    color: "black",
-    alignSelf: "center",
-    paddingBottom: 24,
-    fontFamily:"recoleta-black",
-    paddingTop:20
-    }}>Create a new account</Text>
+          <Text style={{
+            fontSize: 24,
+            fontWeight: "600",
+            color: "black",
+            alignSelf: "center",
+            paddingBottom: 24,
+            fontFamily: "recoleta-black",
+            paddingTop: 20
+          }}>Create a new account</Text>
 
 
-<Bing style={{position:"absolute"}} />
+          <Bing style={{ position: "absolute" }} />
           <InputField
             inputStyle={{
               fontSize: 14,
@@ -166,7 +167,7 @@ export default function SignupScreen({ navigation }) {
             onChangeText={(text) => setEmail(text)}
           />
 
-{/* <Orange style={{position:"absolute", marginTop:255, marginL¯eft:210}} /> */}
+          {/* <Orange style={{position:"absolute", marginTop:255, marginL¯eft:210}} /> */}
 
           <InputField
             inputStyle={{ fontSize: 14 }}
@@ -193,8 +194,8 @@ export default function SignupScreen({ navigation }) {
           />
 
 
-<Yellow style={{position:"absolute", marginTop:379}} />
-<Cactus style={{position:"absolute", marginTop:359}} />
+          <Yellow style={{ position: "absolute", marginTop: 379 }} />
+          <Cactus style={{ position: "absolute", marginTop: 359 }} />
 
           <InputField
             inputStyle={{
@@ -224,20 +225,21 @@ export default function SignupScreen({ navigation }) {
             backgroundColor="black"
             title="Signup"
             tileColor="#fff"
-            titleSize={20}
+            titleSize={18}
             containerStyle={{
               marginBottom: 9,
             }}
           />
 
+          <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 10 }}>
+            <Subtitle style={{ fontSize: 12, marginLeft: 2 }}>Already have an account?</Subtitle>
 
-<Subtitle style={{fontSize:12}}>Already have an account?</Subtitle>
-
-<TouchableOpacity  onPress={() => navigation.navigate("Login")}>
-<Title style={{marginTop:0}}>Log In</Title>
-</TouchableOpacity>
-
-{/*
+            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+              <Title style={{ marginLeft: 2, bottom: 5, fontSize: 17 }}>Log In</Title>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.borderStyle} />
+          {/*
           <RNButton
             onPress={() => navigation.navigate("Login")}
             title="Go to Login"
@@ -265,4 +267,11 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     paddingBottom: 24,
   },
+  borderStyle: {
+    borderWidth: 0.6,
+    borderColor: 'white',
+    alignSelf: 'center',
+    width: '40%',
+    marginTop: 4
+  }
 });
