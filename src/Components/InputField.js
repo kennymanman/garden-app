@@ -2,18 +2,6 @@ import React from 'react';
 import { View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-
-
-
-
-
-
-
-
-
-
-
-
 const InputField = ({
   leftIcon,
   iconColor = '#000',

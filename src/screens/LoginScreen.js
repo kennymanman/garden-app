@@ -11,7 +11,7 @@ import {
   TouchableOpacity
 } from "react-native";
 
-import {Title, Body, Subtitle} from "native-base"
+import { Title, Body, Subtitle } from "native-base"
 
 import ErrorMessage from "../Components/ErrorMessage";
 import Button from "../Components/Button";
@@ -25,7 +25,7 @@ import Cheetos from "../Svg/Cheetos.svg"
 const auth = Firebase.auth();
 
 export default function LoginScreen({ navigation }) {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("abdul@webguruz.co.in");
   const [password, setPassword] = useState("");
   const [passwordVisibility, setPasswordVisibility] = useState(true);
   const [rightIcon, setRightIcon] = useState("eye");
@@ -65,93 +65,99 @@ export default function LoginScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <SafeAreaView>
-      <StatusBar style="dark-content" />
+        <StatusBar style="dark-content" />
 
-<Green style={{position:"absolute"}}/>
-
-
-      <Text style={{ fontSize: 52,
-    fontWeight: "600",
-    color: "black",
-    alignSelf: "center",
-    paddingBottom: 2,
-    fontFamily:"recoleta-black",
-    paddingTop:120
-    
-    }}>Garden<Text style={{color:"orange", fontSize:55}}>.</Text></Text>
-
-    <Subtitle style={{paddingBottom: 12}}>Groceries at your doorstep</Subtitle>
-
-      <InputField
-        inputStyle={{
-          fontSize: 14,
-          
-        }}
-        containerStyle={{
-          backgroundColor: "#fff",
-          marginBottom: 20,
-        }}
-        leftIcon="email-multiple-outline"
-        placeholder="Enter email"
-        autoCapitalize="none"
-        keyboardType="email-address"
-        textContentType="emailAddress"
-        autoFocus={true}
-        value={email}
-        onChangeText={(text) => setEmail(text)}
-      />
-
-<Cheetos style={{position:"absolute", marginTop:240}} />
+        <Green style={{ position: "absolute" }} />
 
 
+        <Text style={{
+          fontSize: 52,
+          fontWeight: "600",
+          color: "black",
+          alignSelf: "center",
+          paddingBottom: 2,
+          fontFamily: "recoleta-black",
+          paddingTop: 120
 
-      <InputField
-        inputStyle={{
-          fontSize: 14,
-        }}
-        containerStyle={{
-          backgroundColor: "#fff",
-          marginBottom: 20,
-        }}
-        leftIcon="lock"
-        placeholder="Enter password"
-        autoCapitalize="none"
-        autoCorrect={false}
-        secureTextEntry={passwordVisibility}
-        textContentType="password"
-        rightIcon={rightIcon}
-        value={password}
-        onChangeText={(text) => setPassword(text)}
-        handlePasswordVisibility={handlePasswordVisibility}
-      />
+        }}>Garden<Text style={{ color: "orange", fontSize: 55 }}>.</Text></Text>
 
-      {loginError ? <ErrorMessage error={loginError} visible={true} /> : null}
+        <Subtitle style={{ paddingBottom: 12 }}>Groceries at your doorstep</Subtitle>
 
-      <Button
-        onPress={onLogin}
-        backgroundColor="black"
-        title="Login"
-        tileColor="#fff"
-        titleSize={20}
-        containerStyle={{
-          marginBottom: 24,
-        }}
-      />
+        <InputField
+          inputStyle={{
+            fontSize: 14,
+
+          }}
+          containerStyle={{
+            backgroundColor: "#fff",
+            marginBottom: 20,
+          }}
+          leftIcon="email-multiple-outline"
+          placeholder="Enter email"
+          autoCapitalize="none"
+          keyboardType="email-address"
+          textContentType="emailAddress"
+          autoFocus={true}
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+        />
+
+        <Cheetos style={{ position: "absolute", marginTop: 240 }} />
 
 
-<Subtitle style={{fontSize:12}}>Don't have an account?</Subtitle>
 
-<TouchableOpacity  onPress={() => navigation.navigate("Signup")}>
-<Title style={{marginTop:7}}>SignUp</Title>
-</TouchableOpacity>
+        <InputField
+          inputStyle={{
+            fontSize: 14,
+          }}
+          containerStyle={{
+            backgroundColor: "#fff",
+            marginBottom: 20,
+          }}
+          leftIcon="lock"
+          placeholder="Enter password"
+          autoCapitalize="none"
+          autoCorrect={false}
+          secureTextEntry={passwordVisibility}
+          textContentType="password"
+          rightIcon={rightIcon}
+          value={password}
+          onChangeText={(text) => setPassword(text)}
+          handlePasswordVisibility={handlePasswordVisibility}
+        />
 
-      {/*<RNButton 
+        {loginError ? <ErrorMessage error={loginError} visible={true} /> : null}
+
+        <Button
+          onPress={onLogin}
+          backgroundColor="black"
+          title="Login"
+          tileColor="#fff"
+          titleSize={18}
+          containerStyle={{
+            marginBottom: 12
+          }}
+        />
+        <Subtitle
+          onPress={() => navigation.navigate("ChangePassword")}
+          style={{ fontSize: 13, marginLeft: 1, color: 'black' }}>Change Password</Subtitle>
+
+        <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 20 }}>
+
+          <Subtitle style={{ fontSize: 12, color: 'black' }}>Don't have an account?</Subtitle>
+
+          <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+            <Title style={styles.signupTextStyle}>SignUp</Title>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.borderStyle} />
+        {/*<RNButton 
         onPress={() => navigation.navigate("Signup")}
         title="Signup"
         color="black"
       />*/}
 
-</SafeAreaView>
+      </SafeAreaView>
     </View>
   );
 }
@@ -162,7 +168,20 @@ const styles = StyleSheet.create({
     backgroundColor: "#faedcd",
     paddingTop: 50,
     paddingHorizontal: 12,
+  },
+  borderStyle: {
+    borderWidth: 0.6,
+    borderColor: 'white',
+    alignSelf: 'center',
+    width: '40%',
+    marginTop: 5
+  },
+  signupTextStyle: {
+    marginLeft: 2,
+    bottom: 3,
+    fontSize: 15,
+    color: "orange"
   }
- 
+
 });
 

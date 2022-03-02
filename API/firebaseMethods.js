@@ -162,3 +162,27 @@ export async function removeSavedItems(id) {
     }
   });
 }
+
+export async function getCategoryData(categoryName) {
+  console.log("Kalim categoryName2222 ----", categoryName);
+  var arrayList = []
+  try {
+    const db = firebase.firestore();
+    await db.collection("Category")
+      .doc("kLfqtXJx6xPcjAEwrU4B")
+      .collection(categoryName)
+      .get()
+      .then(subCategory => {
+        //console.log('Total Product in sub category: ', subCategory.size);
+        subCategory.docChanges().forEach(function (anotherSnapshot) {
+          //console.log('databas1122', anotherSnapshot.doc.data())
+          arrayList.push(anotherSnapshot.doc.data())
+        })
+
+      })
+    return arrayList
+  }
+  catch (err) {
+    return
+  }
+}

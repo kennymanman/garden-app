@@ -1,499 +1,390 @@
-import React from "react"
-import { View, StyleSheet, Image, ScrollView, TouchableOpacity, ImageBackground, SafeAreaView } from "react-native"
+import React, { useState, useContext } from 'react'
+import { useFocusEffect } from '@react-navigation/native';
+import { View, StyleSheet, Image, ScrollView, TouchableOpacity, FlatList, ImageBackground, Text } from "react-native"
 import { Button } from 'react-native-elements';
-import Icon from "react-native-vector-icons/FontAwesome5"
-import { Container, Header, Item, Input,  Text } from 'native-base';
-import { Feather } from '@expo/vector-icons';
-import sig from "../img/sig.png"
-
-import pat from "../img/pat.png"
-import veg from "../img/veg.png"
-import mea from "../img/mea.png"
-import brea from "../img/brea.png"
-import egg from "../img/egg.png"
-import cere from "../img/cere.png"
-import dri from "../img/dri.png"
-import al from "../img/al.png"
-import sna from "../img/sna.png"
-import spi from "../img/spi.png"
-import pan from "../img/pan.png"
-import hou from "../img/hou.png"
-import vit from "../img/vit.png"
-import ki from "../img/ki.png"
-import Deals from "../rmg/Deals.png"
-
-import {Title, Subtitle} from "native-base"
-import { TextInput } from "react-native-paper";
+import { Title, Subtitle } from "native-base"
+import { Feather } from "@expo/vector-icons";
 import InputField from "../Components/InputField";
-import Bullseye from "../Svg/Bullseye.svg"
-import Outlinecloud from "../Svg/Outlinecloud.svg"
+import CatListData from './CatListData';
+import * as firebase from "firebase";
+import { AuthenticatedUserContext } from "../Providers/AuthenticatedUserProvider";
+import Modal from "react-native-modal";
 
 
-import orangesimage from "../categoryimages/orangesimage.jpg"
-import kaleimage from "../categoryimages/kaleimage.jpg"
-import meatimage from "../categoryimages/meatimage.jpg"
-import breadimage from "../categoryimages/breadimage.jpg"
-import eggimage from "../categoryimages/eggimage.jpg"
-import drinkimage from "../categoryimages/drinkimage.jpg"
-import spiceimage from "../categoryimages/spiceimage.jpg"
-import pastaimage from "../categoryimages/pastaimage.jpg"
-import tuberimage from "../categoryimages/tuberimage.jpg"
-import juiceima from "../categoryimages/juiceima.jpg"
-import beefimage from "../categoryimages/beefimage.jpg"
+export default function SearchScreen({ navigation }) {
+    const { user, setUser } = useContext(AuthenticatedUserContext);
+    const [productList, setProuctList] = useState([]);
+    const [proList, setProList] = useState([]);
+    const [loader, setLoader] = useState("false");
+    const [search, setSearch] = useState('');
+    const [rightIcon, setRightIcon] = useState("close");
+    const [radioClick, setRadioClick] = useState(0);
+    const [isModalVisible, setModalVisible] = useState(false);
+
+    const toggleModal = () => {
+        setModalVisible(!isModalVisible);
+    };
 
 
+    useFocusEffect(
+        React.useCallback(() => {
+            getProducts()
+        }, [])
+    );
 
 
+    const getProducts = () => {
+        var arrayList = [];
+        setLoader(true);
+        CatListData.forEach((item) => {
+            firebase.firestore().collection("Category").doc("kLfqtXJx6xPcjAEwrU4B").collection(item.name)
+                .get()
+                .then(subCategory => {
+                    subCategory.docChanges().forEach(function (anotherSnapshot) {
+                        //console.log('databas1122', anotherSnapshot.doc.data())
+                        arrayList.push(anotherSnapshot.doc.data());
+                        setProuctList(arrayList);
+                        setLoader(false);
+                    })
+                })
+        })
+    }
 
-export default function SearchScreen ({navigation}) {
-    return (
 
+    const searchClear = async () => {
+        setSearch(''),
+            () =>
+                getProducts()
+        setProList([])
+    };
 
-        
-
-
-        <View style={{ flex: 1}} >
-
-        {/*<Header  style={{marginTop:12  }} searchBar rounded   >
-
-          <Item >
-            <Icon style={{paddingLeft:25, paddingRight:30}} size={15} name="search" />
-            <Input  placeholder="Search" />
-            
-          </Item>
-
-          <Button style={styles.bitch} 
-            type="clear"
-            icon={
-               <Icon
-                name= "bars"
-                size= {21}
-                color= "black"
-                />
+    const onChangeSearch = async (value) => {
+        setSearch(value)
+        var filteredProductData = []
+        if (value.length > 2) {
+            setLoader(true);
+            for (var i = 0; i < productList.length; i++) {
+                if (productList[i].name.toLowerCase().includes(value.toLowerCase())) {
+                    console.log('get search data', productList[i])
+                    filteredProductData.push(productList[i]);
+                }
             }
-            
-            onPress={() => navigation.openDrawer()} />    
-
-
-        </Header>*/}
-
-
-
-
-        
-
-        
-
-
-        <ScrollView >
-
-        
-
-        <View style={{marginTop:23}} >
-
-  
-
-{/*
-<ImageBackground 
- source={require('../rmg/sag.jpg')}
- style={{ height: 250, backgroundSize:"cover"}}
- imageStyle={{borderBottomRightRadius:70}}
-
->*/}
-
-{/*<Outlinecloud style={{position:"absolute", paddingTop:180}} />*/}
-
-{/*<Bullseye style={{position:"absolute", marginLeft:220, paddingTop:1100}} />*/}
-
-
-<Title style={{textAlign:"left", fontSize:39, paddingTop:50, paddingLeft:13, paddingBottom:10, color:"black"}}>Categories</Title>
-
-
-
-
-
-<InputField placeholder="Search Groceries" leftIcon="magnify"
-
-containerStyle={{backgroundColor:"#ced4da", borderBottomRightRadius:17, borderTopRightRadius:17, height:45, borderTopLeftRadius:17, borderBottomLeftRadius:17, margin:10}}
-style={{marginTop:20, padding:12, width:350, height:10}}
->
-</InputField>
-
-
-<View style={{ height: 2,  borderBottomWidth: 1, borderBottomColor: '#CED0CE', marginTop:10}} />
-
-
-
-
-
-
-
-      
-{/*</ImageBackground> */}
-
-
-
-
-
-      {/*<Image  style={{ width: 346, height: 100, alignItems: "center", borderRadius: 20, marginBottom:35, marginLeft: 12, marginRight:25}} source={sig} />*/}
-
-
-
-
-
-
-
-
-
-     {/* <ImageBackground
-             
-             source={require('../rmg/gina.jpg')}
-             imageStyle={{borderRadius:0}}
-          style={{
-            height: 350,
-            width: 375,
-            position: 'relative', // because it's parent
-            marginTop:75,
-            top: 0,  
-          }}
-        >  */}
-
-
-
-
-
-
-<View style={{ marginTop:70}}>
-
-        <ScrollView  horizontal={true} showsHorizontalScrollIndicator={false} >
-
-
-
-<View style={{paddingRight:10, paddingLeft:19, paddingTop:10}}>
-
-
-<Title style={{color:"black"}}>Grocery Boxes & Deals</Title>
-<View>
-    <TouchableOpacity
-     onPress={() => navigation.navigate ( "DealsScreen") }>
-
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom:100}} source={Deals}  />
-
-</TouchableOpacity>
-
-</View>
-</View>
-
-
-
-<View style={{paddingRight:10, paddingTop:10 }}>
-
-<Title style={{color:"black"}}>Fruits</Title>
-<View>
-    <TouchableOpacity onPress={() =>navigation.navigate ("Fruits" ) } >
-
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom:100}} source={orangesimage}  />
-
-</TouchableOpacity>
-
-</View>
-</View>
-
-
-
-
-
-
-
-
-
-
-
-
-<View style={{paddingRight:10, paddingTop:10 }}>
-
-<Title style={{color:"black"}}>Vegetables</Title>
-<View>
-    <TouchableOpacity onPress={() =>navigation.navigate ("Vegetables" ) } >
-
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom:100}} source={kaleimage}  />
-
-</TouchableOpacity>
-
-</View>
-</View>
-
-
-
-<View style={{paddingRight:15, paddingTop:10 }}>
-<Title style={{color:"black"}}>Meat & Seafood</Title>
-<View>
-    <TouchableOpacity onPress={() =>navigation.navigate ( 'Meat')}>
-
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={beefimage}  />
-
-</TouchableOpacity>
-
-</View>
-</View>
-
-
-
-<View style={{paddingRight:15, paddingTop:10 }}>
-<Title  style={{color:"black"}}>Bread & Bakery</Title>
-<View>
-    <TouchableOpacity onPress={() =>navigation.navigate ('Bread')}>
-
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10 , marginBottom: 100}} source={breadimage}  />
-
-</TouchableOpacity>
-
-</View>
-</View>
-
-
-
-<View style={{paddingRight:15, paddingTop:10 }}>
-<Title  style={{color:"black"}}>Dairy & Eggs</Title>
-<View>
-    <TouchableOpacity onPress={() =>navigation.navigate ('Eggs')}>
-
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={eggimage}  />
-
-</TouchableOpacity>
-
-</View>
-</View>
-
-
-{/*
-<View style={{paddingRight:15, paddingTop:10 }}>
-<Title  style={{color:"black"}}>Cereals</Title>
-<View>
-    <TouchableOpacity onPress={() =>navigation.navigate ('Cereal')}>
-
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 20, marginTop: 10, marginBottom: 100}} source={cere}  />
-
-</TouchableOpacity>
-
-</View>
-</View>
-*/}
-
-
-
-<View style={{paddingRight:15, paddingTop:10 }}>
-<Title  style={{color:"black"}}>Drinks</Title>
-<View>
-    <TouchableOpacity onPress={() =>navigation.navigate ('Drinks')}>
-
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={juiceima}  />
-
-</TouchableOpacity>
-
-</View>
-</View>
-
-
-
-{/*
-<View style={{paddingRight:15, paddingTop:10 }}>
-<Title  style={{color:"black"}}>Alcohol</Title>
-<View>
-    <TouchableOpacity onPress={() =>navigation.navigate ('Alcohol')}>
-
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 20, marginTop: 10, marginBottom: 100}} source={al}  />
-
-</TouchableOpacity>
-
-</View>
-</View>
-*/}
-
-
-
-{/*
-<View style={{paddingRight:15, paddingTop:10 }}>
-<Title  style={{color:"black"}}>Snacks</Title>
-<View>
-    <TouchableOpacity onPress={() =>navigation.navigate ('Snacks')}>
-
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 20, marginTop: 10, marginBottom: 100}} source={sna}  />
-
-</TouchableOpacity>
-
-</View>
-</View>
-*/}
-
-
-
-<View style={{paddingRight:15, paddingTop:10 }}>
-<Title  style={{color:"black"}}>Spices, Sauces & Oil</Title>
-<View>
-    <TouchableOpacity onPress={() =>navigation.navigate ('Spices')}>
-
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={spiceimage}  />
-
-</TouchableOpacity>
-
-</View>
-</View>
-
-
-
-
-
-<View style={{paddingRight:15, paddingTop:10 }}>
-<Title  style={{color:"black"}}>Pasta, Noodles & Grains</Title>
-<View>
-    <TouchableOpacity onPress={() =>navigation.navigate ('House')}>
-
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={pastaimage}  />
-
-</TouchableOpacity>
-
-</View>
-</View>
-
-
-
-
-<View style={{paddingRight:15, paddingTop:10 }}>
-<Title  style={{color:"black"}}> Dried, Pantry & Tubers</Title>
-<View>
-    <TouchableOpacity onPress={() =>navigation.navigate ('Pantry')}>
-
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100}} source={tuberimage}  />
-
-</TouchableOpacity>
-
-</View>
-</View>
-
-
-
-
-
-
-
-
-
-
-
-{/*
-<View style={{paddingRight:15, paddingTop:10 }}>
-<Title  style={{color:"black"}}>Health & Nutrition</Title>
-<View>
-    <TouchableOpacity onPress={() =>navigation.navigate ('Health')}>
-
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 20, marginTop: 10, marginBottom: 100}} source={vit}  />
-
-</TouchableOpacity>
-
-</View>
-</View>
-*/}
-
-
-{/*
-<View style={{paddingRight:15, paddingTop:10 }}>
-<Title  style={{color:"black"}}>Kids & Babies</Title>
-<View>
-    <TouchableOpacity onPress={() =>navigation.navigate ('Kids')}>
-
-<Image  style={{ width: 220, height: 270, alignItems: "center", borderRadius: 20, marginTop: 10, marginBottom: 100}} source={ki}  />
-
-</TouchableOpacity>
-
-</View>
-</View>
-*/}
-
-
-
-
-
-</ScrollView>
-</View>
-
-{/*</ImageBackground>*/}
-
-
-
-<Subtitle>Recommend grocery items you would love to see?</Subtitle>
-<Subtitle>Email Us</Subtitle>
-
-<Button  //Checkout Button
-
-buttonStyle={{
-  backgroundColor: "black"
-}}
-
-title="Recommend"
-style={{marginBottom:30,
-width:200,
-marginTop:9,
-alignSelf: "center",
-height:100}}
-
-onPress={() => navigation.navigate ( "HelpScreen")}
-/>
-
-
-
-
-
-
-  </View>    
-
-  
-
-</ScrollView>
-
-        
-
+        }
+        else {
+            filteredProductData = productList
+        }
+        setProList(filteredProductData)
+        setLoader(false);
+    }
+
+
+    // const setFilter = (item) => {
+    //     setRadioClick(item)
+    //     if (radioClick == 1) {
+    //         const data = productList.sort((a, b) => a - b);
+    //         setProList(data);
+    //     }
+    //     if (radioClick == 2) {
+    //         const data = productList.sort((a, b) => a - b).reverse();
+    //         setProList(data);
+    //     }
+    //     toggleModal()
+    // }
+
+    // const filterView = () => {
+    //     return (
+    //         <Modal
+    //             isVisible={isModalVisible}
+    //             backdropOpacity={0.1}
+    //             onBackButtonPress={toggleModal}
+    //             onBackdropPress={toggleModal}
+    //             style={{ justifyContent: 'flex-start', marginTop: 110 }}>
+    //             <View style={styles.modalStyle}>
+    //                 <TouchableOpacity
+    //                     onPress={setFilter}
+    //                     style={styles.radioStyle}>
+    //                     {radioClick == 1 ? (
+    //                         <Image
+    //                             resizeMode="cover"
+    //                             source={require('../img/radioSelected.png')}
+    //                             style={{ height: 15, width: 15, marginRight: 10 }}
+    //                         />
+    //                     ) : (
+    //                         <Image
+    //                             resizeMode="cover"
+    //                             source={require('../img/radioUnselect.png')}
+    //                             style={{ height: 15, width: 15, marginRight: 10 }}
+    //                         />
+    //                     )}
+    //                     <Text>Lowest to Highest</Text>
+    //                 </TouchableOpacity>
+
+    //                 <TouchableOpacity
+    //                     onPress={setFilter}
+    //                     style={styles.radioStyle}>
+    //                     {radioClick == 2 ? (
+    //                         <Image
+    //                             resizeMode="cover"
+    //                             source={require('../img/radioSelected.png')}
+    //                             style={{ height: 15, width: 15, marginRight: 10 }}
+    //                         />
+    //                     ) : (
+    //                         <Image
+    //                             resizeMode="cover"
+    //                             source={require('../img/radioUnselect.png')}
+    //                             style={{ height: 15, width: 15, marginRight: 10 }}
+    //                         />
+    //                     )}
+    //                     <Text>Hightest to Lowest</Text>
+    //                 </TouchableOpacity>
+    //             </View>
+
+    //         </Modal>
+    //     )
+    // }
+
+    const addToCartItem = async (productId, name, price, image, size, description) => {
+        setLoader(true)
+        const currentUser = user.uid;
+
+        const db = firebase.firestore();
+
+        // Create a reference to the cities collection
+        const cartRef = db.collection('cartItems');
+
+        // Create a query against the collection
+        const allCartRes = await cartRef.where('currentUserID', '==', currentUser).where('product_ID', '==', productId).get();
+
+        if (allCartRes.empty) {
+            console.log('No matching documents.');
+            db.collection("cartItems").doc().set({
+                product_ID: productId,
+                productName: name,
+                productPrice: price,
+                productImage: image,
+                productSize: size,
+                productDescription: description,
+                productQty: 1,
+                currentUserID: currentUser
+            });
+            setLoader(false);
+            alert('Item added to cart');
+            return;
+        }
+        else {
+            setLoader(false);
+            alert('Item already added in cart');
+        }
+    }
+
+
+    const savedProducts = async (productId) => {
+        const currentUser = user.uid;
+
+        const db = firebase.firestore();
+
+        // Create a reference to the cities collection
+        const itemRef = db.collection('savedItems');
+
+        // Create a query against the collection
+        const allItemRes = await itemRef.where('currentUserID', '==', currentUser).where('product_ID', '==', productId).get();
+
+        if (allItemRes.empty) {
+            console.log('No matching documents.');
+            db.collection("savedItems").doc().set({
+                product_ID: productId,
+                currentUserID: currentUser
+            });
+            alert('Item saved')
+            return;
+        }
+        else {
+            alert('This item is already saved')
+        }
+    }
+
+
+    return (
+        <View style={{ flex: 1 }} >
+            <Title style={styles.catTitleStyle}>Categories</Title>
+
+            <ScrollView>
+                <View style={{ marginTop: 15, flexDirection: 'row' }}>
+                    <InputField
+                        placeholder="Search Groceries"
+                        leftIcon="magnify"
+                        containerStyle={{ backgroundColor: "#ced4da", width: 330, borderBottomRightRadius: 17, borderTopRightRadius: 17, height: 45, borderTopLeftRadius: 17, borderBottomLeftRadius: 17, marginLeft: 10, marginRight: 10 }}
+                        style={{ marginTop: 20, margin: 15, height: 10 }}
+                        onChangeText={(value) => onChangeSearch(value)}
+                        value={search}
+                        rightIcon={rightIcon}
+                        handlePasswordVisibility={() => searchClear()}
+                    >
+                    </InputField>
+                    {/* {search != '' ? <Button
+                        type="clear"
+                        onPress={toggleModal}
+                        icon={<Feather name="filter" size={24} color="black" style={{ top: 5, right: 10 }} />}
+                    /> : null} */}
+                </View>
+                {/* {filterView()} */}
+
+                <View style={{ height: 2, borderBottomWidth: 1, borderBottomColor: '#CED0CE', marginTop: 10 }} />
+
+                {search == '' ? <View style={{ marginTop: 40 }}>
+
+                    <FlatList
+                        data={CatListData}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                        renderItem={({ item }) => {
+                            return (
+                                <View style={{ paddingRight: 10, paddingLeft: 15, paddingTop: 10 }}>
+                                    <Title style={{ color: "black", textAlign: 'center' }}>{item.name}</Title>
+                                    <View>
+                                        <TouchableOpacity onPress={() => navigation.navigate("CatProducts", { catName: item.name })}>
+
+                                            <Image style={{ width: 220, height: 250, alignItems: "center", borderRadius: 12, marginTop: 10, marginBottom: 100 }} source={item.image} />
+
+                                        </TouchableOpacity>
+
+                                    </View>
+                                </View>
+                            );
+                        }}
+                    />
+                </View>
+                    :
+                    <FlatList
+                        numColumns={2}
+                        data={proList}
+                        renderItem={({ item }) => {
+                            return (
+                                <TouchableOpacity
+                                    onPress={() =>
+                                        navigation.navigate("ProductPage", {
+                                            id: item.productId,
+                                            name: item.name,
+                                            price: item.price,
+                                            image: item.image,
+                                            description: item.description,
+                                            size: item.size,
+                                        })
+                                    }>
+                                    <ImageBackground
+                                        source={{ uri: item.image }} //Background Image
+                                        imageStyle={{ borderRadius: 12 }}
+                                        style={{
+                                            height: 200,
+                                            width: 170,
+                                            position: "relative", // because it's parent
+                                            marginBottom: 10,
+                                            marginTop: 10,
+                                            marginRight: 7,
+                                            marginLeft: 4,
+                                            top: 2,
+                                            left: 2,
+                                        }}
+                                    >
+                                        <Text
+                                            style={{
+                                                fontWeight: "bold",
+                                                color: "white",
+                                                position: "absolute", // child
+                                                bottom: 0, // position where you want
+                                                left: 0,
+                                                marginBottom: 40,
+                                                marginLeft: 12,
+                                                fontSize: 20
+                                            }}
+                                        >
+                                            {item.name}
+                                        </Text>
+
+                                        <Text style={{
+                                            bottom: 0,
+                                            left: 0,
+                                            fontWeight: "bold",
+                                            position: "absolute",
+                                            fontSize: 15,
+                                            marginBottom: 20,
+                                            marginLeft: 15,
+                                            color: "white"
+                                        }}>₦ {item.price}</Text>
+
+                                        <View style={{ flexDirection: "row", marginLeft: 5, justifyContent: 'space-between', marginRight: 5 }}>
+                                            <Button
+                                                type="clear"
+                                                style={{
+                                                    marginTop: 3
+                                                }}
+                                                onPress={() => savedProducts(item.productId)}
+                                                icon={<Feather name="heart" size={20} color="white" />}
+                                            />
+
+                                            <Button
+                                                type="clear"
+                                                style={{ right: 0, top: 0, marginTop: 3, paddingLeft: 102 }}
+                                                onPress={() =>
+                                                    addToCartItem(item.productId, item.name, item.price, item.image, item.size, item.description)
+                                                }
+                                                icon={<Feather name="shopping-bag" size={18} color="white" />}
+                                            />
+                                        </View>
+                                    </ImageBackground>
+                                </TouchableOpacity>
+                            );
+                        }}
+                    />
+                }
+                <View style={{ marginTop: 15, justifyContent: 'flex-end' }}>
+                    <Subtitle style={styles.titleStyle}>Recommend grocery items you would love to see?</Subtitle>
+                    <Subtitle style={styles.titleStyle}>Email Us</Subtitle>
+
+                    <Button
+                        buttonStyle={{
+                            backgroundColor: "black",
+                            margin: 15
+                        }}
+                        title="Recommend"
+                        style={{
+                            alignSelf: "center",
+                            height: 100
+                        }}
+                        onPress={() => navigation.navigate("HelpScreen")}
+                    />
+                </View>
+            </ScrollView>
         </View>
-
-        
     )
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 const styles = StyleSheet.create({
-
-    container: {
-        flex: 1,
-        padding: 24,
-        
-      },
-
-      rest: {
-          textAlign: "center",
-          marginTop: 100
-      },
-
-      best: {
-          justifyContent: "flex-start",
-          marginTop: 20
-      },
-
-      sitch: {
-          alignItems: "flex-end",
-          paddingLeft: 8,
-          paddingRight:19,
-          paddingTop: 49
-      }
+    titleStyle: {
+        color: 'grey',
+        marginLeft: 15,
+        marginRight: 15
+    },
+    catTitleStyle: {
+        textAlign: "left",
+        fontSize: 35,
+        marginTop: 40,
+        marginLeft: 15,
+        color: "black"
+    },
+    radioStyle: {
+        height: 10,
+        margin: 10,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    modalStyle: {
+        height: 90,
+        width: 170,
+        backgroundColor: 'white',
+        alignSelf: 'flex-end',
+        borderRadius: 2,
+        justifyContent: 'center'
+    }
 })

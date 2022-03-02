@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import {
   ImageBackground,
 } from "react-native";
 import { Button } from "react-native-elements";
+import { useFocusEffect } from '@react-navigation/native';
 import Icon from "react-native-vector-icons/FontAwesome5";
 import ban from "../img/ban.png";
 import fresh from "../img/fresh.png";
@@ -32,39 +33,204 @@ import Vortex from "../Svg/Vortex.svg";
 import page from "../rmg/page.png";
 
 import data from "./data";
+import CatListData from "./CatListData";
+import fire, { firestore } from "../config/firebase";
+import { saveItems, getCategoryData } from "../../API/firebaseMethods";
 
-import { saveItems } from "../../API/firebaseMethods";
 import * as firebase from "firebase";
 
 import bag from "../img/bag.png"
-import xag from "../rmg/xag.png"
+import { AuthenticatedUserContext } from "../Providers/AuthenticatedUserProvider";
 import artfruits from "../img/artfruits.png"
 import lagos from "../homescreenimages/lagos.png"
 
 
+const user = firebase.auth().currentUser;
+
+
 export default function HomeScreen({ navigation }) {
+  const { user, setUser } = useContext(AuthenticatedUserContext);
+  const [proList, setProList] = useState([]);
+  const [loader, setLoader] = useState("false");
   const { updateCart } = useContext(AddCartContext);
   const { updateSaved } = useContext(AddSavedContext);
-
+  const [randomList, setRandomList] = useState([]);
   const useCart = updateCart;
   const useSaved = updateSaved;
 
+  useFocusEffect(
+    React.useCallback(() => {
+      getProducts()
+    }, [])
+  );
 
-  const user = firebase.auth().currentUser;
+
+  const getProducts = () => {
+    var arrayList = [];
+    setLoader(true);
+    CatListData.forEach((item) => {
+      firebase.firestore().collection("Category").doc("kLfqtXJx6xPcjAEwrU4B").collection(item.name)
+        .get()
+        .then(subCategory => {
+          subCategory.docChanges().forEach(function (anotherSnapshot) {
+            arrayList.push(anotherSnapshot.doc.data());
+            setProList(arrayList)
+            setLoader(false);
+          })
+        })
+    })
+  }
+
+  async function getCategoryData2(categoryName) {
+    console.log("Kalim categoryNameaaasasas ----", categoryName);
+    var arrayList = []
+    try {
+      const db = firebase.firestore();
+      await db.collection("Category")
+        .doc("kLfqtXJx6xPcjAEwrU4B")
+        .collection(categoryName)
+        .get()
+        .then(subCategory => {
+          //console.log('Total Product in sub category: ', subCategory.size);
+          subCategory.docChanges().forEach(function (anotherSnapshot) {
+            //console.log('databas1122', anotherSnapshot.doc.data())
+            arrayList.push(anotherSnapshot.doc.data())
+          })
+
+        })
+      return arrayList
+    }
+    catch (err) {
+      return
+    }
+
+  }
+
+  const fetchProducts = async () => {
+    var arrayList = [];
+    console.log("CallAfterfetched 1")
+    CatListData.forEach((item) => {
+
+      var response = getCategoryData2(item.name)
+      console.log("Kalim Response ", response)
+      const numFruits = Promise.all(response)
+      console.log("KKKK ", numFruits)
+
+      // Promise.resolve(response).then(value=>{
+      //   if( value.length>0)
+      //   {
+      //     console.log('value:',value[0])
+      //   }
+
+      //   }) 
+
+      // firestore
+      //   .collection("Category")
+      //   .doc("kLfqtXJx6xPcjAEwrU4B")
+      //   .collection(item.name)
+      //   .get()
+      //   .then(subCategory => {
+      //     //console.log('Total Product in sub category: ', subCategory.size);
+      //     subCategory.docChanges().forEach(function (anotherSnapshot) {
+      //       //console.log('databas1122', anotherSnapshot.doc.data())
+      //       arrayList.push(anotherSnapshot.doc.data())
+      //       setProList(arrayList);
+      //     })
+      //   })
+
+    })
+  }
 
 
+  const addToCartItem = async (productId, name, price, image, size, description) => {
+    setLoader(true)
+    const currentUser = user.uid;
+
+    const db = firebase.firestore();
+
+    // Create a reference to the cities collection
+    const cartRef = db.collection('cartItems');
+
+    // Create a query against the collection
+    const allCartRes = await cartRef.where('currentUserID', '==', currentUser).where('product_ID', '==', productId).get();
+
+    if (allCartRes.empty) {
+      console.log('No matching documents.');
+      db.collection("cartItems").doc().set({
+        product_ID: productId,
+        productName: name,
+        productPrice: price,
+        productImage: image,
+        productSize: size,
+        productDescription: description,
+        productQty: 1,
+        currentUserID: currentUser
+      });
+      setLoader(false);
+      alert('Item added to cart');
+      return;
+    }
+    else {
+      setLoader(false);
+      alert('Item already added in cart');
+    }
+  }
+
+
+  const savedProducts = async (productId) => {
+    const currentUser = user.uid;
+
+    const db = firebase.firestore();
+
+    // Create a reference to the cities collection
+    const itemRef = db.collection('savedItems');
+
+    // Create a query against the collection
+    const allItemRes = await itemRef.where('currentUserID', '==', currentUser).where('product_ID', '==', productId).get();
+
+    if (allItemRes.empty) {
+      console.log('No matching documents.');
+      db.collection("savedItems").doc().set({
+        product_ID: productId,
+        currentUserID: currentUser
+      });
+      alert('Item saved')
+      return;
+    }
+    else {
+      alert('This item is already saved')
+    }
+  }
+
+
+  const getRandom = async () => {
+    var arr = [];
+    var list = []
+    while (arr.length < 8) {
+      var r = Math.floor(Math.random() * 10) + 1;
+      if (arr.indexOf(r) === -1) arr.push(r);
+    }
+    console.log('aar', arr);
+    arr.forEach((obj) => {
+      console.log('daaaa', proList[obj])
+      // list.push(proList[obj])
+      // console.log('daaaa1111', list)
+      // setRandomList(list)
+    })
+  }
 
   //Structure of the product list.
-  const Form = ({ name, description, price, id, image, images, size, vendor }) => (
+  const Form = ({ productId, name, description, price, image, images, size }) => (
+
     <ImageBackground
-      source={image ? image : require("../img/sig.png")} //Background Image
+      source={{ uri: image }} //Background Image
       imageStyle={{ borderRadius: 12 }}
       style={{
-        height: 195,
-        width: 180,
+        height: 210,
+        width: 170,
         position: "relative", // because it's parent
-        marginBottom: 15,
-        marginTop: 19,
+        marginBottom: 10,
+        marginTop: 10,
         marginRight: 7,
         marginLeft: 4,
         top: 2,
@@ -78,79 +244,51 @@ export default function HomeScreen({ navigation }) {
           position: "absolute", // child
           bottom: 0, // position where you want
           left: 0,
-          marginBottom: 55,
-          marginLeft: 10,
-          fontSize: 20,
+          marginBottom: 40,
+          marginLeft: 12,
+          fontSize: 20
         }}
       >
         {name}
       </Text>
 
-      <Text
-        style={{
-          bottom: 0,
-          left: 0,
-          position: "absolute",
-          fontSize: 15,
-          marginBottom: 35,
-          marginLeft: 10,
-          color: "white",
-        }}
-      >
-        ${price} {""}
-      </Text>
+      <Text style={{
+        bottom: 0,
+        left: 0,
+        fontWeight: "bold",
+        position: "absolute",
+        fontSize: 15,
+        marginBottom: 20,
+        marginLeft: 15,
+        color: "white"
+      }}>₦ {price} {""}</Text>
 
-      {/*<Text
-        style={{
-          bottom: 0,
-          left: 0,
-          position: "absolute",
-          marginLeft: 10,
-          color: "white",
-          fontSize: 12,
-          marginBottom: 5,
-        }}
-      >
-        {description}
-        {""}{" "}
-      </Text> */}
-
-      <View style={{ flexDirection: "row" }}>
+      <View style={{ flexDirection: "row", marginLeft: 5, justifyContent: 'space-between', marginRight: 5 }}>
         <Button
           type="clear"
           style={{
-            //right:0,
-            top: 0,
-            marginTop: 3,
-            paddingLeft: 8,
+            marginTop: 3
           }}
-          icon={<Feather name="heart" size={15} color="white" />}
+          icon={<Feather name="heart" size={20} color="white" />}
           onPress={() => {
             console.log("User--------", user);
             if (user?.uid) {
-              saveItems({
-                name,
-                price,
-                description,
-                image,
-                images,
-                vendor,
-                size,
-              });
+              savedProducts(productId)
             } else {
-              navigation.navigate("ProfileScreen");
+              //navigation.navigate("ProfileScreen");
             }
           }}
         />
 
-
-
-
         <Button
           type="clear"
-          style={{ right: 0, top: 0, marginTop: 3, paddingLeft: 102}}
-          icon={<Feather name="shopping-bag" size={15} color="white" />}
-          onPress={() => updateCart({ name, price, image, size, description })}
+          style={{ right: 0, top: 0, marginTop: 3, paddingLeft: 102 }}
+          icon={<Feather name="shopping-bag" size={18} color="white" />}
+          onPress={() => {
+            if (user?.uid) {
+              addToCartItem(productId, name, price, image, size, description)
+            }
+          }}
         />
       </View>
     </ImageBackground>
@@ -158,27 +296,28 @@ export default function HomeScreen({ navigation }) {
 
   //Render Items.
   const renderItem = (
-    { item, id, useCart, useSaved, navigation } //had to remove navigation here so i could also render navigation.
+    { item, useCart, useSaved, navigation } //had to remove navigation here so i could also render navigation.
   ) => (
     <TouchableOpacity
-      onPress={() => {
-        // console.log(126, navigation);
+      onPress={() =>
         navigation.navigate("ProductPage", {
+          id: item.productId,
           name: item.name,
           price: item.price,
           image: item.image,
           description: item.description,
           size: item.size,
-        });
-      }}
+        })
+      }
     >
       <Form
-        id={item.id}
+        productId={item.productId}
         name={item.name}
         description={item.description}
         image={item.image}
         price={item.price}
         size={item.size}
+
       />
     </TouchableOpacity>
   );
@@ -186,14 +325,14 @@ export default function HomeScreen({ navigation }) {
   return (
     <View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.container}>
+        <View>
           <Image
             style={{
               width: 349,
               height: 100,
               alignSelf: "center",
               borderRadius: 10,
-              marginTop: 18,
+              marginTop: 25,
             }}
             source={ban}
           />
@@ -201,7 +340,7 @@ export default function HomeScreen({ navigation }) {
           <Image
             style={{
               width: 349,
-              height: 450,
+              height: 400,
               alignSelf: "center",
               borderRadius: 10,
               marginTop: 15,
@@ -212,7 +351,7 @@ export default function HomeScreen({ navigation }) {
           <Image
             style={{
               width: 349,
-              height: 460,
+              height: 350,
               alignSelf: "center",
               borderRadius: 10,
               marginTop: 15,
@@ -220,11 +359,10 @@ export default function HomeScreen({ navigation }) {
             source={bag}
           />
 
-
-<Image
+          <Image
             style={{
               width: 349,
-              height: 100,
+              height: 70,
               alignSelf: "center",
               borderRadius: 10,
               marginTop: 18,
@@ -232,14 +370,14 @@ export default function HomeScreen({ navigation }) {
             source={lagos}
           />
 
-
-
           <Title
             style={{
               alignSelf: "flex-start",
               fontSize: 30,
               marginLeft: 8,
-              marginTop: 70,
+              marginTop: 20,
+              color: 'black',
+              fontFamily: "recoleta-black",
             }}
           >
             Grocery Boxes
@@ -248,97 +386,94 @@ export default function HomeScreen({ navigation }) {
             style={{
               marginLeft: 12,
               fontSize: 13,
-              marginTop: 8,
+              color: 'grey',
               alignSelf: "flex-start",
-              fontFamily: "recoleta-black",
+
             }}
           >
             Get whole grocery boxes at affordable prices.
           </Text>
 
-          <TouchableOpacity onPress={() => navigation.navigate("DealsScreen")}>
+          {/* <TouchableOpacity onPress={() => navigation.navigate("DealsScreen")}>
             <Subtitle
               style={{
-                marginLeft: 9,
+                marginLeft: 15,
                 fontSize: 13,
-                color: "grey",
-                marginTop: 5,
+                color: "black",
+                marginTop: 3,
                 alignSelf: "flex-start",
               }}
             >
               See all boxes
             </Subtitle>
-          </TouchableOpacity>
-
-          <FlatList
-            horizontal={true}
-            data={data}
-            // renderItem={renderItem}
-            renderItem={({ item }) =>
-              renderItem({ navigation, item, useCart, useSaved })
-            }
-            keyExtractor={(item) => item.id}
-          />
+          </TouchableOpacity> */}
+          <View style={{ marginLeft: 10, marginRight: 10 }}>
+            <FlatList
+              horizontal={true}
+              //maxToRenderPerBatch={5}
+              showsHorizontalScrollIndicator={false}
+              data={proList.slice(0, 5)}
+              renderItem={({ item }) =>
+                renderItem({ navigation, item, useCart, useSaved })
+              }
+            />
+          </View>
         </View>
 
         <View
           style={{
             backgroundColor: "#e47644",
-            height: 700,
-            borderTopLeftRadius: 24,
-            borderTopRightRadius: 24,
-            marginTop: 130,
+            borderTopLeftRadius: 30,
+            borderTopRightRadius: 30,
+            height: 200,
+            marginTop: 50,
+
           }}
         >
-          {/*<Vortex style={{ position: "absolute", marginTop: 220 }} />*/}
           <Title
             style={{
-              marginTop: 70,
-              marginLeft: 20,
-              fontSize: 45,
-              alignSelf: "flex-start",
-              color: "black",
-              
+              marginTop: 10,
+              fontSize: 25,
+              alignSelf: "center",
+              color: "white",
+
             }}
           >
-            My 
+            My Grocery List
           </Title>
-          <Title style={{marginLeft:20, alignSelf:"flex-start", fontSize:45}}>Grocery</Title>
-          <Title style={{marginLeft:20, alignSelf:"flex-start", fontSize:45}}>List.</Title>
 
-          <Subtitle style={{marginLeft:20, alignSelf:"flex-start", marginTop:20, color:"black"}}> Create your own personalized grocery list and have{" "}</Subtitle>
+          <Subtitle style={{ alignSelf: "center", marginTop: 5, color: "black", fontSize: 12 }}> Create your own personalized grocery list and have{" "}</Subtitle>
 
-          <Subtitle style={{marginLeft:20, alignSelf:"flex-start", color:"black"}}> it delivered on your selected date.</Subtitle>
+          <Subtitle style={{ alignSelf: "center", color: "black", fontSize: 12 }}> it delivered on your selected date.</Subtitle>
 
-         
+
 
           {/* <Orangelong style={{position:"absolute", marginTop:480, marginLeft:230}} /> */}
 
-          <Title
-            style={{
-              color: "white",
-              fontSize: 13,
-              
-              marginTop: 50,
-            }}
-          >
-            Selected date of delivery: 25th October 2021{" "}
-          </Title>
 
           <Button //Checkout Button
             buttonStyle={{
               backgroundColor: "black",
+              margin: 20,
             }}
             title="Edit Grocery List"
             style={{
-              marginBottom: 20,
-              width: 300,
-              marginTop: 20,
               alignSelf: "center",
               height: 100,
             }}
             onPress={() => navigation.navigate("Grocerylist")}
           />
+          <Title
+            style={{
+              fontSize: 15,
+              alignSelf: "center",
+              bottom: 7,
+              color: "white",
+
+            }}
+          >
+            Selected date of delivery
+          </Title>
         </View>
       </ScrollView>
     </View>
@@ -347,7 +482,7 @@ export default function HomeScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 35,
+    marginTop: 5,
   },
 
   rest: {
