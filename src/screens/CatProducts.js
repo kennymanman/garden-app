@@ -34,6 +34,7 @@ export default function CatProducts({ navigation, ...props }) {
 
     useEffect(() => {
         var arrayList = [];
+
         setLoader(true);
         firestore
             .collection("Category")
@@ -43,17 +44,19 @@ export default function CatProducts({ navigation, ...props }) {
             .then(subCategory => {
                 console.log('Total Product in sub category: ', subCategory.size);
                 subCategory.docChanges().forEach(function (anotherSnapshot) {
-                    //console.log('databas1122', anotherSnapshot.doc.id)
-                    arrayList.push(anotherSnapshot.doc.data());
+                    console.log('databas1122 get id', anotherSnapshot.doc.id)
+
+                    arrayList.push({ ...anotherSnapshot.doc.data(), 'productID': anotherSnapshot.doc.id });
                     setLoader(false);
                     setProList(arrayList);
+
                 })
             })
 
     }, [])
 
 
-    const addToCartItem = async (productId, name, price, image, size, description) => {
+    const addToCartItem = async (productID, productId, name, price, image, size, description, stock) => {
         setLoader(true)
         const currentUser = user.uid;
 
@@ -69,6 +72,7 @@ export default function CatProducts({ navigation, ...props }) {
         if (allCartRes.empty) {
             console.log('No matching documents.');
             db.collection("cartItems").doc().set({
+                productID: productID,
                 product_ID: productId,
                 productName: name,
                 productPrice: price,
@@ -76,6 +80,7 @@ export default function CatProducts({ navigation, ...props }) {
                 productSize: size,
                 productDescription: description,
                 productQty: 1,
+                totalStock: stock,
                 currentUserID: currentUser
             });
             setLoader(false);
@@ -128,7 +133,7 @@ export default function CatProducts({ navigation, ...props }) {
     }
 
     //Structure of the product list.
-    const Form = ({ productId, name, description, price, image, images, size }) => (
+    const Form = ({ productID, productId, name, description, price, image, images, size, stock }) => (
 
         <ImageBackground
             source={{ uri: image }} //Background Image
@@ -194,7 +199,7 @@ export default function CatProducts({ navigation, ...props }) {
                     icon={<Feather name="shopping-bag" size={18} color="white" />}
                     onPress={() => {
                         if (user?.uid) {
-                            addToCartItem(productId, name, price, image, size, description)
+                            addToCartItem(productID, productId, name, price, image, size, description, stock)
                         }
                     }}
                 />
@@ -213,20 +218,22 @@ export default function CatProducts({ navigation, ...props }) {
 
     //Render Items.
     const renderItem = ({ item, id, useCart, useSaved, navigation }) => (
-
         //had to remove navigation here so i could also render navigation.
-        <TouchableOpacity
+        < TouchableOpacity
             onPress={() =>
                 navigation.navigate("ProductPage", {
+                    productID: item.productID,
                     id: item.productId,
                     name: item.name,
                     price: item.price,
                     image: item.image,
                     description: item.description,
                     size: item.size,
+                    stock: item.totalStock
                 })
             }>
             <Form
+                productID={item.productID}
                 productId={item.productId}
                 name={item.name}
                 description={item.description}
@@ -234,9 +241,10 @@ export default function CatProducts({ navigation, ...props }) {
                 price={item.price}
                 images={item.images}
                 size={item.size}
+                stock={item.totalStock}
 
             />
-        </TouchableOpacity>
+        </TouchableOpacity >
 
     )
 
@@ -253,7 +261,7 @@ export default function CatProducts({ navigation, ...props }) {
                 </Left>
                 <Body>
                     <Title
-                        style={{ color: 'black', left: '25%', fontWeight: 'bold', width: 300 }}>{props.route.params.catName}</Title>
+                        style={{ color: 'black', fontWeight: 'bold', width: 300, textAlign: 'center', right: '20%' }}>{props.route.params.catName}</Title>
                 </Body>
                 <Right>
 
@@ -271,7 +279,7 @@ export default function CatProducts({ navigation, ...props }) {
                 />
             </View>
             {loader ?
-                <View style={{ marginTop: 150 }}>
+                <View style={{ marginTop: 250 }}>
                     <ActivityIndicator size="large" color="#4267B2" />
                 </View>
                 : null}

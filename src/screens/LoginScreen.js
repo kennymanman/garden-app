@@ -20,12 +20,13 @@ import Firebase from "../config/firebase";
 import { signIn } from "../../API/firebaseMethods";
 import Green from "../Svg/Green.svg"
 import Cheetos from "../Svg/Cheetos.svg"
+import { getConfiguration } from "../Components/configuration";
 
 
 const auth = Firebase.auth();
 
 export default function LoginScreen({ navigation }) {
-  const [email, setEmail] = useState("abdul@webguruz.co.in");
+  const [email, setEmail] = useState("mobileteam@gmail.com");
   const [password, setPassword] = useState("");
   const [passwordVisibility, setPasswordVisibility] = useState(true);
   const [rightIcon, setRightIcon] = useState("eye");
@@ -41,29 +42,28 @@ export default function LoginScreen({ navigation }) {
     }
   };
 
+
   const onLogin = async () => {
     // const res = signIn(email, password);
-
+    const db = Firebase.firestore();
     try {
       const response = await auth.signInWithEmailAndPassword(email, password);
       console.log("Response of login----", response);
+      const current = auth.currentUser.uid;
+      let token = await getConfiguration('fcmToken');
+      console.log('get fcm token', token)
+
+      await db.collection("users").doc(current).update({ expoToken: token });
+
       // return true;
     } catch (err) {
       Alert.alert("There is something wrong!", err.message);
       // return false;
     }
-
-    // try {
-    //   if (email !== "" && password !== "") {
-    //     await auth.signInWithEmailAndPassword(email, password);
-    //   }
-    // } catch (error) {
-    //   setLoginError(error.message);
-    // }
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} >
       <SafeAreaView>
         <StatusBar style="dark-content" />
 

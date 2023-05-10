@@ -16,10 +16,7 @@ import * as firebase from "firebase";
 import { Feather } from "@expo/vector-icons";
 import { AuthenticatedUserContext } from "../Providers/AuthenticatedUserProvider";
 import { FontAwesome } from "@expo/vector-icons";
-import { AddSavedContext } from "./CartContext";
-import { AddCartContext } from "./CartContext";
 import fire, { firestore } from "../config/firebase";
-import { getsSavedItems, removeSavedItems } from "../../API/firebaseMethods";
 import CatListData from "./CatListData";
 import { FlatList } from "react-native-gesture-handler";
 
@@ -29,27 +26,12 @@ export default function SavedScreen({ navigation }) {
   const { user, setUser } = useContext(AuthenticatedUserContext);
   const [proList, setProList] = useState([]);
   const [loader, setLoader] = useState("false");
-  const { updateSaved } = useContext(AddSavedContext);
-  // const { saved } = useContext(AddSavedContext);
-  const [saved, setSaved] = useState([]);
 
-  const { updateCart } = useContext(AddCartContext);
-  const { cart } = useContext(AddCartContext);
-
-  const { removeFromSaved } = useContext(AddSavedContext)
-
-  const Kandlepress = () =>
-    Alert.alert(
-      "Removed",
-
-    );
-
-  const Handlepress = () => Alert.alert("Added to Cart");
 
   useFocusEffect(
     React.useCallback(() => {
-    fetchFav();
-  }, [])
+      fetchFav();
+    }, [])
   );
 
 
@@ -81,7 +63,7 @@ export default function SavedScreen({ navigation }) {
                 //console.log('databas1122', anotherSnapshot.doc.data())
                 if (anotherSnapshot.doc.data().productId == doc.data().product_ID) {
                   //console.log('databa',anotherSnapshot.doc.data())
-                  arrayList.push(anotherSnapshot.doc.data())
+                  arrayList.push({ ...anotherSnapshot.doc.data(), 'productID': anotherSnapshot.doc.id });
                   console.log('get log', proList)
                   setProList(arrayList);
                   setLoader(false)
@@ -107,7 +89,6 @@ export default function SavedScreen({ navigation }) {
 
     const removeFavRes = await favItems.where('currentUserID', '==', currentUser).where('product_ID', '==', productId).get();
     removeFavRes.forEach(item => {
-      console.log(item.id,);
       const id = item.id
       db.collection("savedItems").doc(id).delete();
     })
@@ -117,7 +98,7 @@ export default function SavedScreen({ navigation }) {
   }
 
 
-  const addToCartItem = async (id, name, price, image, size, description) => {
+  const addToCartItem = async (productID, id, name, price, image, size, description, stock) => {
     setLoader(true)
     const currentUser = user.uid;
 
@@ -133,6 +114,7 @@ export default function SavedScreen({ navigation }) {
     if (allCartRes.empty) {
       console.log('No matching documents.');
       db.collection("cartItems").doc().set({
+        productID: productID,
         product_ID: id,
         productName: name,
         productPrice: price,
@@ -140,6 +122,7 @@ export default function SavedScreen({ navigation }) {
         productSize: size,
         productDescription: description,
         productQty: 1,
+        totalStock: stock,
         currentUserID: currentUser
       });
       setLoader(false);
@@ -174,31 +157,34 @@ export default function SavedScreen({ navigation }) {
   //   }
   // };
 
-  const Form = ({ id, name, description, price, image, size }) => (
+  const Form = ({ productID, id, name, description, price, image, size, stock }) => (
     <View style={{ marginTop: 10 }}>
-      <ImageBackground
-        source={{ uri: image }}
-        imageStyle={{ borderRadius: 12 }}
-        style={{
-          height: 190,
-          width: 180,
-          position: "relative", // because it's parent
-          marginBottom: 5,
-          marginTop: 10,
-          marginLeft: 15
-        }}
-      >
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate("ProductPage", {
-              id: id,
-              name: name,
-              price: price,
-              image: image,
-              description: description,
-              size: size,
-            })
-          }>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={() =>
+          navigation.navigate("ProductPage", {
+            productID: productID,
+            id: id,
+            name: name,
+            price: price,
+            image: image,
+            description: description,
+            size: size,
+            stock: stock
+          })
+        }>
+        <ImageBackground
+          source={{ uri: image }}
+          imageStyle={{ borderRadius: 12 }}
+          style={{
+            height: 190,
+            width: 180,
+            position: "relative", // because it's parent
+            marginBottom: 5,
+            marginTop: 10,
+            marginLeft: 15
+          }}
+        >
           <Text
             style={{
               fontWeight: "bold",
@@ -226,47 +212,50 @@ export default function SavedScreen({ navigation }) {
           >
             ₦ {price}
           </Text>
-        </TouchableOpacity>
-        {/*} <Text style={{bottom:0, left:0,position: "absolute", marginLeft:10, color:"white", fontSize:12, marginBottom:5}}>
+          {/*} <Text style={{bottom:0, left:0,position: "absolute", marginLeft:10, color:"white", fontSize:12, marginBottom:5}}>
 
 {description}  </Text> */}
-        <View style={{ alignSelf: 'flex-end', right: 10, marginTop: 10 }}>
+          <View style={{ alignSelf: 'flex-end', right: 10, marginTop: 10 }}>
 
+            <Button
+              type="clear"
+              icon={<FontAwesome name="remove"
+                size={17}
+                color="white"
+                style={{ alignSelf: 'center', position: 'absolute' }}
+                onPress={() => removeFavItem(id)}
+              />}
+            />
+          </View>
           <Button
             type="clear"
-            icon={<FontAwesome name="remove"
-              size={17}
-              color="white"
-              style={{ alignSelf: 'center', position: 'absolute' }}
-              onPress={() => removeFavItem(id)}
-            />}
-          />
-        </View>
-        <Button
-          type="clear"
-          icon={
-            <Feather name="shopping-bag" size={18} color="white" style={{ left: 70, marginTop: 20 }}
+            icon={
+              <Feather name="shopping-bag" size={18} color="white" style={{ left: 70, marginTop: 20 }}
 
-              onPress={() => {
-                if (user?.uid) {
-                  addToCartItem(id, name, price, image, size, description)
-                }
-              }}
-            />
-          }
-        />
-      </ImageBackground>
+                onPress={() => {
+                  if (user?.uid) {
+                    addToCartItem(productID, id, name, price, image, size, description, stock)
+                  }
+                }}
+              />
+            }
+          />
+        </ImageBackground>
+      </TouchableOpacity>
+
     </View>
   );
 
   const renderItem = ({ item, navigation }) => (
     <Form
+      productID={item.productID}
       id={item.productId}
       name={item.name}
       description={item.description}
       image={item.image}
       price={item.price}
       size={item.size}
+      stock={item.totalStock}
 
     />
 
@@ -304,7 +293,7 @@ export default function SavedScreen({ navigation }) {
         </Title>
 
         {loader ?
-          <View style={{ marginTop: 150 }}>
+          <View style={{ marginTop: 200 }}>
             <ActivityIndicator size="large" color="#4267B2" />
           </View>
           :

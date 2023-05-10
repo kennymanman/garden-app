@@ -37,6 +37,7 @@ export default function SignupScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("Mohali");
+  const [state, setState] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisibility, setPasswordVisibility] = useState(true);
   const [rightIcon, setRightIcon] = useState("eye");
@@ -61,6 +62,8 @@ export default function SignupScreen({ navigation }) {
       Alert.alert("Enter valid phone number.");
     } else if (!address) {
       Alert.alert("Address field is required.");
+    } else if (!state) {
+      Alert.alert("State field is required.");
     } else if (!password) {
       Alert.alert("Password field is required.");
     } else {
@@ -77,7 +80,8 @@ export default function SignupScreen({ navigation }) {
         lastName,
         firstName,
         phone,
-        address
+        address,
+        state
       );
 
       console.log("Res-----", res);
@@ -193,9 +197,20 @@ export default function SignupScreen({ navigation }) {
             onChangeText={(text) => setAddress(text)}
           />
 
-
           <Yellow style={{ position: "absolute", marginTop: 379 }} />
           <Cactus style={{ position: "absolute", marginTop: 359 }} />
+
+          <InputField
+            inputStyle={{ fontSize: 14 }}
+            containerStyle={{ backgroundColor: "#fff", marginBottom: 20 }}
+            leftIcon="map-marker-circle"
+            placeholder="State"
+            autoCapitalize="none"
+            autoFocus={true}
+            value={state}
+            onChangeText={(text) => setState(text)}
+          />
+
 
           <InputField
             inputStyle={{

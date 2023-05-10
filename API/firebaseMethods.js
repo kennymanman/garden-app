@@ -1,6 +1,8 @@
 import * as firebase from "firebase";
 import "firebase/firestore";
 import { Alert } from "react-native";
+import { getConfiguration } from '../src/Components/configuration';
+
 
 export async function registration(
   email,
@@ -8,11 +10,13 @@ export async function registration(
   lastName,
   firstName,
   phone,
-  address
+  address,
+  state
 ) {
   try {
     await firebase.auth().createUserWithEmailAndPassword(email, password);
     const currentUser = firebase.auth().currentUser;
+    const token = getConfiguration('fcmToken');
 
     const db = firebase.firestore();
     db.collection("users").doc(currentUser.uid).set({
@@ -21,6 +25,8 @@ export async function registration(
       firstName: firstName,
       phone,
       address,
+      state,
+      expoToken:token
     });
     return true;
   } catch (err) {

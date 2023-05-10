@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { View, Text, ScrollView, FlatList, StyleSheet } from 'react-native'
+import { View, Text, ScrollView, FlatList, StyleSheet, ActivityIndicator } from 'react-native'
 import { Button } from "react-native-elements"
 import { Header, Left, Right, Title, Body } from "native-base"
 import { Feather } from '@expo/vector-icons';
@@ -47,65 +47,72 @@ export default function OrderScreen({ navigation }) {
 
   return (
     <View>
-      <Header>
-        <Left>
-          <Button type="clear" style={{ paddingLeft: 9 }}
-            icon={<Feather name="arrow-left"
-              size={25}
-              color="white" />}
-            onPress={() => navigation.navigate("My Profile")} />
+      <ScrollView showsVerticalScrollIndicator={false}>
 
-        </Left>
-        <Body>
-          <Title style={{ textAlign: "center" }}>My Order History</Title>
-        </Body>
-        <Right>
-        </Right>
-      </Header>
+        <Header>
+          <Left>
+            <Button type="clear" style={{ paddingLeft: 9 }}
+              icon={<Feather name="arrow-left"
+                size={25}
+                color="white" />}
+              onPress={() => navigation.navigate("My Profile")} />
 
-      <ScrollView snapToEnd={false}>
-        <FlatList
-          data={orderList}
-          renderItem={({ item }) => {
-            return (
-              <View style={styles.orderStyle}>
-                <View style={{ margin: 10 }}>
-                  <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={{ marginLeft: 3, marginTop: 5, marginBottom: 5,fontWeight:'700' }}>{item.data().date}</Text>
-                    <Text
-                      onPress={() => navigation.navigate('OrderDetail', { orderId: item.id })}
-                      style={{ textAlign: 'right', fontSize: 11, color: '#3b5998', textDecorationLine: 'underline' }}>View detail</Text>
-                  </View>
-                  <View style={styles.itemStyle}>
-                    <Text style={styles.titleStyle}>Delivery Address:</Text>
-                    <Text>{item.data().address}</Text>
-                  </View>
-                  <View style={styles.itemStyle}>
-                    <Text style={styles.titleStyle}>OrderId:</Text>
-                    <Text>#{item.data().order_id}</Text>
-                  </View>
-                  <View style={styles.itemStyle}>
-                    <Text style={styles.titleStyle}>SubTotal:</Text>
-                    <Text>{item.data().subtotal}</Text>
-                  </View>
-                  <View style={styles.itemStyle}>
-                    <Text style={styles.titleStyle}>Delivery charges:</Text>
-                    <Text>#{item.data().deliveryFee}</Text>
-                  </View>
-                  <View style={styles.itemStyle}>
-                    <Text style={styles.titleStyle}>Total Amount:</Text>
-                    <Text>{item.data().total}</Text>
-                  </View>
-                  <View style={styles.itemStyle}>
-                    <Text style={styles.titleStyle}>PaymentMode:</Text>
-                    <Text>{item.data().orderType}</Text>
+          </Left>
+          <Body>
+            <Title style={{ textAlign: "center" }}>My Order History</Title>
+          </Body>
+          <Right>
+          </Right>
+        </Header>
+        <View>
+        {orderList.length != 0 ?  <FlatList
+            data={orderList}
+            renderItem={({ item }) => {
+              return (
+                <View style={styles.orderStyle}>
+                  <View style={{ margin: 10 }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                      <Text style={{ marginLeft: 3, marginTop: 5, marginBottom: 5, fontWeight: '700' }}>{item.data().date}</Text>
+                      <Text
+                        onPress={() => navigation.navigate('OrderDetail', { orderId: item.id })}
+                        style={{ textAlign: 'right', fontSize: 11, color: '#3b5998', textDecorationLine: 'underline' }}>View detail</Text>
+                    </View>
+                    <View style={styles.itemStyle}>
+                      <Text style={styles.titleStyle}>Delivery Address:</Text>
+                      <Text>{item.data().address}</Text>
+                    </View>
+                    <View style={styles.itemStyle}>
+                      <Text style={styles.titleStyle}>OrderId:</Text>
+                      <Text>#{item.data().order_id}</Text>
+                    </View>
+                    <View style={styles.itemStyle}>
+                      <Text style={styles.titleStyle}>SubTotal:</Text>
+                      <Text>{item.data().subtotal}</Text>
+                    </View>
+                    <View style={styles.itemStyle}>
+                      <Text style={styles.titleStyle}>Delivery charges:</Text>
+                      <Text>#{item.data().deliveryFee}</Text>
+                    </View>
+                    <View style={styles.itemStyle}>
+                      <Text style={styles.titleStyle}>Total Amount:</Text>
+                      <Text>{item.data().total}</Text>
+                    </View>
+                    <View style={styles.itemStyle}>
+                      <Text style={styles.titleStyle}>PaymentMode:</Text>
+                      <Text>{item.data().orderType}</Text>
+                    </View>
                   </View>
                 </View>
-              </View>
-            )
-          }
-          }
-        />
+              )
+            }
+            }
+          />
+            :
+          <View style={{ flex: 1, alignItems: 'center', marginTop: 200 }}>
+            <Text style={{ fontSize: 16, color: 'black' }}>No Orders</Text>
+          </View>
+        }
+        </View>
 
         {/* <Text style={{ marginTop: 40, fontWeight: "bold", left: 9 }}>Order Date: 25th August 1992</Text>
 
@@ -185,6 +192,11 @@ export default function OrderScreen({ navigation }) {
 
         </View> */}
 
+        {loader ?
+          <View style={{ marginTop: 250 }}>
+            <ActivityIndicator size="large" color="#4267B2" />
+          </View>
+          : null}
       </ScrollView>
 
     </View>
