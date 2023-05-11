@@ -49,99 +49,100 @@ export default function OrderDetail({ route, navigation }) {
 
     return (
         <View>
-            <Header>
-                <Left>
-                    <Button type="clear" style={{ paddingLeft: 9 }}
-                        icon={<Feather name="arrow-left"
-                            size={25}
-                            color="white" />}
-                        onPress={() => navigation.goBack()} />
+            <ScrollView showsVerticalScrollIndicator={false}>
 
-                </Left>
-                <Body>
-                    <Title style={{ textAlign: "center" }}>Order Details</Title>
-                </Body>
-                <Right>
-                </Right>
-            </Header>
+                <Header>
+                    <Left>
+                        <Button type="clear" style={{ paddingLeft: 9 }}
+                            icon={<Feather name="arrow-left"
+                                size={25}
+                                color="white" />}
+                            onPress={() => navigation.goBack()} />
 
-            <ScrollView snapToEnd={false}>
-                <FlatList
-                    data={detailList}
-                    renderItem={({ item }) => {
-                        return (
-                            <View style={styles.orderStyle}>
-                                <View style={{ margin: 10, flexDirection: 'row' }}>
-                                    <Image
-                                        source={{ uri: item.image }}
-                                        style={{
-                                            height: 100,
-                                            width: 110,
-                                            borderRadius: 12,
-                                            margin: 5
-                                        }}
-                                    />
-                                    <View style={{ marginLeft: 5, marginTop: 2 }}>
-                                        <Text
+                    </Left>
+                    <Body>
+                        <Title style={{ textAlign: "center" }}>Order Details</Title>
+                    </Body>
+                    <Right>
+                    </Right>
+                </Header>
+                <View>
+                    <FlatList
+                        data={detailList}
+                        renderItem={({ item }) => {
+                            return (
+                                <View style={styles.orderStyle}>
+                                    <View style={{ margin: 10, flexDirection: 'row' }}>
+                                        <Image
+                                            source={{ uri: item.image }}
                                             style={{
-                                                fontWeight: '700',
-                                                fontSize: 16,
+                                                height: 100,
+                                                width: 110,
+                                                borderRadius: 12,
+                                                margin: 5
                                             }}
-                                        >
-                                            {item.name}
-                                        </Text>
-                                        <Text
-                                            numberOfLines={2}
-                                            style={{
-                                                fontSize: 12,
-                                                marginTop: 2,
-                                                color: 'grey',
-                                                width: 170
-                                            }}
-                                        >
-                                            {item.description}
-                                        </Text>
-
-                                        <View style={{ flexDirection: 'row', marginTop: 3 }}>
+                                        />
+                                        <View style={{ marginLeft: 5, marginTop: 2 }}>
                                             <Text
                                                 style={{
-                                                    fontSize: 13,
-                                                    color: 'grey'
+                                                    fontWeight: '700',
+                                                    fontSize: 16,
                                                 }}
                                             >
-                                                qty:
+                                                {item.name}
                                             </Text>
                                             <Text
+                                                numberOfLines={2}
                                                 style={{
-                                                    fontSize: 15,
-                                                    marginLeft: 4
+                                                    fontSize: 12,
+                                                    marginTop: 2,
+                                                    color: 'grey',
+                                                    width: 170
                                                 }}
                                             >
-                                                {item.qty}
+                                                {item.description}
+                                            </Text>
+
+                                            <View style={{ flexDirection: 'row', marginTop: 3 }}>
+                                                <Text
+                                                    style={{
+                                                        fontSize: 13,
+                                                        color: 'grey'
+                                                    }}
+                                                >
+                                                    qty:
+                                                </Text>
+                                                <Text
+                                                    style={{
+                                                        fontSize: 15,
+                                                        marginLeft: 4
+                                                    }}
+                                                >
+                                                    {item.qty}
+                                                </Text>
+                                            </View>
+                                            <Text
+                                                style={{
+                                                    marginTop: 1,
+                                                    fontSize: 15,
+                                                }}
+                                            >
+                                                ₦ {item.price}
                                             </Text>
                                         </View>
-                                        <Text
-                                            style={{
-                                                marginTop: 1,
-                                                fontSize: 15,
-                                            }}
-                                        >
-                                            ₦ {item.price}
-                                        </Text>
                                     </View>
                                 </View>
-                            </View>
 
-                        )
-                    }
-                    }
-                />
+                            )
+                        }
+                        }
+                    />
+                </View>
                 {loader ?
-                    <View style={{ marginTop: 150 }}>
+                    <View style={{ marginTop: 200 }}>
                         <ActivityIndicator size="large" color="#4267B2" />
                     </View> : null}
             </ScrollView>
-
         </View>
     )
 }

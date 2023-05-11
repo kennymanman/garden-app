@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "731992047828",
+    "firebase_url": "https://grossaryshopping-default-rtdb.firebaseio.com",
+    "project_id": "grossaryshopping",
+    "storage_bucket": "grossaryshopping.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731992047828:android:e4ea6f0794cc076c847b41",
+        "android_client_info": {
+          "package_name": "com.groce_app.wgt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "117119655911901936790",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmQF9y3qb2QDDRPwxAzc9CDg2FwUB5e8g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "117119655911901936790",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

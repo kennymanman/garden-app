@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useContext, useState } from 'react'
 import { useFocusEffect } from '@react-navigation/native';
 import { View, Text, TouchableOpacity, Alert } from 'react-native'
 import { Header, Left, Right, Title, Body } from "native-base";
@@ -8,10 +8,7 @@ import { PayWithFlutterwave } from 'flutterwave-react-native';
 import * as firebase from "firebase";
 import moment from 'moment';
 import { AuthenticatedUserContext } from "../Providers/AuthenticatedUserProvider";
-import fire, { firestore } from "../config/firebase";
-import Green from "../Svg/Green.svg"
-import Flower from "../Svg/Flower.svg"
-import Outlinecloud from "../Svg/Outlinecloud.svg"
+
 
 const date = moment().format('DD-MMM-YYYY, h:mm a');
 
@@ -102,7 +99,8 @@ export default function Checkout({ route, navigation }) {
                 total: parseFloat(amount).toFixed(2),
                 transaction_id: id,
                 deliveryFee: shipping,
-                subtotal: sub.toFixed(2)
+                subtotal: sub.toFixed(2),
+                status: 'Pending'
             })
 
             await cartItem.forEach(item => {

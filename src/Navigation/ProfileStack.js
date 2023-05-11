@@ -12,6 +12,7 @@ import Password from "../screens/Password";
 import HelpScreen from "../screens/HelpScreen";
 import HomeScreen from "../screens/HomeScreen";
 import OrderDetail from "../screens/OrderDetail";
+import showClosed from '../screens/showClosed';
 
 
 export default function ProfileStack() {
@@ -35,8 +36,6 @@ export default function ProfileStack() {
         <ProfileStack.Screen name="Change my Password" component={Password} />
 
         <ProfileStack.Screen name="Help & Support" component={HelpScreen} />
-
-
         <ProfileStack.Screen name="HomeScreen" component={HomeScreen} />
 
 

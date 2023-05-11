@@ -42,7 +42,7 @@ export default function SearchScreen({ navigation }) {
                 .then(subCategory => {
                     subCategory.docChanges().forEach(function (anotherSnapshot) {
                         //console.log('databas1122', anotherSnapshot.doc.data())
-                        arrayList.push(anotherSnapshot.doc.data());
+                        arrayList.push({ ...anotherSnapshot.doc.data(), 'productID': anotherSnapshot.doc.id });
                         setProuctList(arrayList);
                         setLoader(false);
                     })
@@ -78,18 +78,17 @@ export default function SearchScreen({ navigation }) {
     }
 
 
-    // const setFilter = (item) => {
-    //     setRadioClick(item)
-    //     if (radioClick == 1) {
-    //         const data = productList.sort((a, b) => a - b);
-    //         setProList(data);
-    //     }
-    //     if (radioClick == 2) {
-    //         const data = productList.sort((a, b) => a - b).reverse();
-    //         setProList(data);
-    //     }
-    //     toggleModal()
-    // }
+    const setFilter = (item) => {
+        console.log('get filter', item)
+        if (item == 1) {
+            const data = productList.sort((a, b) => a.price - b.price);
+            setProList([...data]);
+        }
+        else {
+            const data = productList.sort((a, b) => b.price - a.price);
+            setProList([...data]);
+        }
+    }
 
     // const filterView = () => {
     //     return (
@@ -98,10 +97,10 @@ export default function SearchScreen({ navigation }) {
     //             backdropOpacity={0.1}
     //             onBackButtonPress={toggleModal}
     //             onBackdropPress={toggleModal}
-    //             style={{ justifyContent: 'flex-start', marginTop: 110 }}>
+    //             style={{ justifyContent: 'flex-start', marginTop: 115 }}>
     //             <View style={styles.modalStyle}>
     //                 <TouchableOpacity
-    //                     onPress={setFilter}
+    //                     onPress={() => setFilter(1)}
     //                     style={styles.radioStyle}>
     //                     {radioClick == 1 ? (
     //                         <Image
@@ -120,7 +119,7 @@ export default function SearchScreen({ navigation }) {
     //                 </TouchableOpacity>
 
     //                 <TouchableOpacity
-    //                     onPress={setFilter}
+    //                     onPress={() => setFilter(2)}
     //                     style={styles.radioStyle}>
     //                     {radioClick == 2 ? (
     //                         <Image
@@ -143,7 +142,7 @@ export default function SearchScreen({ navigation }) {
     //     )
     // }
 
-    const addToCartItem = async (productId, name, price, image, size, description) => {
+    const addToCartItem = async (productID, productId, name, price, image, size, description, totalStock) => {
         setLoader(true)
         const currentUser = user.uid;
 
@@ -158,6 +157,7 @@ export default function SearchScreen({ navigation }) {
         if (allCartRes.empty) {
             console.log('No matching documents.');
             db.collection("cartItems").doc().set({
+                productID: productID,
                 product_ID: productId,
                 productName: name,
                 productPrice: price,
@@ -165,7 +165,8 @@ export default function SearchScreen({ navigation }) {
                 productSize: size,
                 productDescription: description,
                 productQty: 1,
-                currentUserID: currentUser
+                currentUserID: currentUser,
+                totalStock: totalStock
             });
             setLoader(false);
             alert('Item added to cart');
@@ -209,11 +210,11 @@ export default function SearchScreen({ navigation }) {
             <Title style={styles.catTitleStyle}>Categories</Title>
 
             <ScrollView>
-                <View style={{ marginTop: 15, flexDirection: 'row' }}>
+                <View style={{ marginTop: 15 }}>
                     <InputField
                         placeholder="Search Groceries"
                         leftIcon="magnify"
-                        containerStyle={{ backgroundColor: "#ced4da", width: 330, borderBottomRightRadius: 17, borderTopRightRadius: 17, height: 45, borderTopLeftRadius: 17, borderBottomLeftRadius: 17, marginLeft: 10, marginRight: 10 }}
+                        containerStyle={{ backgroundColor: "#ced4da", width: 335, borderBottomRightRadius: 17, borderTopRightRadius: 17, height: 45, borderTopLeftRadius: 17, borderBottomLeftRadius: 17, marginLeft: 10, marginRight: 10 }}
                         style={{ marginTop: 20, margin: 15, height: 10 }}
                         onChangeText={(value) => onChangeSearch(value)}
                         value={search}
@@ -221,15 +222,25 @@ export default function SearchScreen({ navigation }) {
                         handlePasswordVisibility={() => searchClear()}
                     >
                     </InputField>
-                    {/* {search != '' ? <Button
-                        type="clear"
-                        onPress={toggleModal}
-                        icon={<Feather name="filter" size={24} color="black" style={{ top: 5, right: 10 }} />}
-                    /> : null} */}
+                    {search != '' ? <View style={{ flexDirection: 'row', justifyContent: 'flex-end', margin: 10 }}>
+                        <Button
+                            buttonStyle={styles.filterButtonStyle}
+                            type="clear"
+                            onPress={() => setFilter(1)}
+                            title='Lowest to Highest'
+                            titleStyle={styles.filterTextStyle}
+                        />
+                        <Button
+                            buttonStyle={styles.filterButtonStyle}
+                            type="clear"
+                            onPress={() => setFilter(2)}
+                            title='Highest to Lowest'
+                            titleStyle={styles.filterTextStyle}
+                        />
+                    </View> : null}
                 </View>
-                {/* {filterView()} */}
 
-                <View style={{ height: 2, borderBottomWidth: 1, borderBottomColor: '#CED0CE', marginTop: 10 }} />
+                <View style={{ height: 2, borderBottomWidth: 1, borderBottomColor: '#CED0CE', marginTop: 5 }} />
 
                 {search == '' ? <View style={{ marginTop: 40 }}>
 
@@ -263,12 +274,14 @@ export default function SearchScreen({ navigation }) {
                                 <TouchableOpacity
                                     onPress={() =>
                                         navigation.navigate("ProductPage", {
+                                            productID: item.productID,
                                             id: item.productId,
                                             name: item.name,
                                             price: item.price,
                                             image: item.image,
                                             description: item.description,
                                             size: item.size,
+                                            stock: item.totalStock
                                         })
                                     }>
                                     <ImageBackground
@@ -326,7 +339,7 @@ export default function SearchScreen({ navigation }) {
                                                 type="clear"
                                                 style={{ right: 0, top: 0, marginTop: 3, paddingLeft: 102 }}
                                                 onPress={() =>
-                                                    addToCartItem(item.productId, item.name, item.price, item.image, item.size, item.description)
+                                                    addToCartItem(item.productID, item.productId, item.name, item.price, item.image, item.size, item.description, item.totalStock)
                                                 }
                                                 icon={<Feather name="shopping-bag" size={18} color="white" />}
                                             />
@@ -386,5 +399,18 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         borderRadius: 2,
         justifyContent: 'center'
+    },
+    filterButtonStyle: {
+        backgroundColor: '#ced4da',
+        height: 22,
+        width: 110,
+        borderRadius: 10,
+        right: 5
+    },
+    filterTextStyle: {
+        fontSize: 10,
+        textAlign: 'center',
+        color: 'black',
+        bottom: 2
     }
 })

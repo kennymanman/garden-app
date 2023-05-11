@@ -1,25 +1,14 @@
 import React, { useEffect, useContext, useState } from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import * as firebase from "firebase";
-import fire, { firestore } from "../config/firebase";
-//import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from "../screens/HomeScreen";
 import SearchScreen from "../screens/SearchScreen";
-import CartScreen from "../screens/CartScreen";
-import SavedScreen from "../screens/SavedScreen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import {
   createDrawerNavigator,
-  DrawerItemList,
-  DrawerContent,
-  DrawerContentScrollView,
-  DrawerItem,
 } from "@react-navigation/drawer";
-import { NavigationContainer } from "@react-navigation/native";
-import { View, SafeAreaView, ScrollView, Image } from "react-native";
 import CatProducts from '../screens/CatProducts';
 import Fruits from "../screens/Fruits";
 import Vegetables from "../screens/Vegetables";
@@ -37,13 +26,9 @@ import Health from "../screens/Health";
 import Kids from "../screens/Kids";
 import { createStackNavigator } from "@react-navigation/stack";
 import ProductPage from "../screens/ProductPage";
-
 import DeliveryScreen from "../screens/DeliveryScreen";
 import HelpScreen from "../screens/HelpScreen";
-import OrderScreen from "../screens/OrderScreen";
-import EditScreen from "../screens/EditScreen";
 import DealsScreen from "../screens/DealsScreen";
-import ProfileScreen from "../screens/ProfileScreen";
 import ProfileStack from "../Navigation/ProfileStack";
 import SavedStack from "../Navigation/SavedStack";
 import CartStack from "../Navigation/CartStack";
@@ -53,8 +38,6 @@ import { AuthenticatedUserContext } from "../Providers/AuthenticatedUserProvider
 
 
 const auth = Firebase.auth();
-
-const count = 0;
 
 // function CustomDrawerContent(props) {
 //   //Icons and Images for Drawer Navigation
@@ -212,7 +195,7 @@ function MainTabNavigator() {
           tabBarIcon: ({ color }) => (
             <Feather name="shopping-bag" size={22} color={color} />
           ),
-          tabBarBadge:0, //The Quantity Icon on the Tab Bar
+          tabBarBadge: global.cartCount, //The Quantity Icon on the Tab Bar
         }}
       />
 
@@ -253,11 +236,12 @@ export default function AppNavigator() {
       fetch(id)
     }
   });
+  
 
   const fetch = async (id) => {
     const allCartRes = await firebase.firestore().collection("cartItems").where('currentUserID', '==', id).get();
     console.log('get cartttttt', allCartRes.size)
-    count = allCartRes.size
+    global.cartCount = allCartRes.size
   }
 
 

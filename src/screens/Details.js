@@ -17,6 +17,7 @@ export default function Details({ navigation }) {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [state, setState] = useState("");
   const [updating, setUpdating] = useState(false);
   const [loading, setLoading] = useState(false);
   const { user, setUser } = useContext(AuthenticatedUserContext);
@@ -41,6 +42,7 @@ export default function Details({ navigation }) {
           setLastName(info?.lastName || "");
           setPhone(info?.phone || "");
           setAddress(info?.address || "");
+          setState(info?.state || "");
           console.log("Doc----", info);
           // console.log(JSON.parse(doc._document.data.toString()));
         })
@@ -57,6 +59,33 @@ export default function Details({ navigation }) {
 
 
   const updateUserDetails = async () => {
+    setUpdating(true);
+    const db = firebase.firestore();
+    try {
+      db.collection("users")
+        .doc(user.uid)
+        .update({
+          // email: user?.email || "",
+          lastName,
+          firstName,
+          phone,
+          address,
+          state
+        })
+        .then((res) => {
+          console.log("Res------", res);
+          Alert.alert("Success!", "Profile Updated Successfully!");
+          getUserDetails();
+          navigation.goBack();
+        });
+    } catch (error) {
+      console.log("Error in Update----", error);
+    } finally {
+      setUpdating(false);
+    }
+  };
+
+  const getCuntry = () => {
     if (!firstName) {
       Alert.alert("First name is required");
 
@@ -64,32 +93,41 @@ export default function Details({ navigation }) {
       Alert.alert("Enter valid phone number.");
     } else if (!address) {
       Alert.alert("Address field is required.");
+    } else if (!state) {
+      Alert.alert("state field is required.");
     } else {
-      setUpdating(true);
-      const db = firebase.firestore();
-      try {
-        db.collection("users")
-          .doc(user.uid)
-          .update({
-            // email: user?.email || "",
-            lastName,
-            firstName,
-            phone,
-            address,
-          })
-          .then((res) => {
-            console.log("Res------", res);
-            Alert.alert("Success!", "Profile Updated Successfully!");
-            getUserDetails();
-            navigation.goBack();
-          });
-      } catch (error) {
-        console.log("Error in Update----", error);
-      } finally {
-        setUpdating(false);
-      }
+      const API_KEY = `AIzaSyD0t_2df-_UpqBkOcFVfHZ575OJVGIwsqw`
+      const URL = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${API_KEY}`
+
+      fetch(URL)
+        .then(response => response.json())
+        .then((responseJson) => {
+          // console.log('getting data from fetch', responseJson)
+          if (responseJson.results != [] && (state == 'Lagos' || state == 'lagos')) {
+            var dataResult = responseJson.results[0]
+
+            // console.log('get state of address', dataResult.address_components[5])
+            if (dataResult.address_components[5].long_name == "Lagos") {
+              updateUserDetails();
+            }
+            else {
+              Alert.alert("", "we are deliver only in lagos");
+            }
+          }
+          else {
+            alert("please enter valid address");
+          }
+          // setTimeout(() => {
+          //   this.setState({
+          //     loading: false,
+          //     dataSource: responseJson
+          //   })
+          // }, 2000)
+
+        })
+        .catch(error => console.log(error))
     }
-  };
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -196,7 +234,6 @@ export default function Details({ navigation }) {
           }}
           containerStyle={{
             backgroundColor: "#fff",
-            marginBottom: 20,
             marginTop: 20,
           }}
           leftIcon="map-marker-circle"
@@ -209,6 +246,25 @@ export default function Details({ navigation }) {
           onChangeText={(text) => setAddress(text)}
         />
 
+        <InputField
+          inputStyle={{
+            fontSize: 14,
+          }}
+          containerStyle={{
+            backgroundColor: "#fff",
+            marginBottom: 20,
+            marginTop: 20,
+          }}
+          leftIcon="map-marker-circle"
+          placeholder="Delivery State"
+          autoCapitalize="none"
+          keyboardType="email-address"
+          textContentType="emailAddress"
+          autoFocus={true}
+          value={state}
+          onChangeText={(text) => setState(text)}
+        />
+
         <Subtitle style={styles.textStyle}>Please ensure that address or location provided is within Lagos</Subtitle>
         <Subtitle style={styles.textStyle}>state as Garden only operates in Lagos state for now. </Subtitle>
 
@@ -219,7 +275,7 @@ export default function Details({ navigation }) {
             marginBottom: 20
           }}
           loading={updating}
-          onPress={updateUserDetails}
+          onPress={getCuntry}
           style={{
             borderRadius: 45,
             backgroundColor: "black",
