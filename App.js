@@ -13,6 +13,8 @@ import { setConfiguration } from './src/Components/configuration';
 import * as font from 'expo-font';
 
 
+
+
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
