@@ -14,7 +14,8 @@ import {
 import { Button } from "react-native-elements";
 import { Feather } from '@expo/vector-icons';
 import fire, { firestore } from "../config/firebase";
-import * as firebase from "firebase";
+// import * as firebase from "firebase";
+import firebase from "firebase/compat/app"
 import { AddCartContext, AddSavedContext } from "../screens/CartContext";
 import { Header, Left, Right, Title, Body } from "native-base"
 import { AuthenticatedUserContext } from "../Providers/AuthenticatedUserProvider";

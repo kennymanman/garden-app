@@ -1,4 +1,5 @@
-import * as firebase from "firebase";
+// import * as firebase from "firebase";
+import firebase from "firebase/compat/app"
 import "firebase/firestore";
 import { Alert } from "react-native";
 import { getConfiguration } from '../src/Components/configuration';

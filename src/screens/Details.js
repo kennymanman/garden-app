@@ -5,8 +5,9 @@ import { Button } from "react-native-elements";
 import { Feather } from "@expo/vector-icons";
 import InputField from "../Components/InputField";
 import { AuthenticatedUserContext } from "../Providers/AuthenticatedUserProvider";
+import firebase from "firebase/compat/app"
 import { getUser } from "../../API/firebaseMethods";
-import * as firebase from "firebase";
+//import * as firebase from "firebase";
 import "firebase/firestore";
 import CustomLoader from "../Components/CustomLoader";
 

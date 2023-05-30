@@ -1,0 +1,153 @@
+API/firebaseMethods.js:import { getConfiguration } from '../src/Components/configuration';
+src/Components/ActivityIndicator/ActivityIndicator.js:import React from 'react';
+src/Components/ActivityIndicator/ActivityIndicator.js:import { ActivityIndicator, View } from 'react-native';
+src/Components/ActivityIndicator/index.js:import Activity from './ActivityIndicator';
+src/Components/Button.js:import React from 'react';
+src/Components/Button.js:import { StyleSheet, Pressable, Text } from 'react-native';
+src/Components/Button.js:import { fontSize } from 'styled-system';
+src/Components/ErrorMessage.js:import React from 'react';
+src/Components/ErrorMessage.js:import { StyleSheet, Text } from 'react-native';
+src/Components/IconButton.js:import React from 'react';
+src/Components/IconButton.js:import { Pressable, StyleSheet } from 'react-native';
+src/Components/IconButton.js:import { AntDesign } from '@expo/vector-icons';
+src/Components/InputField.js:import React from 'react';
+src/Components/InputField.js:import { View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+src/Components/InputField.js:import { MaterialCommunityIcons } from '@expo/vector-icons';
+src/Components/configuration.js:import {Map} from 'immutable';
+src/Navigation/AppNavigator.js:import CatProducts from '../screens/CatProducts';
+src/Navigation/AuthStack.js:import React from 'react';
+src/Navigation/AuthStack.js:import LoginScreen from '../screens/LoginScreen';
+src/Navigation/AuthStack.js:import SignupScreen from '../screens/SignupScreen';
+src/Navigation/AuthStack.js:import ChangePasswordScreen from '../screens/ChangePasswordScreen';
+src/Navigation/CartStack.js:import React from 'react'
+src/Navigation/CartStack.js:import { View, Text } from 'react-native'
+src/Navigation/CartStack.js:import CartScreen from '../screens/CartScreen'
+src/Navigation/CartStack.js:import ProfileScreen from '../screens/ProfileScreen';
+src/Navigation/CartStack.js:import Checkout from '../screens/Checkout';
+src/Navigation/CartStack.js:import Offers from '../screens/Offers';
+src/Navigation/CartStack.js:import showClosed from '../screens/showClosed';
+src/Navigation/HomeStack.js:import React from 'react'
+src/Navigation/HomeStack.js:import HomeScreen from '../screens/HomeScreen'
+src/Navigation/HomeStack.js:import DealsScreen from '../screens/DealsScreen'
+src/Navigation/HomeStack.js:import ProductPage from '../screens/ProductPage'
+src/Navigation/HomeStack.js:import Grocerylist from '../screens/Grocerylist';
+src/Navigation/HomeStack.js:import CatProducts from '../screens/CatProducts'
+src/Navigation/ProfileStack.js:import showClosed from '../screens/showClosed';
+src/Navigation/RootNavigator.js:import React from 'react';
+src/Navigation/RootNavigator.js:import { NavigationContainer } from '@react-navigation/native';
+src/Navigation/RootNavigator.js:import { createDrawerNavigator } from '@react-navigation/drawer';
+src/Navigation/RootNavigator.js:import { DefaultTheme, DarkTheme } from '@react-navigation/native';
+src/Navigation/RootNavigator.js:import { useTheme } from 'react-native-paper';
+src/Navigation/RootNavigator.js://import { StackNavigator } from './stack';
+src/Navigation/RootNavigator.js:import { DrawerContent } from '../Navigation/DrawerContent';
+src/Navigation/SavedStack.js:import React, { useContext, useState, useEffect } from 'react'
+src/Navigation/SavedStack.js:import { View, Text } from 'react-native'
+src/Navigation/SavedStack.js:import { NavigationContainer } from '@react-navigation/native';
+src/Navigation/SavedStack.js:import { AuthenticatedUserContext } from '../Providers/AuthenticatedUserProvider';
+src/Navigation/SavedStack.js:import SavedScreen from '../screens/SavedScreen';
+src/Navigation/SavedStack.js:import Firebase from '../config/firebase';
+src/Navigation/SavedStack.js:import { ActivityIndicator } from 'react-native';
+src/Navigation/SavedStack.js:import ProductPage from '../screens/ProductPage';
+src/Providers/AuthenticatedUserProvider.js:import React, { useState, createContext } from 'react';
+src/config/firebase.js:import * as firebase from 'firebase'
+src/screens/Alcohol.js:import { Feather } from '@expo/vector-icons';
+src/screens/Badge.js:import React, { Component } from 'react';
+src/screens/Badge.js:import { Container, Header, Content, Badge, Text, Icon } from 'native-base';
+src/screens/Bread.js:import { Feather } from '@expo/vector-icons';
+src/screens/CartScreen.js:import React, { useContext, useEffect, useState, useCallback } from 'react'
+src/screens/CartScreen.js:import { useFocusEffect } from '@react-navigation/native';
+src/screens/CartScreen.js:import { FontAwesome } from '@expo/vector-icons';
+src/screens/CartScreen.js:import RNPickerSelect from 'react-native-picker-select';
+src/screens/CartScreen.js:import { Chevron } from 'react-native-shapes';
+src/screens/CartScreen.js:import * as Updates from 'expo-updates';
+src/screens/CatProducts.js:import { Feather } from '@expo/vector-icons';
+src/screens/Cereal.js:import { Feather } from '@expo/vector-icons';
+src/screens/ChangePasswordScreen.js:import Toast from 'react-native-simple-toast';
+src/screens/Checkout.js:import React, { useRef, useContext, useState } from 'react'
+src/screens/Checkout.js:import { useFocusEffect } from '@react-navigation/native';
+src/screens/Checkout.js:import { View, Text, TouchableOpacity, Alert } from 'react-native'
+src/screens/Checkout.js:import { PayWithFlutterwave } from 'flutterwave-react-native';
+src/screens/Checkout.js:import moment from 'moment';
+src/screens/DavedScreen.js:import { Button } from 'react-native-elements';
+src/screens/DavedScreen.js:import { Feather } from '@expo/vector-icons';
+src/screens/DavedScreen.js:import { FontAwesome } from '@expo/vector-icons';
+src/screens/DeliveryScreen.js:import React from 'react'
+src/screens/DeliveryScreen.js:import { View, Text, ScrollView, ImageBackground } from 'react-native'
+src/screens/DeliveryScreen.js:import { Ionicons } from '@expo/vector-icons';
+src/screens/Drinks.js:import { Feather } from '@expo/vector-icons';
+src/screens/EditScreen.js:import React from 'react'
+src/screens/EditScreen.js:import { View, Text, ImageBackground, ScrollView } from 'react-native'
+src/screens/EditScreen.js:import { Ionicons } from '@expo/vector-icons'
+src/screens/EditScreen.js:import { Avatar, Accessory } from 'react-native-elements';
+src/screens/Eggs.js:import { Feather } from '@expo/vector-icons';
+src/screens/Fruits.js:import { Feather } from '@expo/vector-icons';
+src/screens/Fruits.js:import { Chevron } from 'react-native-shapes'
+src/screens/Fruits.js:import RNPickerSelect from '@react-native-picker/picker';
+src/screens/Grocerylist.js:import { useFocusEffect } from '@react-navigation/native';
+src/screens/Grocerylist.js:import DatePicker from 'react-native-datepicker';
+src/screens/Health.js:import { Feather } from '@expo/vector-icons';
+src/screens/HelpScreen.js:import React from 'react'
+src/screens/HelpScreen.js:import { View, Text, ImageBackground, ScrollView } from 'react-native'
+src/screens/HelpScreen.js:import { Ionicons } from '@expo/vector-icons'
+src/screens/HelpScreen.js:import { Feather } from '@expo/vector-icons';
+src/screens/HomeScreen.js:import { useFocusEffect } from '@react-navigation/native';
+src/screens/HomeScreen.js:import DatePicker from 'react-native-datepicker';
+src/screens/House.js:import { Feather } from '@expo/vector-icons';
+src/screens/Kids.js:import { Feather } from '@expo/vector-icons';
+src/screens/LogIn.js:import React from 'react'
+src/screens/LogIn.js:import { View, Text, ImageBackground, TouchableOpacity, ScrollView } from 'react-native'
+src/screens/LogIn.js:import { Container, Header, Content, Item, Input, Button, Icon } from 'native-base';
+src/screens/LogIn.js://import { TouchableOpacity } from 'react-native-gesture-handler';
+src/screens/Meat.js:import { Feather } from '@expo/vector-icons';
+src/screens/Offers.js:import { Feather } from '@expo/vector-icons';
+src/screens/Offers.js:import { useFocusEffect } from '@react-navigation/native';
+src/screens/OrderDetail.js:import { View, Text, ScrollView, FlatList, StyleSheet, Image, ActivityIndicator } from 'react-native'
+src/screens/OrderDetail.js:import { Feather } from '@expo/vector-icons';
+src/screens/OrderDetail.js:import { useFocusEffect } from '@react-navigation/native';
+src/screens/OrderScreen.js:import { View, Text, ScrollView, FlatList, StyleSheet, ActivityIndicator } from 'react-native'
+src/screens/OrderScreen.js:import { Feather } from '@expo/vector-icons';
+src/screens/OrderScreen.js:import { useFocusEffect } from '@react-navigation/native';
+src/screens/Pantry.js:import { Feather } from '@expo/vector-icons';
+src/screens/Password.js:import React, { useContext, useState, useEffect } from 'react'
+src/screens/Password.js:import { View, Text, ScrollView } from 'react-native'
+src/screens/Password.js:import { Feather } from '@expo/vector-icons';
+src/screens/Password.js:import * as font from 'expo-font';
+src/screens/Password.js:import { AppLoading } from 'expo-font';
+src/screens/ProductPage.js:import React, { useContext, useState } from 'react'
+src/screens/ProductPage.js:import { View, Text, Dimensions, StyleSheet, Image, TouchableOpacity } from 'react-native'
+src/screens/ProductPage.js:import { useFocusEffect } from '@react-navigation/native';
+src/screens/ProductPage.js:import { Feather } from '@expo/vector-icons';
+src/screens/ProductPage.js:import { Title, Subtitle } from 'native-base';
+src/screens/ProductPage.js:import Animated from 'react-native-reanimated';
+src/screens/ProductPage.js:import BottomSheet from 'reanimated-bottom-sheet';
+src/screens/ProductPage.js:import { SwiperFlatList } from 'react-native-swiper-flatlist';
+src/screens/ProductPage.js:import { AuthenticatedUserContext } from '../Providers/AuthenticatedUserProvider';
+src/screens/ProductPage.js:import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+src/screens/ProductPage.js:import RNPickerSelect from 'react-native-picker-select';
+src/screens/ProductPage.js:import { Chevron } from 'react-native-shapes';
+src/screens/ProductPage.js:import { ScrollView } from 'react-native-gesture-handler';
+src/screens/SavedScreen.js:import { useFocusEffect } from '@react-navigation/native';
+src/screens/SearchScreen.js:import React, { useState, useContext } from 'react'
+src/screens/SearchScreen.js:import { useFocusEffect } from '@react-navigation/native';
+src/screens/SearchScreen.js:import { Button } from 'react-native-elements';
+src/screens/SearchScreen.js:import CatListData from './CatListData';
+src/screens/SignUp.js:import React from 'react';
+src/screens/SignUp.js:import { View, Text, ImageBackground, ScrollView, TouchableOpacity } from 'react-native';
+src/screens/SignUp.js:import { Container, Header, Content, Item, Input, Button, Icon, CheckBox } from 'native-base';
+src/screens/SignUp.js:import { Ionicons } from '@expo/vector-icons';
+src/screens/SignUp.js:import { Title } from 'react-native-paper';
+src/screens/SignUp.js:import { Subheading } from 'react-native-paper';
+src/screens/Snacks.js:import { Feather } from '@expo/vector-icons';
+src/screens/Spices.js:import { Feather } from '@expo/vector-icons';
+src/screens/Start.js:import React from 'react'
+src/screens/Start.js:import { View, Text, ImageBackground } from 'react-native'
+src/screens/Vegetables.js:import { Feather } from '@expo/vector-icons';
+src/screens/roductPage.js:import React, {useContext, useState} from 'react';
+src/screens/roductPage.js:import { View,  ImageBackground, ScrollView,SafeAreaView, Image} from 'react-native';
+src/screens/roductPage.js:import { Ionicons } from '@expo/vector-icons';
+src/screens/roductPage.js:import { Feather } from '@expo/vector-icons';
+src/screens/roductPage.js:import { Tile } from 'react-native-elements';
+src/screens/roductPage.js:import { Title,Subtitle, Text, Icon } from 'native-base';
+src/screens/roductPage.js:import { RNCarousel } from 'react-native-carousel-cards';
+src/screens/roductPage.js:import DropdownMenu from 'react-native-dropdownmenus';
+src/screens/showClosed.js:import { Feather } from '@expo/vector-icons';

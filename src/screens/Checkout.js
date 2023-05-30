@@ -5,7 +5,8 @@ import { Header, Left, Right, Title, Body } from "native-base";
 import { Button } from "react-native-elements"
 import { Feather } from "@expo/vector-icons";
 import { PayWithFlutterwave } from 'flutterwave-react-native';
-import * as firebase from "firebase";
+import firebase from "firebase/compat/app"
+//import * as firebase from "firebase";
 import moment from 'moment';
 import { AuthenticatedUserContext } from "../Providers/AuthenticatedUserProvider";
 

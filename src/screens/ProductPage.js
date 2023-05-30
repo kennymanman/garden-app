@@ -7,7 +7,8 @@ import { Title, Subtitle } from 'native-base';
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
-import * as firebase from "firebase";
+import firebase from "firebase/compat/app"
+// import * as firebase from "firebase";
 import { AuthenticatedUserContext } from '../Providers/AuthenticatedUserProvider';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import RNPickerSelect from 'react-native-picker-select';

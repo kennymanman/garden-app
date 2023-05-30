@@ -12,7 +12,8 @@ import {
 import { useFocusEffect } from '@react-navigation/native';
 import { Button } from "react-native-elements";
 import { Header, Left, Right, Title } from "native-base";
-import * as firebase from "firebase";
+import firebase from "firebase/compat/app"
+//import * as firebase from "firebase";
 import { AuthenticatedUserContext } from "../Providers/AuthenticatedUserProvider";
 import { AntDesign } from "@expo/vector-icons";
 import { FlatList } from "react-native-gesture-handler";

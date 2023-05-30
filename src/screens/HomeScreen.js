@@ -39,7 +39,8 @@ import fire, { firestore } from "../config/firebase";
 import { saveItems, getCategoryData } from "../../API/firebaseMethods";
 import DatePicker from 'react-native-datepicker';
 import moment from "moment";
-import * as firebase from "firebase";
+import firebase from "firebase/compat/app"
+// import * as firebase from "firebase";
 import { AntDesign } from "@expo/vector-icons";
 import bag from "../img/bag.png"
 import { AuthenticatedUserContext } from "../Providers/AuthenticatedUserProvider";

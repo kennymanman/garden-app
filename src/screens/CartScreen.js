@@ -16,7 +16,8 @@ import { useFocusEffect } from '@react-navigation/native';
 import { Button } from "react-native-elements";
 import { FontAwesome } from '@expo/vector-icons';
 import { Header, Left, Right, Title, Body, Subtitle } from "native-base";
-import * as firebase from "firebase";
+import firebase from "firebase/compat/app"
+//import * as firebase from "firebase";
 import fire, { firestore } from "../config/firebase";
 import CustomLoader from "../Components/CustomLoader";
 import { AddCartContext } from "./CartContext"

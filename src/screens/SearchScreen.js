@@ -6,7 +6,8 @@ import { Title, Subtitle } from "native-base"
 import { Feather } from "@expo/vector-icons";
 import InputField from "../Components/InputField";
 import CatListData from './CatListData';
-import * as firebase from "firebase";
+import firebase from "firebase/compat/app"
+//import * as firebase from "firebase";
 import { AuthenticatedUserContext } from "../Providers/AuthenticatedUserProvider";
 import Modal from "react-native-modal";
 

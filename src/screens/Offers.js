@@ -14,7 +14,8 @@ import {
 import { Button } from "react-native-elements";
 import { Feather } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
-import * as firebase from "firebase";
+import firebase from "firebase/compat/app"
+// import * as firebase from "firebase";
 import { Header, Left, Right, Title, Body } from "native-base"
 
 export default function Offers({ navigation, ...props }) {

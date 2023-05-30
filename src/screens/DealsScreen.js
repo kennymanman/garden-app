@@ -15,7 +15,8 @@ import { Header, Left, Right, Title, Body, Subtitle } from "native-base";
 import data from "./data";
 import { AddCartContext, AddSavedContext } from "../screens/CartContext";
 import { saveItems } from "../../API/firebaseMethods";
-import * as firebase from "firebase";
+// import * as firebase from "firebase";
+import firebase from "firebase/compat/app"
 
 export default function DealsScreen({ navigation, ...props }) {
 

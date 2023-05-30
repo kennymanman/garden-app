@@ -1,14 +1,12 @@
 import React, { useEffect, useContext, useState } from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import * as firebase from "firebase";
+// import * as firebase from "firebase";
 import SearchScreen from "../screens/SearchScreen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import {
-  createDrawerNavigator,
-} from "@react-navigation/drawer";
+
 import CatProducts from '../screens/CatProducts';
 import Fruits from "../screens/Fruits";
 import Vegetables from "../screens/Vegetables";
@@ -33,11 +31,11 @@ import ProfileStack from "../Navigation/ProfileStack";
 import SavedStack from "../Navigation/SavedStack";
 import CartStack from "../Navigation/CartStack";
 import HomeStack from "../Navigation/HomeStack";
-import Firebase from "../config/firebase";
+// import Firebase from "../config/firebase";
 import { AuthenticatedUserContext } from "../Providers/AuthenticatedUserProvider";
 
 
-const auth = Firebase.auth();
+//const auth = Firebase.auth();
 
 // function CustomDrawerContent(props) {
 //   //Icons and Images for Drawer Navigation

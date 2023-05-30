@@ -16,7 +16,7 @@ import { Header, Left, Right, Title, Body, Subtitle } from "native-base"
 import data from "./data"
 import { AddCartContext, AddSavedContext } from "../screens/CartContext"
 import { Chevron } from 'react-native-shapes'
-import RNPickerSelect from '@react-native-picker/picker';
+
 
 
 

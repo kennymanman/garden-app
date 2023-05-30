@@ -12,7 +12,8 @@ import {
 import { useFocusEffect } from '@react-navigation/native';
 import { Button } from "react-native-elements";
 import { Header, Left, Right, Title, Body } from "native-base";
-import * as firebase from "firebase";
+import firebase from "firebase/compat/app"
+//import * as firebase from "firebase";
 import { Feather } from "@expo/vector-icons";
 import { AuthenticatedUserContext } from "../Providers/AuthenticatedUserProvider";
 import { FontAwesome } from "@expo/vector-icons";
