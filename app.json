@@ -32,9 +32,7 @@
       [
         "expo-notifications",
         {
-          "icon": "./local/path/to/myNotificationIcon.png",
           "color": "#ffffff",
-          "sounds": ["./local/path/to/mySound.wav", "./local/path/to/myOtherSound.wav"],
           "mode": "test"
         }
       ]
